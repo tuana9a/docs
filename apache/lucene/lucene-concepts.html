@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+    <h1>lucene concepts</h1>
+    <p>
+        nguồn từ <a href="https://alibaba-cloud.medium.com/analysis-of-lucene-basic-concepts-5ff5d8b90a53">alibaba cloud</a>
+        <strong style="color: red">(đéo biết có đúng hay không nói chung là không tin 100% được)</strong>
+    </p>
+
+    <h2>document</h2>
+    <p>mỗi một document khi được đưa vào lucene sẽ được gán một docId duy nhất</p>
+
+    <h2>field</h2>
+    <p>
+        một doc được cấu thành tử một hoặc nhiều field, field là đơn vị dữ liệu nhỏ nhất trong lucene <br />
+        StringField, TextField and NumericDocValuesField. <br />
+        lucene sẽ tự detect và đưa ra chiến thuật index phù hợp <br />
+        (such as Invert Index, Store Field, DocValues or N-dimensional) <br />
+        lucene còn dựa vào FieldType để quyết định ở trên
+    </p>
+
+    <h2>term và term dictionary</h2>
+    <p>
+        đơn vị nhỏ nhất phục vụ index và search, một field gồm một hoặc nhiều term <br />
+        term được tạo ra khi cho một field qua một Analyzer (tokenizer) <br />
+        term dictionary là chỉ mục đơn giản phục vụ conditional search dựa trên term
+    </p>
+
+    <h2>Segment</h2>
+    <p>
+        một index trong lucene chứa một hoặc nhiều sub-index, một sub-index được gọi là segment <br />
+        tổng quan sub-index của lucene có cơ chế giống LSM (Log-structured merge-tree) <br />
+        xem thêm <a href="https://yetanotherdevblog.com/lsm/">https://yetanotherdevblog.com/lsm/</a> <br />
+        đại loại LSM là cấu trúc:
+    </p>
+    <ul>
+        <li>
+            phù hợp với heavy write (cập nhật liên tục) ghi thành sequence log, segment
+            <ul>
+                <li>các lệnh ghi được lưu trên ram khi vượt size tạo segment và ghi xuống disk</li>
+                <li>
+                    cấu trúc trên RAM có thể linh động tùy mục đích (cây đỏ đen) <br />
+                    xem thêm <a href="https://en.wikipedia.org/wiki/Red-black_tree">https://en.wikipedia.org/wiki/Red-black_tree</a>
+                </li>
+                <li>các segemnt phải được xắp xếp theo thứ tự tăng dần</li>
+            </ul>
+        </li>
+        <li>
+            dữ liệu được ghi dạng key-value, khá phù hợp với chỉ mục ngược <br>
+            <ul>
+                <li>với key là từ (term) value là danh sách thẻ định vị</li>
+            </ul>
+        </li>
+        <li>
+            có thể lưu thêm thông tin để tìm kiếm trên segment mới nhất (nhanh hơn tìm toàn bộ)
+            <ul>
+                <li>từ đó cho phép tìm kiếm trên nhiều segment một lúc (<b>có thể</b> cải thiện)</li>
+                <li>tuy nhiên nếu log quá nhiều thì vẫn cần phải merge (xem ý tiếp theo)</li>
+            </ul>
+        </li>
+        <li>
+            có thể merge segment (định kì or rule) giảm dung lượng lưu trữ
+            <ul>
+                <li>merge sẽ lấy giá trị mới nhất của mỗi id</li>
+                <li>merge sẽ không lấy giá trị bị đánh tombstone (xóa ảo, sau đó làm thật)</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>sequence number</h2>
+    <p><strong>TODO</strong></p>
+
+    <h2>analyzer</h2>
+    <p>xem code ở <a href="https://lucene.apache.org/core/7_7_3/analyzers-common/index.html">đây</a></p>
+</body>
+
+</html>

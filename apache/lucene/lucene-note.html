@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <h1>tổng quan</h1>
+    <p>
+        tổng quan thì lucene là một lib để xử lý tìm kiếm text <br />
+        lucene đã được phát triển và hỗ trợ text index, <br />
+        ngoài ra có hỗ trợ nhiều loại index cho các cách search khác nhau <br />
+        các thành phần chính trong code của lucene
+    </p>
+    <ul>
+        <li>index writer có nhiệm vụ ghi index (chính)</li>
+        <li>directory là một abstract lưu index, index writer sẽ ghi index vào directory</li>
+        <li>directory lưu index thành các sub-indexs, tạo thành segments</li>
+        <li>một term là một cặp: field_name + token (token có thể là từ)</li>
+        <li>lucene tổ chức lưu trữ term cho việc tìm kiếm</li>
+    </ul>
+
+    <h2>các concepts xem <a href="./lucene-concepts.html">tại đây</a></h2>
+
+    <h2>file format xem <a href="./file-format.html">tại đây</a></h2>
+
+    <h2>lucene in a nutshell</h2>
+    <p>
+        link gốc từ stack over flow
+        <a href="https://stackoverflow.com/questions/2602253/how-does-lucene-index-documents">tại đây</a>
+    </p>
+
+    <p>
+        lucene lưu dạng <a href="../datastructure-and-algorithm/skip-list/skip-list.html">skip list</a> (multi level) <br />
+        xuống disk và load chúng lên vào ram, click vào link để hiểu kĩ hơn về cái này <br />
+        sau đó lucene load vào bộ nhớ và sử dụng FST, xem thêm tại
+        <a href="https://blog.mikemccandless.com/2010/12/using-finite-state-transducers-in.html">đây</a>
+    </p>
+
+    <p>
+        document là một đơn vị lưu trữ trong lucene, một document sẽ gồm các trường <br />
+        khi thêm một trường thì toàn bộ nội dung của trường đó (full text) sẽ được tokenize <br />
+        với analyzer, có thể là bằng khoảng cách, có thể xem thêm tại đây
+        <a href="https://lucene.apache.org/core/7_7_3/memory/index.html">
+            https://lucene.apache.org/core/7_7_3/memory/index.html
+        </a>
+        <br />
+    </p>
+
+    <p>
+        tìm hiểu tiếp về analyzer tại đây
+        <a href="https://lucene.apache.org/core/7_7_3/analyzers-common/index.html">
+            https://lucene.apache.org/core/7_7_3/analyzers-common/index.html
+        </a>
+    </p>
+
+    <p>
+        tìm hiểu tiếp về query tại đây
+        <a href="https://lucene.apache.org/core/7_7_3/queries/index.html">
+            https://lucene.apache.org/core/7_7_3/queries/index.html
+        </a>
+    </p>
+
+    <h2>Refs</h2>
+    <strong>checked</strong><br>
+    <a href="https://stackoverflow.com/questions/2602253/how-does-lucene-index-documents">https://stackoverflow.com/questions/2602253/how-does-lucene-index-documents</a><br>
+    <strong>not checked yet</strong><br>
+    <a href="https://blog.mikemccandless.com/2010/12/using-finite-state-transducers-in.html">https://blog.mikemccandless.com/2010/12/using-finite-state-transducers-in.html</a><br>
+    <a href="https://lucene.apache.org/core/7_7_3/queryparser/index.html">https://lucene.apache.org/core/7_7_3/queryparser/index.html</a><br>
+    <a href="https://lucene.apache.org/core/7_7_3/analyzers-opennlp/index.html">https://lucene.apache.org/core/7_7_3/analyzers-opennlp/index.html</a><br>
+    <a href="https://lucene.apache.org/core/7_7_3/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package.description">https://lucene.apache.org/core/7_7_3/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package.description</a><br>
+    <a href="https://lucene.apache.org/core/7_7_3/core/org/apache/lucene/search/similarities/TFIDFSimilarity.html">https://lucene.apache.org/core/7_7_3/core/org/apache/lucene/search/similarities/TFIDFSimilarity.html</a><br>
+    <a href="https://lucene.apache.org/core/7_7_3/core/org/apache/lucene/search/package-summary.html#package.description">https://lucene.apache.org/core/7_7_3/core/org/apache/lucene/search/package-summary.html#package.description</a><br>
+    <a href="https://lucene.apache.org/core/7_7_3/analyzers-common/index.html">https://lucene.apache.org/core/7_7_3/analyzers-common/index.html</a><br>
+    <a href="http://www.lucenetutorial.com/basic-concepts.html">http://www.lucenetutorial.com/basic-concepts.html</a><br>
+
+</body>
+
+</html>

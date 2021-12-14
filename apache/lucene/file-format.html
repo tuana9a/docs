@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <h2>file name format</h2>
+
+    <div class="block">Lucene 5.0 compound file format
+        <p> Files:</p>
+        <ul>
+            <li><tt>.cfs</tt>: An optional "virtual" file consisting of all the other
+                index files for systems that frequently run out of file handles.
+            </li>
+            <li><tt>.cfe</tt>: The "virtual" compound file's entry table holding all
+                entries in the corresponding .cfs file.
+            </li>
+        </ul>
+        <p>Description:</p>
+        <ul>
+            <li>Compound (.cfs) -- Header, FileData <sup>FileCount</sup>, Footer</li>
+            <li>Compound Entry Table (.cfe) -- Header, FileCount, &lt;FileName,
+                DataOffset, DataLength <sup>FileCount</sup></li>
+            <li>Header -- <a href="#IndexHeader"><code>IndexHeader</code></a></li>
+            <li>FileCount -- <a href="#"><code>VInt</code></a></li>
+            <li>DataOffset,DataLength,Checksum -- <a href="#"><code>UInt64</code></a></li>
+            <li>FileName -- <a href="#"><code>String</code></a></li>
+            <li>FileData -- raw file data</li>
+            <li>Footer -- <a href="#"><code>CodecFooter</code></a></li>
+        </ul>
+        <p>Notes:</p>
+        <ul>
+            <li>FileCount indicates how many files are contained in this compound file.
+                The entry table that follows has that many entries.
+            </li>
+            <li>Each directory entry contains a long pointer to the start of this file's data
+                section, the files length, and a String with that file's name.
+            </li>
+        </ul>
+    </div>
+
+    <div id="IndexHeader">
+        <h4>writeIndexHeader</h4>
+        <pre>public static&nbsp;void&nbsp;writeIndexHeader(<a href="#" title="class in org.apache.lucene.store">DataOutput</a>&nbsp;out,
+                                        <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;codec,
+                                        int&nbsp;version,
+                                        byte[]&nbsp;id,
+                                        <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;suffix)
+                                 throws <a href="https://docs.oracle.com/javase/8/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
+        <div class="block">Writes a codec header for an index file, which records both a string to
+            identify the format of the file, a version number, and data to identify
+            the file instance (ID and auxiliary suffix such as generation).
+            <p>This header can be parsed and validated with <a href="#"><code>checkIndexHeader()</code></a>.</p>
+            <p>IndexHeader -- CodecHeader,ObjectID,ObjectSuffix</p>
+            <ul>
+                <li>CodecHeader -- <a href="#"><code>writeHeader(org.apache.lucene.store.DataOutput, java.lang.String, int)</code></a>
+                </li>
+                <li>ObjectID -- <a href="#"><code>byte</code></a>
+                </li>
+                <li>ObjectSuffix -- SuffixLength,SuffixBytes
+                </li>
+                <li>SuffixLength -- <a href="#"><code>byte</code></a>
+                </li>
+                <li>SuffixBytes -- <a href="#"><code>byte</code></a>
+                </li>
+            </ul>
+            <p>Note that the length of an index header depends only upon the
+                name of the codec and suffix, so this length can be computed at any time
+                with <a href="#"><code>indexHeaderLength(String,String)</code></a>.</p>
+        </div>
+        <dl>
+            <dt><span class="paramLabel">Parameters:</span></dt>
+            <dd><code>out</code> - Output stream</dd>
+            <dd><code>codec</code> - String to identify the format of this file. It should be simple ASCII,
+                less than 128 characters in length.</dd>
+            <dd><code>id</code> - Unique identifier for this particular file instance.</dd>
+            <dd><code>suffix</code> - auxiliary suffix information for the file. It should be simple ASCII,
+                less than 256 characters in length.</dd>
+            <dd><code>version</code> - Version number</dd>
+            <dt><span class="throwsLabel">Throws:</span></dt>
+            <dd><code><a href="https://docs.oracle.com/javase/8/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code> - If there is an I/O error writing to the underlying medium.</dd>
+            <dd><code><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/IllegalArgumentException.html?is-external=true" title="class or interface in java.lang">IllegalArgumentException</a></code> - If the codec name is not simple ASCII, or
+                is more than 127 characters in length, or if id is invalid,
+                or if the suffix is not simple ASCII, or more than 255 characters
+                in length.</dd>
+        </dl>
+    </div>
+</body>
+
+</html>
