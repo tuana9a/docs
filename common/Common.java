@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Common {
     public static void main(String[] args) {
         System.out.println("123456789".substring(2, 5));
-        // 
+        // index 2 and index 5 is 345
 
         List<Integer> arr = new ArrayList<Integer>();
         arr.add(1);
