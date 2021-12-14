@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to assign static ip to container</title>
+</head>
+
+<body>
+    <h1>static ip address to container, docker network</h1>
+
+    <p>link tham khảo phải đây <a href="https://www.cloudsavvyit.com/14508/how-to-assign-a-static-ip-to-a-docker-container/">tại đây</a></p>
+
+    <p><code>docker network create --subnet=172.20.0.0/16 test1</code></p>
+    <p>trong đó</p>
+    <ul>
+        <li>127.20.0.0/16 là card mạng + subnet</li>
+        <li>test1 là tên network mà bạn muốn tạo</li>
+    </ul>
+
+    <p><code>docker run --net test1 --ip 172.20.0.3 --name test2 -d mongo:5.0</code></p>
+    <p>trong đó</p>
+    <ul>
+        <li>test1 là tên network mà muốn add</li>
+    </ul>
+
+    <p><code>docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' name_or_id</code></p>
+    <p>lệnh trên để kiểm tra lại ip của container xem có chuẩn không</p>
+
+    <p>file docker-compose</p>
+
+    <div class="fetchAppend" data-url="./docker-compose.yaml"></div>
+
+    <script src="../../../common.js"></script>
+</body>
+
+</html>
