@@ -12,10 +12,10 @@
     <h1>cert bot note</h1>
 
     <h2>certbot scripts</h2>
-    <div id="certbot-sh"></div>
+    <div class="fetchAppend" data-url="./certbot.sh"></div>
 
     <h2>file .cloudflare.ini</h2>
-    <div id="cloudflare-ini"></div>
+    <div class="fetchAppend" data-url="./.cloudflare.ini"></div>
 
     <h2>vị trí của cert</h2>
     <p>
@@ -23,10 +23,6 @@
         key="/etc/letsencrypt/live/tuana9a.tech/privkey.pem"
     </p>
     <script src="../common.js"></script>
-    <script>
-        fetchThenAppend("certbot-sh", "./certbot.sh");
-        fetchThenAppend("cloudflare-ini", "./.cloudflare.ini");
-    </script>
 </body>
 
 </html>
