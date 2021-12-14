@@ -1,0 +1,90 @@
+<pre>
+linux tip tips terminal commond command
+
+<h1>Uknown</h1>
+#!/bin/bash
+input="temp.txt"
+while IFS= read -r line
+do
+  sudo iptables -D $line
+done &lt; "$input"
+
+
+#for tmp in $(cat temp.txt)
+#do
+#  echo sudo iptables -D $tmp
+#done
+
+
+<h1>genpassword</h1>
+echo ===
+date +%s | sha256sum | base64 | head -c 15 ; echo
+echo ===
+openssl rand -base64 15
+echo ===
+
+<h1>run command in background</h1>
+nohup python main.py >> run.log 2>&1 &
+nohup node dist/main.js >> run.log 2>&1 &
+nohup java -jar app.jar >> run.log 2>&1 &
+
+<h1>datetime ctl timezone</h1>
+sudo timedatectl set-timezone Asia/Ho_Chi_Minh
+
+<h1>ssh</h1>
+mkdir .ssh
+chmod 700 .ssh
+echo ssh-rsa PUBLIC_KEY >> .ssh/authorized_keys
+chmod 600 .ssh/authorized_keys
+
+<h1>quản lí swap file, bộ nhớ ảo trên linux</h1>
+sudo swapon --show
+
+
+
+<h1># remove if config</h1>
+sudo nano /etc/fstab
+	rm /swap.img
+
+<h1>journalctl</h1>
+journalctl -u service-name.service
+sudo ifconfig enp0s8 192.168.200.3 netmask 255.255.255.0 up
+	card mạng enp0s8
+	địa chỉ cho card này 192.168.200.3
+	netmask là 255.255.255.0
+	up là bật card này lên
+
+<h1>root</h1>
+sudo passwd				đổi root password
+
+<h1>monitor</h1>
+sudo service mongodb stop		có thể thay stop: start, restart
+sudo systemctl mongodb stop		có thể thay stop: start, restart
+df -h					xem thong tin o dia con trong
+du -h					xem thong tin kich thuoc file
+
+<h1>apt</h1>
+sudo apt-get autoremove			tự động xóa các apt không cần thiết
+sudo apt autoremove			...
+whereis pkg_name			xem địa của của một package
+
+<h1>power management</h1>
+sudo halt		 		? ngủ đông
+sudo reboot				khởi động lại máy
+sudo poweroff			tắt máy
+clear					để clear terminal
+
+<h1>zip</h1>
+tar czf resource.tar.gz *		zip toàn bộ thư mục, files từ thư mục .
+tar -xvf archive.tar.gz			unzip toàn bộ file vào thư mục hiện tại
+
+<h1>kernel</h1>
+rpm -q kernel-core		check cac kernel version hien co cua os
+uname -a				check kernel hien tai dang su dung
+
+<h1>cronjob</h1>
+crontab -e				// mở editor để edit file này :V
+	# m h dom mon dow command
+	*/15 * * * * /bin/bash /home/tuana9a/write-public-ip.sh
+systemctl restart cron(d) 		//bên fedora là có d còn các cái khác có thể là cron
+</pre>
