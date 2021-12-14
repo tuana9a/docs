@@ -1,0 +1,84 @@
+<pre>
+|-- trove/instance/service.py > InstanceController > create()
+|   |-- trove/instance/models.py > Instance > create()
+|   |   |-- trove/db/models.py > DatabaseModelBase > create()
+|   |       |-- trove/db/models.py > DatabaseModelBase > save()
+|   |           |-- (import module)
+|   |           |-- (default) trove/db/sqlalchemy/api.py > save()
+|   |               |-- db_session = session.get_session() <b class="color-cyan" id="same_1st">#same_1st</b>
+|   |               |   |-- return _FACADE.get_engine()
+|   |               |       |-- site-packages/oslo_db/sqlalchemy/enginefacade.py > LegacyEngineFacade > get_engine()
+|   |               |           |-- return self._factory._reader_engine or return self._factory._writer_engine
+|   |               |-- db_session.merge(model)
+|   |               |-- db_session.flush()
+|   |-- trove/taskmanamger/api.py > API > create_instance()
+|       |-- trove/taskmanamger/api.py > API > _cast("create_instance") <b id="same_2nd" class="color-cyan">#same_2nd</b>
+|           |-- cctxt = self.client.prepare(version=version) // Prepare a method invocation context
+|           |   |-- site-packages/oslo_messaging/rpc/client.py > RPCClient.prepare()
+|           |       |-- return _CallContext._prepare()
+|           |           |-- return _CallContext()
+|           |-- cctxt.cast(self.context, method_name, **kwargs)
+|               |-- site-packages/oslo_messaging/rpc/client.py > _BaseCallContext > cast()
+|                   |-- self.transport._send()
+|                       |-- (<b class="color-red">send to rabbitmq</b>)
+|-- (... taskmanager queue ...)
+|-- trove/taskmanger/manager.py > Manager > create_instance()
+|   |-- trove/taskmanger/manager.py > Manager > _create_instance()
+|       |-- (if slave_of_id)
+|       |   |-- trove/taskmanger/manager.py > Manager > _create_replication_slave(): TODO
+|       |-- (else)
+|           |-- trove/instance/models.py > FreshInstanceTasks > load() <b class="color-red">extends</b> trove/instance/models.py > FreshInstance > Load()//create instance task
+|           |   |-- trove/instance/models > load_instance()
+|           |       |-- trove/db/models.py > DatabaseModelBase > find_by()
+|           |           |-- trove/db/models.py > DatabaseModelBase > get_by()
+|           |               |-- (import module)
+|           |               |-- (default) trove/db/sqlalchemy/api.py > find_by()
+|           |                   |-- trove/db/sqlalchemy/api.py > _query_by()
+|           |                       |-- trove/db/sqlalchemy/api.py > _base_query()
+|           |                           |-- return session.get_session().query(cls)
+|           |                               |-- <a href="#same_1st">#same_1st</a>
+|           |-- trove/taskmanager/models.py > FreshInstanceTasks > create_instance()
+|               |-- trove/taskmanager/models.py > FreshInstanceTasks > _prepare_networks_for_instance(): TODO
+|               |-- trove/taskmanager/models.py > FreshInstanceTasks > get_injected_files(): TODO
+|               |-- trove/taskmanager/models.py > FreshInstanceTasks > _create_server_volume(): TODO
+|               |-- trove/taskmanager/models.py > FreshInstanceTasks > _render_config(): TODO
+|               |-- trove/taskmanager/models.py > FreshInstanceTasks > _guest_prepare()
+|               |   |-- self.guest
+|               |   |   |-- (if not self._guest) self.get_guest()
+|               |   |       |-- self._guest = trove/instance/models.py > BaseInstance > get_guest()
+|               |   |       |   |-- return trove.common.clients.create_guest_client()
+|               |   |       |       |-- (import class)
+|               |   |       |       |-- return (default) trove/common/clients.py > guest_client()
+|               |   |       |           |-- (if manager) strategy.load_guestagent_strategy(manager).guest_client_class
+|               |   |       |           |   |-- trove/common/strategies/cluster/strategy.py > load_guest_agent_startegy(manager)
+|               |   |       |           |   |   |-- clazz = CONF.get(manager).get('guestagent_strategy')
+|               |   |       |           |   |       |-- (VD) trove.common.strategies.cluster.experimental.mongodb.guestagent.MongoDbGuestAgentStrategy
+|               |   |       |           |   |-- clazz = strategy.load_guestagent_strategy(manager).guest_client_class
+|               |   |       |           |       |-- (VD) trove.common.strategies.cluster.experimental.mongodb.guestagent.MongoDbGuestAgentAPI <b class="color-red">extends</b> trove.guestagent.api.py > API
+|               |   |       |           |-- (else)
+|               |   |       |           |   |-- clazz = (default) trove.guestagent.api.py > API
+|               |   |       |           |-- return clazz(context, id)
+|               |   |       |-- return self._guest
+|               |   |-- self.guest.prepare()
+|               |       |-- trove.guestagent.api.py > API > prepare()
+|               |           |-- trove.guestagent.api.py > API > _cast("prepare")
+|               |               |-- <a href="#same_2nd">#same_2nd</a>
+|               |               |-- (<b class="color-red">send to rabbitmq</b>)
+|               |-- trove/taskmanager/models.py > FreshInstanceTasks > _create_dns_entry(): TODO
+|-- (... guestagent queue ...)
+|-- trove/guestagent/datastore/manager.py > Manager
+    |-- trove/guestagent/datastore/manager.py > prepare()
+        |-- self._prepare()
+            |-- self.status.begin_install(): TODO
+            |-- self.do_prepare()
+            |   |-- (VD) trove/guestagent/datastore/experimental/mongodb/manager.py > Manager > do_prepare(): TODO
+            |-- self.status.end_install(): TODO
+            |-- (if not cluster_config)
+            |   |-- (if database)
+            |   |   |-- self.create_database(): TODO
+            |   |-- (if users)
+            |   |   |-- self.create_user(): TODO
+            |   |-- (if root_password and not backup_info)
+            |       |-- self.enable_root_on_prepare(): TODO
+            |-- self.post_prepare(): TODO    
+</pre>

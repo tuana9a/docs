@@ -1,0 +1,17 @@
+<pre>
+trove/guestagent/datastore/experimental/mongodb/manager.py > Manager > add_members()
+trove/guestagent/datastore/experimental/mongodb/service.py > MongoDBAdmin > rs_add_members()
+trove/guestagent/datastore/experimental/mongodb/taskmanager.py > MongoDbClusterTasks > create_cluster()
+trove/taskmanamger/models.py > FreshInstanceTasks > attach_replication_slave()
+Trove API -> Task Manager ** Trove API -> Guest Agent ** Guest Agent -> Conductor ** Task Manager -> Conductor
+trove/guestagent do_prepare post prepare ,...
+
+guestagent>datastore>manager>prepare()								
+guestagent>datastore>manager>do_prepare(abtract)
+	VD: MySqlManager
+	self.app.stop_db()
+	operating_system.ensure_directory()
+	self.app.set_data_dir(data_dir)
+	self.app.start_db()
+guesagent>datastore>manager>post_prepare()
+</pre>

@@ -1,0 +1,12 @@
+trove/cluster/service.py > ClusterController > create():
+    trove/cluster/models.py > Cluster > create():
+    (load Cluster Class):
+    (VD) trove/common/strategies/cluster/experimental/mongodb/api.py > MongoDbCluster > create():
+        trove/db/models.py > DatabaseModelBase > create() //init db_info:
+        (loop):
+            trove/instance/models.py > Instance > create():
+                trove/instance/models.py > DBInstance > create():
+                trove/taskmanager/api.py > API > create_instance():
+                <a href="../instance/create_instance.html">#create_instance</a>:
+        trove/taskmanager/api.py > API > create_cluster():
+            trove/taskmanamger/api.py > API > _cast(): TODO

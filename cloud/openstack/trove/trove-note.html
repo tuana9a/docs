@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../../../common.css" />
+	<link rel="stylesheet" href="./common.css">
+	<title>trove note</title>
+</head>
+
+<body>
+	<h2>how to install trove</h2>
+	<div class="fetchAppend" data-url="./install.sh"></div>
+
+	<h2>#temp</h2>
+	<div class="fetchAppend" data-url="./temp.stack.html"></div>
+
+	<h2>tổng quan về trove</h2>
+	<ul>
+		<li>trove là database as a service</li>
+		<li>trove orchestation các instance database: tạo instance, quản lí lifecycle, tăng giảm kích thước database</li>
+		<li>trove có tương tác với nova: quản lí vm instance, ...</li>
+	</ul>
+
+	<h1>trove gồm:</h1>
+
+	<ul>
+		<li>api server: là cái để tương tác
+			<ul>
+				<li>là web service lắng nghe request từ client, làm nhiệm vụ authen</li>
+				<li>communicate với task manager với task nặng</li>
+				<li>communicate trực tiếp tới guestagent với task nhẹ (list users)</li>
+			</ul>
+		</li>
+		<li>taskmanager: là thằng xử lí các logic nặng nhất
+			<ul>
+				<li>provisioning instances, managing the lifecycle of instances, and performing operations on the instance</li>
+				<li>It takes messages from the API Server, responds accordingly with a message of consent, and begins tasks</li>
+				<li>một task manager có thể quản lí nhiều instance vì dựa vào instance_id</li>
+			</ul>
+		</li>
+		<li>guestagent: là thằnh phần đi kèm theo database instance
+			<ul>
+				<li>It is in charge of bringing a datastore online, which can be a complicated task</li>
+				<li>The Guest Agent also sends heartbeat messages to the API via conductor.</li>
+				<li>mỗi một instance database sẽ có một guest agent đi kèm</li>
+				<li>listen on topic RabbitMQ</li>
+			</ul>
+		</li>
+		<li>conductor:
+			<ul>
+				<li>runs on the host, responsible for recieving messages from guest instances to update information on the host</li>
+				<li>For example, instance statuses and the current status of a backup</li>
+				<li>Conductor listens for RPC messages through the message bus and performs the relevant operation</li>
+				<li>listen topic on RabbitMQ</li>
+			</ul>
+		</li>
+	</ul>
+	<div class="display-flex justify-content-center align-items-center">
+		<img src="./img/trove-architecture-1.jpg" width="700px" />
+		<img src="./img/trove-architecture-2.png" width="600px" />
+	</div>
+	<div class="display-flex justify-content-center align-items-center">
+		<img src="./img/trove-architecture-3.jpg" width="700px" />
+		<img src="./img/trove-architecture-4.png" width="700px" />
+	</div>
+	<script src="../../../common.js"></script>
+</body>
+
+</html>
