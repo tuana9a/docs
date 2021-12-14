@@ -1,0 +1,5 @@
+# tuana9a add hadoop cluster
+192.168.100.10 hadoop-master.local
+192.168.100.11 hadoop-slave-00-01.local
+192.168.100.12 hadoop-slave-00-02.local
+192.168.100.13 hadoop-slave-00-03.local
