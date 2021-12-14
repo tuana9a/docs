@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>my diary</title>
+</head>
+
+<body>
+    <h1>2021-12</h1>
+
+    <h1>không thể ảo diệu hơn quả lỗi rất bố đời</h1>
+
+    <p>đcm phải bỏ dấu chấm phẩy ở cuối charset=utf-8 thì express.js mới nhận ra json ạ, con mẹ nó chứ :)</p>
+    <div id="scripts">
+        <script>
+            let url = "/register";
+            function api() {
+                return fetch(url, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json; charset=utf-8;", // cái dấu chấm phẩy ở cuối hại thận vãi đái
+                    },
+                    body: JSON.stringify(user),
+                }).then((resp) => resp.json());
+            }
+        </script>
+    </div>
+
+    <h1>database mongodb và cái ssl của loèn</h1>
+    <p>cert key file khi cấu hình ssl tls của mongodb có cấu trúc là phần đầu là cert phần cuối là key</p>
+    <p>tất cả cert và key phải trong cùng một file chứ không tách riêng</p>
+
+    <script>
+        const element = document.getElementById("scripts")
+        const scriptElement = document.getElementsByTagName("script").item(0);
+        const preElement = document.createElement("pre");
+        preElement.innerHTML = scriptElement.innerHTML;
+        element.appendChild(preElement);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>my diary</title>
+</head>
+
+<body>
+    <h1># 2021-07-01</h1>
+    <p>cách cài hadoop trên window hướng dẫn cài hadoop trên window, winutils, winutils.exe</p>
+    <p>
+        tôi tìm được winutils.exe chỉ việc tải về và setup HADOOP_HOME, %HADOOP_HOME%/bin trong PATH <br />
+        và thế là tôi đã chạy được spark trên windows từ IDE Intelliji IDEA Community
+    </p>
+    <hr />
+    <h1># 2021-07-10</h1>
+    <p>lỗi phiên bản java, java error because of version</p>
+    <p>
+        tôi tải openjdk-1.8.0_41 và bị lỗi ssl exception, <br />
+        có vẻ runtime của nó quá cùi và không đáp ứng điều kiện của hiện tại <br />
+        chính xác hơn là ssl bị lỗi thời (liên quan tới bảo mật) :V <br />
+        lỗi này làm mất của tôi 30p để tìm lỗi logic trong code mà thực chất là éo có <br />
+        tôi tải lại openjdk-1.8.0_292 và vấn đề được giải quyết :)))
+    </p>
+    <hr />
+    <h1># 2021-07-12</h1>
+    <p>window audio driver error, maxx audio, install driver</p>
+    <p>
+        máy dell xps 13 9370 có phần mềm maxx audio, đcm disable at startup làm window éo nhận được headphone <br />
+        đcm chuối vl => bắt buộc enable của nợ này nếu muốn dùng các thằng ml khác
+    </p>
+    <br />
+    <h1># 2021-07-13</h1>
+    <p># cmd của window như đầu bòi, set command in cmd, window cmd</p>
+    <p>
+        cái đệt mợ windows, tưởng lỏng lẻo giờ lại chặt chẽ dẫu cách trong cmd <br />
+        "khi dùng set thì phải là set name=value viết liền còn set name = value là toang" <br />
+    </p>
+    <p># cách sửa port mặc định ssh, change default port of ssh server</p>
+    <p>sửa config ssh server = file /etc/ssh/sshd_config dòng #Port 22 thành Port 2222 và done :V</p>
+    <hr />
+    <h1># 2021-07-14</h1>
+    <p>another java version cause error, máy tính của tài cài java 15 báo lỗi bố đời</p>
+    <p>
+        máy của tai tài éo hiểu sao bị lỗi mà máy của hung chạy k bị lỗi <br />
+        nguyên ngân lại do version java 15 của máy tai :V (2 ngày liên tiếp lỗi do java -version)
+    </p>
+    <hr />
+    <h1># 2021-07-20</h1>
+    <p>sudo adduser tuana9a</p>
+    <p># MySQL câu lệnh sửa scope truy cập database mysql</p>
+    <p>
+        // If you've got access to the mysql database, you can change the grant tables directly: <br />
+        <code>UPDATE mysql.user SET Host='%' WHERE Host='localhost' AND User='username';</code> <br />
+        // Also you might need to make changes to the mysql.db table as well: <br />
+        <code>UPDATE mysql.db SET Host='%' WHERE Host='localhost' AND User='username';</code> <br />
+        // and then flush to apply the privileges: <br />
+        <code>FLUSH PRIVILEGES;</code> <br />
+    </p>
+
+    <h1># 2021-07-22</h1>
+    <p>lỗi router vnpt, ghi đề lệnh router, overwrite command routing in router</p>
+
+    <p>
+        con router nhà mình bị ghi đè lệnh <br />
+        dmz ghi trước port forwarding thì port bị miss <br />
+        dmz save sau thì nó sẽ được check sau <br />
+    </p>
+
+    <h1># 2021-07-26</h1>
+    <p># venv in linux, virtual environment in linux is weird, đặc biệt mối trường ảo trên linux</p>
+    <p>
+        venv trong linux hơi dị <br />
+        mặc dù đang trong (venv) nhưng bash install.sh <br />
+        install.sh chứa một loạt pip install nhưng pip vẫn install ở ngoài (venv) <br />
+        có lể phải source venv/bin/activate trước chăng :? <br />
+        (đúng vậy các bạn ạ, đã test và thành công) <br />
+    </p>
+
+    <h1># 2021-07-31</h1>
+    <p># crontab, cron job, interval execute command linux</p>
+
+    <p>
+        <code>crontab -e</code> <br />
+        <code># m h dom mon dow command</code> <br />
+        <code>*/1 * * * * /bin/bash /home/tuana9a/update-dns-vpn.tuana9a.tech.sh</code>
+    </p>
+</body>
+
+</html>
