@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en-vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <h1>các lỗi backend</h1>
+    <ul>
+        <li>sập nguồn</li>
+        <li>database lỗi</li>
+        <li>mất kết nối db</li>
+        <li>role truy cập</li>
+        <li>đường truyền mạng (chậm, close)</li>
+        <li>time out</li>
+        <li>quá tải hệ thống (băng thông, bộ nhớ, ram, ddos, flood)</li>
+    </ul>
+
+    <h1>backend design note</h1>
+    <h2>config</h2>
+    <ul>
+        <li>runtime (key, ...)</li>
+        <li>startup (ENV: port, database, address, ...)</li>
+        <li>hàm auto config, tự duyệt thư mục config và load ứng với tên file [tự chế]</li>
+        <li>có hàm get, set tùy ý biến runtime</li>
+    </ul>
+
+    <h2>api query các api khác [tự chế]</h2>
+    <p>api gốc query các api khác để frontend adapt vs thay đổi url của backend</p>
+
+    <h2>dynamic webapp update frontend [tự chế]</h2>
+    <ul>
+        <li>webapp đóng gói = file zip rồi up lên backend</li>
+        <li>có thể fix nóng mà không cần phải commit backend</li>
+        <li>nhiều server sẽ update từng server</li>
+    </ul>
+
+    <h2>backup, loging - monitor</h2>
+    <ul>
+        <li>theo ngày</li>
+        <li>nhiều version</li>
+    </ul>
+
+    <h2>microservice</h2>
+    <ul>
+        <li>không bắt service phải biết về thông tin của các service khác nếu không cần thiết</li>
+        <li>không chia nhỏ quá, đcm code khổ hơn thay vào đó cố gắng co chúng lại</li>
+    </ul>
+
+    <h1>scale solution</h1>
+
+    <img src="./scale-solution-in-nutshell.PNG" alt="404">
+</body>
+
+</html>
