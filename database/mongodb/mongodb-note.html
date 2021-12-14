@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>note</title>
+
+        <link rel="stylesheet" href="../../../common.css" />
+    </head>
+
+    <body>
+        <pre>
+        1. lịch sử
+            10gen software company began developing MongoDB in 2007 as a component of a planned platform as a service product.
+            In 2009, the company shifted to an open-source development model, with the company offering commercial support and other services.
+            In 2013, 10gen changed its name to MongoDB Inc	
+
+            the name MongoDB or Mongo is shorten from humongous
+
+        2. market share
+            https://www.datanyze.com/market-share/databases--272
+            https://db-engines.com/en/ranking
+
+            
+        3. release
+            viết = C++, JS, Python
+
+            version 1.0: 2009-02
+            version 1.6: replica set, sharding
+            version 2.4: switch V8 engine https://engineering.mongodb.com/post/code-generating-away-the-boilerplate-in-our-migration-back-to-spidermonkey
+                java script engine sử dụng trong việc thông dịch các câu lệnh (tương tự với sql parsing) rồi áp các hàm js aggregation trong việc xử lí dữ liệu
+                sau khi kết quả trả về muốn tìm max(của một thuộc tính nào đó), sum, count, giống group by của bên SQL
+
+            version 3.0: WiredTiger storage engine
+            version 3.2: from V8 engine to SpiderMonkey
+            version 5.0: 2021-06-13
+
+        5. các tính năng
+            ad-hoc queries:     tìm kiếm theo trường (tên = tuấn), tìm kiếm theo range (VD: tìm kiếm u20), 
+            replication:        nói chi tiết hơn ở phía sau
+            sharding:         
+            aggregation:        chính là group by trong sql, (count, max, min, sum)
+
+        </pre>
+    </body>
+</html>
