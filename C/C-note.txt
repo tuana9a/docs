@@ -1,0 +1,226 @@
+C note lập trình C
+
+Kiểu dữ liệu và Nhập xuất
+
+Int: số nguyên
+%i hệ nào thì khi nhập dữ liệu giá trị sẽ đúng hệ đó
+%d in ra đều là hệ decimal (hệ 10)
+%o và %#o dạng octal (hệ 8) dấu “#” là đúng quy ước cho hệ 8 là có số “0” đứng trước
+%x và %#x dạng hexa (hệ 16) tương tư trên thì hệ 16 có “0x” hoặc “0X” đứng trước
+    VD : printf(“%03d”,i) thì giá trị in ra căn từ bên phải 001 sẽ có trường hợp dấu trừ
+    đứng trước 03d để căn từ bên trái (hoặc ngược lại)
+
+Char: ký tự thực ra vẫn là số nguyên nhưng đc mã hóa cho ký tự
+%c ký tự
+        VD: print(”%c”,48)thì giá trị in ra là 0 chứ ko phải 48
+
+Float: số thực
+%f
+
+Double: số thực (độ chính xác cao hơn)
+%lf %g %e
+
+Void: kiểu này chịu
+
+Signed và Unsigned thì usigned luôn dương nhưng in ra thì vẫn âm được :))
+
+Unsigned khi khai báo chỉ cần thêm unsigned đằng trước là được :V
+Biến global: là biến được sử dụng trong nhiều hàm và sẽ tồn tại kể cả sau khi gọi hàm
+    Chú ý sử dụng trong function khi thêm extern trong function hoặc có thể bỏ qua nếu biến global đó được đưa hết lên đầu 
+Nhưng khi muốn sử dụng biến đó trong một file khác thì chắc chắn sẽ cần extern trước nó
+    Biến global khi khai báo cần phải là constant tức ko đc là biếu thức còn biến static và register thì thoải mái hơn
+    VD: 
+        int a=1406;chỗ này ko thể khai báo là int a=b+c;
+        void main(void)
+        {
+            extern int a;		
+        }
+    Biến static: là biến chỉ tồn tại trong hàm hoặc file mà chứa nó
+        do vậy các hàm khác hoặc file khác sẽ không thấy biến này giống biến automatic
+        nhưng biến static sẽ giữ nguyên giá trị sau khi gọi hàm hoặc file khi khai báo chỉ cần thêm static trước nó
+
+    Biến register: cái này ko rõ lắm
+
+    Chú ý nếu hai loại biến a,b không cùng loại thì loại sẽ đc ưu tiên theo rule
+        double>float>(char và short convert sang int)>long
+        tức là nếu xuất hiện cùng lúc thì thằng ưu tiên thấp sẽ phải convert sang thằng ưu tiên cao hơn
+
+    (double) x tức là chuyển x sang dạng double tương tự cho các loại khác khi thay double bằng float, int, …
+        VD: double x=3.14; khi đó (int)x sẽ là 3 tức bị mất phần phân :V
+
+Toán tử (cộng trừ nhân chia, …)
+Toán từ bình thường
+    Số học là:  +  -  *  /  %  
+    trong đó % là chia lấy phần dư (chỉ dùng với 2 toán tử là số nguyên được ưu tiên như nhân chia)
+    Quan hệ là:  >  <  <=  >=  ==  != trong đó == và != kém ưu tiên so vs còn lại
+    Chú ý quan hệ và số học sẽ trả về giá trị 1 nếu đúng và 0 nếu sai
+        vì vậy trong vòng lặp thì điều kiện cứ khác 0 là đúng và bằng 0
+        thì dừng vòng lặp từ đó if(x) tương đương if(x!=0)
+
+    Logic là:  &&  || trong đó && ưu tiên hơn ||
+    Gán là:  = gán có một trường hợp đặc biệt i=1+(i=1+1) thì tức là i bằng 3 LOL
+    Chú ý SỐ HỌC > QUAN HỆ > LOGIC > GÁN
+
+Toán tử bất thường
+    Toán tử tăng giảm
+        i++ và ++i cùng là cộng một vào giá trị của i nhưng ++i công ngay tức thì còn i++ là cộng sau khi tryền giá trị VD:
+        i=1;
+        j=i++; thì i=2 và j=1
+        còn 	j=++i; thì i=2 và j=2
+        i+=10 tức là i=i+10
+        i*=y+1 tức là i=i*(y+1) thay này là thay tức thì ko phải thay sau :V
+        ngoài ra còn  -=   /=   %=   &=   ^=   |=   >>=   <<=
+
+        exp1 ? exp2 : exp3 trả về kết quả là exp2 nếu exp1 khác 0 và exp3 nếu exp1 bằng 0
+        VD: z=(a>b)?a:b; tức là z=max(a,b) dấu ngoặc chứa a>b không cần vì ? ưu tiên thấp chỉ trước gán
+
+
+    Toán tử bitwise (ảo tung chảo mỡ)
+        i & j sẽ thu được kết quả là số mà dạng nhị phân của nó là phần bit một trùng nhau của 2 toán hạng,phần bit khác nhau hoặc cùng bằng 0 sẽ là bit 0
+                VD: 10 & 5 kết quả sẽ là 0 vì 10 là 1010 còn 5 là 0101 tức thu được 0000
+        VD: 10 & 3 kết quả sẽ là 2 vì 10 là 1010 còn 3 là 0011 thì phần bit một ở cuối số 6 khác nên ko được tính và sẽ bằng 0 tức thu được 0010
+        VD: 10 & 6 kết quả sẽ là 2 vì 10 là 1010 còn 6 là 0110 tức thu được 0010
+        i | j sẽ thu được kết quả là số mà dạng nhị phân của nó là các bit một của cả 2 số, nếu cả 2 toán hạng đều là bit 0 thì bit đó bằng 0
+                VD: 10 | 5 kết quả sẽ là 15 vì 10 là 1010 và 5 là 0101 tức thu được 1111 
+                VD: 10 | 3 kết quả sẽ là 11 vì 10 là 1010 và 3 là 0011 tức thu được 1011
+        i ^ j sẽ thu được kết quả là số mà dạng nhị phân có bit bằng 1 nếu bit của 2 toán hạng khác nhau và bit bằng 0 nếu hai toán hạng trùng nhau
+                VD: 10 ^ 5 kết quả sẽ là 15 vì 10 là 1010 và 5 là 0101 tức thu được 1111
+                VD: 10 ^ 3 kết quả sẽ là 9 vì 10 là 1010 và 3 là 0011 tức  thu được 1001
+        x<<i sẽ thu được số mà dạng nhị phân của nó sẽ là dạng nhị phân của x dịch  sang phải i đơn vị và các bit mới tạo sẽ bằng 0 (thực chất là nhân với 2 mũ i)
+                VD: 2<<2 sẽ thu được kết quả là 8 vì 2 là 0010 tức thu được 1000
+        Chú ý là x không bị thay đổi giá trị
+        tương tự vớii x>>i nhưng khi đó sẽ có làm tròn vì đây thực chất là chia (ko nên dùng)
+            ~x sẽ thu được số mà dạng nhị phân là mỗi bit 1 của x sẽ thành bit 0 và ngược lại như thế sẽ thành số âm trong việc xoay vòng:V	
+        x & ~i sẽ thu được kết quả là số mà dạng nhị phân của nó là dạng nhị phân của x mà cứ chỗ nào trùng với bit một của i sẽ bằng 0 còn lại sẽ bằng chính nó
+                VD: 5 &~3 kết quả sẽ là 4 vì 5 là 0101 và 3 là 0011 tức thu được 0100
+                VD: 5 &~2 kết quả sẽ là 5 vì 5 là 0101 và 2 là 0010 tức thu được 0101
+
+
+Toán tử logic
+    chú ý toán tử logic kiểu &&  hoặc || có cơ chế hoạt động lạ
+    thì vế đầu sai thì nó sẽ không quan tấm vế sau, và nó sẽ không thực hiện câu lệnh (nếu có) ở vế sau
+
+
+Thao tác với file
+    FILE *fp;
+    char ch;
+    char* s
+    fp=fopen("C:\\data.dat","r"); hoặc fopen_s(&fp,"tenfile","mode");
+        r	chỉ đọc
+        (not test)w	ghi từ đầu, nếu chưa tồn tại thì tạo mới
+        (not test)a	ghi tiếp, nếu chưa tồn tại thì tạo mới
+        (not test)r+	đọc và ghi
+        w+	làm trắng, ghi, nếu chưa tồn tại thì tạo mới
+        (not test)a+	đọc từ đầu, ghi vào cuối
+    ch=fgetc(fp);	// trả về một ký tự hiện tại và fp sẽ trỏ tới ký tự tiếp theo
+    s=fgets(fp);  	// trả về một xâu cho tới ‘\n’ cái này chưa rõ
+    fputc(ch,fp);	// ghi một ký tự vào file
+    fputs(xâu,fp); 	// cái này sẽ ghi ra file tuỳ theo tuỳ chọn mình đã set up từ trước
+    fprintf(fp ,“format”,..,”các đối số nếu có”)
+        hàm fprintf giống ý hệt printf nhưng khác mỗi là nó ghi ra file
+    fclose(fp);
+    
+    
+Các thứ khác
+
+Chú ý fflush(stdin) trước mỗi lệnh đọc xâu
+
+    câu lệnh switch case
+        switch(giá trị muốn xét)
+        {
+            case TH1: làm gì;break luôn;
+            ...
+        }
+    
+Câu lệnh do while thì auto làm một lần trước rồi mới vào vòng lặp ngược với while
+    Nếu câu lệnh trong các case giống nhau có thể viết:
+        case TH1: case TH2: ... case THn: làm gì;break
+        VD: case ‘1’: case ‘2’: case ‘3’: ndigit[c-’0’]++; break; (đếm số số trong text)
+            thì tất cả trường hợp phía trước đều làm chung một lệnh, lệnh break để thoát khỏi switch tránh việc lãng phí thời gian hoặc vô tình thực hiện các câu lệnh không mong muốn
+    
+
+Hàm đệ quy nếu có nhiều nhành thì khi đến lúc return thì nó chỉ return 1 nhánh các nhánh khác không bị ảnh hưởng 	
+
+Khi chạy Command-line Argument thì dấu “*” cần thêm \* hoặc ‘*’ nếu không muốn bị hiểu là tất cả file trong thư mục đó là đầu vào
+
+define tên dài quá thì thêm \ ở cuối mỗi dòng và define đó ko thay thế xâu
+
+struct PHONGTRO *list=(struct PHONGTRO*)malloc(n*sizeof(struct PHONGTRO));
+
+(*p1).diachi  phải có dấu ngoặc vì độ ưu tiên của dấu chấm "."
+p1->sdt  tương đương với cái trên
+
+scanf("%*c",&tmp)
+
+
+
+printf("Entered Array: [");
+for(int i=0;i<n;++i) printf(  (i==n-1)? "%d]" : "%d" ,a[i]  );
+
+
+printf(   strlen(s[i]) ?  "line[%d]:%s\n" : "line[%d]:EMPTY\n",i+1,s[i]   );
+Các thư viện
+<string.h>
+    gets(string) lấy string vừa nhập phần tử của mảng cuối là ‘\0’ ko lấy ký tự ‘\n’
+    puts(string) out cái string đó ra
+    strlen(string) trả về độ dài xâu cho tới ký tự ‘\0’ đầu tiên nên kết qủa sẽ như nhìn thấy
+    strcmp(s1,s2) so sánh giá trị xâu 
+        trả về âm nếu s1<s2 VD: a<z thì trả về giá trị là -25 
+        trả về 0 nếu s1 trùng s2 VD: a=a thì  trả về giá trị là 0
+        trả về 1 nếu s1>s2 VD: z>a trả về giá trị là 25
+    strcpy(s1,s2) s1=s2 s1 sẽ có giá trị của s2 (gán s1 bằng s2)
+    strchr(s1,’ký_tự_muốn_tìm’) trả về con trỏ là xâu ký tự từ vị trí đầu tiên thấy ký tự muốn 	tìm
+        VD: char *p=strchr(s,’ ‘) với s là “dit me” thì p sẽ là một xâu hoặc giá trị vị trí của
+            dấu cách “ me” trỏ p “*p” sẽ có giá trị là dấu cách 
+
+<ctype.h>
+    islower(char)
+    isupper(char)
+    isdigit(char)
+    isspace(char) 
+        cả 4 cái trên trả về giá trị 0 nếu sai và khác không nếu đúng 
+    tolower(char) biến thành viết thường
+    toupper(char) biến thành viết hoa
+
+<stdlib.h>
+    atof(xâu_con_số) chuyển đổi string thành số thực VD:xâu s[]=”123.456” sau double 	i=atof(s) sẽ được i=123.456
+    atoi(xâu_con_số) cũng như trên nhưng thu về số nguyên
+
+<math.h> lúc biên dịch cần thêm -lm VD: cc test0.c -lm
+
+<dos.h> hoặc <time.h>	
+rand() %2 số 0,1
+rand() %6+1 số 1,2,3..,6
+khởi tạo nhân đầu tiên
+    srand(true(NULL));
+
+Con trỏ và những chú ý
+    Cấp phát động là xin “sổ đỏ” trên RAM hay HEAP (vitorual memory) để lưu giá trị và xóa toàn quyền do người lập trình khác với STACK là do máy quyết định không can thiệp được vì vậy nên bắt buộc phải có con trỏ để kiểm soát được
+    VD: i=(int*)malloc(sizeof(int)) xin bộ nhớ cho biến con trỏ i với kích cỡ mặc định cho một số nguyên (int 4bytes thì phải)
+    
+    Chú ý là việc hàm trả về con trỏ sẽ phải đc khai báo trước hàm main :V  không thì nó báo clgt gì đó cũng éo hiểu vì sao
+    
+    Hàm cũng có địa chỉ nên có cả con trỏ trỏ về địa chỉ của hàm :V
+    
+    Mảng thực chất là con trỏ VD: char s[10]; thì s sẽ có giá trị là vị trí của cả cái xâu đó và s+i sẽ là vị trí của s[i] theo đó i=1 tức là vị trí của s[1] và mặc định thì s sẽ là vị trí của s[0] tương tự nếu mảng là int và các kiểu dữ liệu khác
+    Mặc dù có giá trị là địa chỉ nhưng mảng (tên mảng) không được sử dụng full chức năng như một con trỏ
+        VD: a là mảng p là con trỏ thì p=a và p++ là hợp lệ còn a=p và a++ là điêu
+            và con trỏ đôi khi cũng chưa sử dụng được (cấp phát bộ nhớ)
+        VD: char *s thì gets(s) đéo được vì kiểu xâm phạm bộ nhớ hoặc chưa biết trỏ đó trỏ vào đâu nên không biết đằng nào mà lần
+
+    Khai báo mảng hai chiều và khởi tạo giá trị cho mảng hai chiều VD:
+        char daytab[12][13]= {
+            {0,31,28,29,30,31,30,31,31,30,31,30,31},
+            {0,31,29,29,30,31,30,31,31,30,31,30,31},
+        }
+        mỗi hàng sẽ có 13 phần tử và có 2 hàng các giá trị trên cùng hàng sẽ cùng trong block
+    
+    Đầu vào khi muốn thay đổi giá trị của mảng hai chiều 
+        VD: a[2][5] ở main thì khai báo hàm sẽ là  void input(int a[][5]) số cột phải có và chính xác số cột vì như thế mới đúng việc kiểm soát bộ nhớ giống như mảng một chiều phải đúng vị trí bắt đầu thì mảng hai chiều phải đúng vị trí bắt đầu của mỗi mảng 1 chiều do vậy số cột là khoảng cách giữa 2 mảng một chiều nên bắt buộc phải có và chính xác
+
+
+1. Tìm đảo diện tích lớn nhất ký tự 1 liện nhau là đảo còn ký tự 0 là nước
+(done)	2. Điền vào chỗ chấm sao cho kết quả thu đc thỏa mãn VD 15=3_5
+(done)	3. Đầu vào văn bản tiếng anh đầu ra tần suất của các chữ cái
+4. Đầu vào ảnh BMP đầu ra ảnh 1/0 kiểu đen trắng
+(done)	5. Vẽ chữ bằng ký tự
