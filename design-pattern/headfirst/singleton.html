@@ -1,0 +1,72 @@
+<h1>singleton pattern, one of a kind object</h1>
+
+<p>
+    thường các chương trình, hoặc nói rộng hơn hệ điều hành luôn có một số thành phần được truy cập ở nhiều nơi <br />
+    với chương trình thì đó có thể là một biến, một dạng tài nguyên <br />
+    với OOP thì để sử dụng thì cần phải khởi tạo object để sử dụng (hoặc dùng static, cái này sẽ được nói sau) <br />
+    vậy nếu tài nguyên này được dùng ở nhiều nơi và do đó được khởi tạo mỗi cần sẽ gây ra sự không kiểm soát tài nguyên
+    <br />
+    thậm chí rò gỉ bộ nhớ, ... nếu không được kiểm soát tốt <br />
+</p>
+
+<p>
+    do đó singleton pattern được sinh ra để giải quyết vấn đề này <br />
+    bằng cách chỉ cho phép tài nguyên đó được khởi tạo một lần <br />
+    và giới hạn việc khởi tạo chỉ nằm trong một class nhất định <br />
+    class này sẽ cung cấp một global access point cho ai muốn dùng
+</p>
+
+<p>
+    trước khi đi vào nhận xét thì cùng mình đi qua một vài ví dụ, tình huống mà mình gặp phải trong quá trình code
+    <br />
+</p>
+<ul>
+    <li>
+        tình huống 1: cũng khởi tạo một lần và truyền nó vào hàm khởi tạo cho các class dùng nó
+        <ul>
+            <li>tự nhiên bắt buộc phải có trong hàm khởi tạo</li>
+            <li>
+                nếu thay đổi thì thôi dồi
+                <ul>
+                    <li>
+                        class dùng nó thay đổi hàm khởi tạo
+                        <ul>
+                            <li>phải cập nhật lại cách truyền object ban đầu</li>
+                            <li>phải tìm tất cả chỗ khởi tạo và truyền lại</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                nếu muốn tìm chỗ nào sử dụng
+                <ul>
+                    <li>khi tìm kiếm sẽ ra cả chỗ khởi tạo và chỗ gọi phương thức</li>
+                    <li>CTRL + Click đúng là thảm họa</li>
+                    <li>nếu khởi tạo theo tầng thì còn mệt hơn nữa</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+
+<p><strong>NHẬN XÉT</strong></p>
+<ul>
+    <li>code giờ sẽ biết được singleton đó được gọi ở đâu mà không cần p khởi tạo</li>
+    <li>tránh được dependency vòng</li>
+    <li>kế thừa một Singleton: thực tế méo ai làm như này</li>
+    <li>
+        ván đề về đa luồng
+        <ul>
+            <li>cái này không chỉ riêng singleton, static đều gặp phải</li>
+            <li>chỉ cần thêm code xử lí, synchronize, locking là được</li>
+        </ul>
+    </li>
+    <li>
+        so sánh với static
+        <ul>
+            <li>về mặt cảm giác rõ ràng singleton mạnh hơn static</li>
+            <li>singleton có thể truyền khởi tạo còn static thì không</li>
+            <li>static xử lý dependency vòng phức tạp, có thể gây khó cho jvm</li>
+        </ul>
+    </li>
+</ul>

@@ -1,0 +1,113 @@
+<link rel="stylesheet" href="./common.css" />
+
+<h1>bài toán con vịt "siêu nhân", strategy pattern, design pattern</h1>
+
+<p>
+    một cái app làm về con vịt, bài toán đặt ra là một con vịt có thể bay hoặc sủa <br />
+    do vậy cần phải thiết kế lại class sao cho phù hợp tính kế thừa và tính mở rộng
+</p>
+<p>
+    cách một là làm một class Duck (có thể abstract) có phương thức quack() <br />
+    sau đó mỗi một con vịt mới thêm vào sẽ viết thêm class mới <br />
+    nhưng ngay sao đó một đợt cập nhật, chủ app yêu cầu code thêm chức năng bay cho vịt <br />
+    vậy phải code lại toàn bộ các con vịt (điều này càng khủng khiếp nếu sau này có nhiều vịt hơn) <br />
+</p>
+<p>
+    một giải pháp để giải quyết bài toán trên là code chức năng bay cho root class <br />
+    nhưng như vậy có những con vịt không bay được lại vẫn cho bay <br />
+    lại phải override các class này, mặc dù dùng tính kế thừa của OOP <br />
+    <strong>nhưng chả thấy dễ maintain đâu, toàn tăng độ khó cho game</strong>
+</p>
+<ul>
+    <li>code bị trùng lặp ở nhiều subclass (phải override liên tục)</li>
+    <li>lúc runtime khó thay đổi, phức tạp, (hard code)</li>
+    <li>khi runtime khó phân biệt các con vịt với nhau (méo nhớ nó có bay được k)</li>
+</ul>
+<p><strong>VẬY LÀM SAO ĐỂ CÓ THỂ LINH ĐỘNG TRONG VIỆC THÊM MỘT CHỨC NĂNG MỚI CHO HỆ THỐNG CŨ ?</strong></p>
+
+<hr />
+
+<p><strong style="color: red">DESIGN PRINCIPLE:</strong></p>
+<ul>
+    <li>
+        xác định thành phần có nhiều thay đổi nhất trong chương trình
+        <ul>
+            <li>VD: các tính năng của con vịt <b>chứ k phải cả con vịt</b></li>
+        </ul>
+    </li>
+    <li>tách chúng ra khỏi phần ít thay đổi của chương trình</li>
+    <li>
+        đóng gói chúng (nhỏ nhất)
+        <ul>
+            <li> để chỉnh sửa trong khung này</li>
+            <li>các phần bên ngoài không bị ảnh hưởng</li>
+        </ul>
+    </li>
+</ul>
+<p>
+    bằng cách đóng gói thầng có biến thể nhiều nhất là hành vi của con vịt (fly và quack) <br />
+    <strong>program to interface not implementation</strong> <br />
+    đại loại đây là ý nghĩa của interface: một giao diện để các thứ khác sử dụng, <br />
+    (hành vi để vịt sử dụng), tạo các insterface cho các hành vi bay, quạc, và kết tập chúng vào class Duck <br />
+</p>
+
+<hr />
+
+<p><strong>NHẬN XÉT</strong></p>
+<ul>
+    <li>giờ lúc runtime nếu có lắp cánh tên lửa thì cũng chỉ cần set lại là được</li>
+    <li>bất kì con vật nào ngoài vịt đều có thể <b>tái sử dụng</b> các hành vi trên</li>
+    <li>
+        có thể thêm các hành vi mới mà không bị ảnh hưởng quá nhiều
+        <ul>
+            <li>
+                VD: thêm hành vi mới tạo interface mới và một default hành vi cho con vịt
+                <ul>
+                    <li>sửa class Duck thêm vài dòng code các con vịt khác k cần sửa</li>
+                    <li>chỉ cần sửa nếu chúng có phản ứng đặc biệt thôi</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>
+        có thể thêm các con vịt siêu nhân, vịt dời rất đơn giản
+        <ul>
+            <li>chỉ cần kế thừa class Duck, trong hàm khởi tạo chỉ cần set lại hành vi tương ứng</li>
+        </ul>
+    </li>
+</ul>
+<p>
+    sau này nếu có thêm các chức năng bay quạc khác <br />
+    thì cũng chỉ cần viết thêm class implement cái interface mà không cần phải sửa code class duck
+</p>
+
+<hr />
+
+<p>phía dưới là source code ví dụ</p>
+
+<div style="display: flex">
+    <div>
+        <div id="FlyBehavior" class="code"></div>
+        <div id="FlyNoWay" class="code"></div>
+    </div>
+    <div>
+        <div id="QuackBehavior" class="code"></div>
+        <div id="MuteQuack" class="code"></div>
+    </div>
+    <div id="Duck" class="code"></div>
+</div>
+
+<p><strong style="color: red">DESIGN PRINCIPLE:</strong></p>
+<ul>
+    <li>FAVOR <b>composition</b> OVER <b>inheritance</b></li>
+</ul>
+
+<script src="./common.js"></script>
+<script>
+    const pathPrefix = "./src/headfirst/strategy/";
+    load({ className: "FlyBehavior", pathToClass: pathPrefix + "FlyBehavior.java" });
+    load({ className: "FlyNoWay", pathToClass: pathPrefix + "FlyNoWay.java" });
+    load({ className: "QuackBehavior", pathToClass: pathPrefix + "QuackBehavior.java" });
+    load({ className: "MuteQuack", pathToClass: pathPrefix + "MuteQuack.java" });
+    load({ className: "Duck", pathToClass: pathPrefix + "Duck.java" });
+</script>
