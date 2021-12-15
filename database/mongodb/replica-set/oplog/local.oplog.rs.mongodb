@@ -1,0 +1,50 @@
+// MongoDB Playground
+// Use Ctrl+Space inside a snippet or a string literal to trigger completions.
+
+// The current database to use.
+use('local');
+
+db['oplog.rs'].dataSize()
+
+db.getCollection('oplog.rs')
+  .find({
+    ns: "test.test",
+    op: 'i'
+  }).count();
+
+db.getCollection('oplog.rs')
+  .find({
+    o: {dropDatabase: 1},
+    op: 'c'
+  });
+
+db.getCollection('oplog.rs')
+  .find()
+  .sort({ $natural: -1 })
+
+db.getCollection('oplog.rs')
+  .find({
+    op: "n",
+    o: {
+      msg: "periodic noop"
+    }
+  }).count()
+
+db.getCollection('oplog.rs')
+  .find({
+    op: "c",
+    ns: "READ__ME_TO_RECOVER_YOUR_DATA.$cmd"
+  })
+
+db.getCollection('oplog.rs')
+  .find({
+    // op: "c",
+    ns: "READ__ME_TO_RECOVER_YOUR_DATA.README"
+  })
+
+db.getCollection('oplog.rs')
+  .find()
+  .sort({$natural: -1})
+
+db['oplog.rs'].find({ns: {$ne: ''}}).sort({ts: -1})
+

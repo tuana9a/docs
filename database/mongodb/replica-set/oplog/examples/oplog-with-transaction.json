@@ -1,0 +1,77 @@
+{
+    "lsid": {
+        "id": {
+            "$binary": {
+                "base64": "Mw93IHEQSNq384+q5OjsTg==",
+                "subType": "04"
+            }
+        },
+        "uid": {
+            "$binary": {
+                "base64": "47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=",
+                "subType": "00"
+            }
+        }
+    },
+    "txnNumber": 1,
+    "op": "c",
+    "ns": "admin.$cmd",
+    "o": {
+        "applyOps": [
+            {
+                "op": "i",
+                "ns": "test1.test",
+                "ui": {
+                    "$binary": {
+                        "base64": "i6Zgu5fATa6Qt307HhgX4w==",
+                        "subType": "04"
+                    }
+                },
+                "o": {
+                    "_id": {
+                        "$oid": "612f44a860604781337967d8"
+                    },
+                    "i": 1630487720209,
+                    "name": "Rally Pizza Razer"
+                }
+            },
+            {
+                "op": "i",
+                "ns": "test1.test",
+                "ui": {
+                    "$binary": {
+                        "base64": "i6Zgu5fATa6Qt307HhgX4w==",
+                        "subType": "04"
+                    }
+                },
+                "o": {
+                    "_id": {
+                        "$oid": "612f44ad60604781337967d9"
+                    },
+                    "i": 1630487725254,
+                    "name": "Milk Fun Pizza"
+                }
+            }
+        ]
+    },
+    "ts": {
+        "$timestamp": {
+            "t": 1630487740,
+            "i": 1
+        }
+    },
+    "t": 1,
+    "v": 2,
+    "wall": {
+        "$date": "2021-09-01T09:15:40.760Z"
+    },
+    "prevOpTime": {
+        "ts": {
+            "$timestamp": {
+                "t": 0,
+                "i": 0
+            }
+        },
+        "t": -1
+    }
+}
