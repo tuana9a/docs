@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.tuana9a.models.Book" table="book">
+        <id name="id" type="long" column="id" />
+        <property name="name" column="name" type="string" />
+        <property name="publisher" column="publisher" type="string" />
+    </class>
+</hibernate-mapping>
