@@ -1,0 +1,39 @@
+h1 {
+    text-align: center;
+}
+
+p {
+    text-align: center;
+}
+
+a {
+    text-decoration: underline;
+}
+
+.search-container {
+    width: 50%;
+    max-width: 80%;
+    margin: auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#inputSearch {
+    font-size: 25px;
+    width: 100%;
+    padding: 2px 10px;
+}
+
+#searchResult {
+    width: 100%;
+    top: 100%;
+    position: absolute;
+    font-size: 17px;
+}
+
+#buttonSearch {
+    font-size: 20px;
+    padding: 6px 12px;
+}
