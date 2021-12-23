@@ -1,7 +1,8 @@
 package com.tuana9a.controllers;
 
 import com.tuana9a.entities.JsonResponse;
-import com.tuana9a.indexers.DocsService;
+import com.tuana9a.services.DocsService;
+
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

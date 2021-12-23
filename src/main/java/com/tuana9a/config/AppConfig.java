@@ -1,5 +1,6 @@
 package com.tuana9a.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import lombok.ToString;
@@ -17,5 +18,8 @@ public class AppConfig {
     public int BUFFER_SIZE = 1024; // 1KB
     public long DEFAULT_EXPIRE_TIME = 604800000L; // 1 weeks
     public String MULTIPART_BOUNDARY = "MULTIPART_BYTERANGES";
+
+    @Value("${custom.secret}")
+    public String SECRET;
 
 }
