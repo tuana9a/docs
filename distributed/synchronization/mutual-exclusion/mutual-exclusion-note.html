@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../common.css">
+    <title>mutual exclusion</title>
+</head>
+
+<body>
+    <h1>nhóm thuật toán loại trừ lẫn nhau</h1>
+    <p>tài nguyên khi được sử dụng chung cần có cơ chế locking, waiting, ... <br>sau đây sẽ là các thuật toán </p>
+    <ul>
+        <li>giải thuật tập trung: có một master, monitor quản lý ai vào, ai ra, ai đợi, đến lượt ai (sử dụng hàng đợi)</li>
+        <li>
+            <p>giải thuật phân tán: khi cần sử dụng sẽ broadcast hỏi toàn bộ</p>
+            <p><img src="./img/noname1.PNG"></p>
+        </li>
+        <li>giải thuật token ring: xem phía dưới</li>
+        <li>giải thuật bầu chọn: xem phía dưới</li>
+    </ul>
+
+    <h1>giải thuật token ring</h1>
+    <p>đại loại các node form thành vòng tròn và lần lượt truyền tay nhau chiếc vé (token) để sử dụng tài nguyên</p>
+    <div class="display-flex flex-wrap-wrap">
+        <p><img src="./img/token-ring-1.PNG"></p>
+        <p><img src="./img/token-ring-2.PNG"></p>
+    </div>
+    <p>giải thuật khá đơn giản và dễ sử dụng tuy nghiên cũng có vài điểm cần phải lưu ý</p>
+    <ul>
+        <li>
+            <span>hiện tượng mất token</span>
+            <ul>
+                <li>mất do bên gửi đã gửi nhưng bên nhận ko nhận được (mạng, đứt cáp): giải pháp thêm cơ chế ACK</li>
+                <li>cần có monitor sinh lại token, nhưng phải đảm bảo không có 2 token một lúc</li>
+            </ul>
+        </li>
+        <li><span>nếu kết nối của bất kì node nào mất thì gián đoạn toàn bộ mạng</span></li>
+        <li><span>hiện tượng deadlock trên một node: dẫn tới token mãi không được truyền đi: timeout, monitor</span></li>
+    </ul>
+</body>
+
+</html>

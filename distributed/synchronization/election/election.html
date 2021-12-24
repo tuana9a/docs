@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>thuật toán bầu chọn</title>
+    <style>
+        img {
+            max-width: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>các thuật toán bầu chọn</h1>
+    <p>để giải quyết bài toán về đồng bộ người ta cũng có cơ chế bầu chọn để tìm ra được một node master, một node duy nhất thực thi công việc nào đó</p>
+    <p>công việc này có thể là sử dụng tài nguyên, orchestation, promoting, ...</p>
+    <p>thuật toán này rất đơn giản (truyền thống) để ứng dụng chắc chắn sẽ phải mở rộng và chỉnh sửa</p>
+    <p>các giải thuật gồm</p>
+    <ul>
+        <li>
+            <span>giải thuật truyền thống</span>
+            <ul>
+                <li>giải thuật bully</li>
+                <li>giải thuật ring</li>
+            </ul>
+        </li>
+        <li><span>giải thuật mạng không dây (diện rộng)</span></li>
+    </ul>
+
+    <h1>giải thuật bully</h1>
+    <p>đại loại bầu chọn theo một chỉ số nào đó (priority)</p>
+    <p><img src="./img/bully1.PNG"></p>
+    <p>các node sẽ gửi yêu cầu sử dụng (broadcast) cho toàn bộ các node khác, thấp hơn thì skip, cao hơn thì phải rep</p>
+    <p><img src="./img/bully2.PNG"></p>
+    <p>node cao hơn sẽ gửi tiếp các request tới các node cao hơn <br> các node chỉ thắng thì mọi node khác không trả lời (xử lý được cả node die)</p>
+    <p><img src="./img/bully3.PNG"></p>
+    <p>nhận xét: cái này khá tự nhiên (hay) nhưng cũng có một vài vấn đề</p>
+    <ul>
+        <li>mất request</li>
+        <li>request delay</li>
+        <li>network partition</li>
+    </ul>
+
+    <h1>giải thuật ring</h1>
+    <p>cái này tôi quên cm nó rồi đại loại giống ring ở trên và chuyền tay nhau</p>
+    <p><img src="./img/ring.PNG"></p>
+
+    <h1>giải thuật bầu chọn cho mạng không dây</h1>
+    <p>giờ nếu các node không biết vị trí của nhau mà chỉ biết node gần nó</p>
+    <p>chính là mạng mấy tính diện rộng, mạng wifi</p>
+    <p>ở giải pháp đầu tiên này thì sẽ lan truyền dần cho tới nút lá, sau đó sẽ lan truyền ngược lại</p>
+    <p><img src="./img/noname1.PNG"></p>
+    <p><img src="./img/noname2.PNG"></p>
+    <p><img src="./img/noname3.PNG"></p>
+
+</body>
+
+</html>

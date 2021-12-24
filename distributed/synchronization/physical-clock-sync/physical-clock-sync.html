@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đồng bộ hoá đồng hồ vật lý</title>
+</head>
+
+<body>
+    <h1>đồng bộ hoá đồng hồ vật lý</h1>
+    <p>với những nghiệp vụ dựa vào thời gian để xử lý<br>ta có thể xử lý bằng cách đồng bộ đồng hồ vật lý để giúp chương trình chạy đúng trên các node <br></p>
+    <p><img src="./img/dong-bo-hoa-dong-ho-vat-ly-1.PNG"></p>
+    <p>ở ví dụ này là bài toán về editor và compiler<br>chương trình compiler sẽ chỉ compile phát hiện chỉnh sửa sau lần compile gần nhất</p>
+
+    <p>nếu thời gian bị lệch rất có thể phía máy compile sẽ detect thời gian edit là trước compile mà thực tế là ngược lại</p>
+    <p>từ đó dẫn tới không compile, vậy là sai logic chương trình</p>
+
+    <h2>định vị toàn cầu GPS</h2>
+    <p>thời gian truyền tính hiệu lên trạm bị nước, khí quyển dẫn tới sai lệch</p>
+
+    <h2>bản chất của đồng hồ</h2>
+    <p>tinh thể thạch anh, IC, clock speed rõ ràng khác nhau trên mọi máy nên luôn luôn có hiện tượng sai lệch</p>
+
+    <h1>Giải pháp</h1>
+    <ul>
+        <li>network time protocol</li>
+        <li>thuật toán berkeley</li>
+        <li>đồng bộ vật lý trong mạng không dây</li>
+    </ul>
+
+    <h2>network time protocol</h2>
+    <p>bằng cách sử dụng một single source of truth, dùng đồng hồ nguyên tử để làm điểm so sánh<br>các thiết bị khi có kết nối internet sẽ check sau một khoảng thời gian</p>
+    <p>cách này được ứng dụng rất phổ biển ở mọi thiết bị, để ý ngay khi kết nối internet thời gian sẽ được tự điều chỉnh lại cho chuẩn</p>
+    <p><img src="./img/network-time-protocol.PNG"></p>
+
+    <h2>thuật toán berkeley</h2>
+    <p>bằng cách sử dụng cơ chế quảng bá và một node nguồn, sẽ liên tục broadcast "hỏi thăm" các node khác và yêu cầu chúng cập nhật</p>
+    <p><img src="./img/thuat-toan-berkley.PNG"></p>
+
+    <h2></h2>
+</body>
+
+</html>

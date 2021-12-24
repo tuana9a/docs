@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dồng bộ hoá xử lý trong hệ phân tán</title>
+</head>
+
+<body>
+    <h1>bài toán vấn đề đồng bộ trong hệ phân tán</h1>
+    <p><strong>nguồn: Thầy Trần Hải Anh: giảng viên đại học bách khoa hà nội (2021)</strong></p>
+    <p>
+        để đảm bảo logic trong hệ phân tán xảy ra theo mong muốn <br>
+        sẽ cần một (nhiềU) cơ chế đồng bộ để đảm bảo rắng các node sẽ hoạt động theo các trình tự nhất định <br>
+        từ đó cũng sinh ra vô số các thuật toán đề đáp ứng tuỳ thuộc vào nhu cầu, nghiệp vụ của bài toán tương ứng <br>
+    </p>
+    <p>
+        ngoài ra hệ phân tán cũng có thể sử dụng chung tài nguyên <br>
+        từ đó vấn đề về đồng bộ (trước sau) của hệ phân tán cũng được chú ý
+    </p>
+
+    <h1>Đồng bộ hoá đồng hồ vật lý</h1>
+    <p>đồng bộ hoá luôn đồng hồ vật lý cho các chương trình sử dụng thời gian để chạy</p>
+    <p><a href="./physical-clock-sync/physical-clock-sync.html">xem tại đây</a></p>
+
+    <h1>đồng bộ hoá đồng hồ logic</h1>
+    <p>chỉ đảm bảo dúng thứ tự về thời gian chứ không đảm bảo là đúng với thời gian thực tế</p>
+    <p><a href="./logic-clock-sync/logic-clock-sync.html">xem tại đây</a></p>
+
+    <h1>thuật toán loại trừ lẫn nhau</h1>
+    <p>như tên gọi của chúng, các node sẽ phải chờ đợi để dược sử dụng tài nguyên</p>
+    <p><a href="./mutual-exclusion/mutual-exclusion-note.html">xem tại đây</a></p>
+
+    <h1>thuật toán bầu chọn</h1>
+    <p>
+
+    </p>
+</body>
+
+</html>

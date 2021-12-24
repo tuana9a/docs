@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../common.css">
+    <title>đồng bộ hoá đồng hồ logic</title>
+    <style>
+        img {
+            max-width: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>bài toán</h1>
+    <p>nhận xét nếu một hệ thống không cần quá chính xác về thời gian <br>chỉ cần chúng hoạt động đúng logic thì có thể xem xét các thuật toán sau</p>
+    <ul>
+        <li>đồng bộ hoá đồng hồ logic của lamport</li>
+        <li>vector clocks</li>
+    </ul>
+
+    <h2>cơ chế đồng bộ đồng hồ logic của lamport</h2>
+    <p><img width="500px" src="./img/lamport1.PNG"></p>
+    <p>lamport sẽ giải quyết bài toán về vấn đề cycle (chu kì) của các clock trên các đồng hồ là khác nhau <br> hay tổng quát là lệch thời gian</p>
+    <p>có thể thấy với ảnh dưới thì rõ ràng thông điệp gửi đi ở node này lại được node kia nhận ở thời gian trước đó</p>
+    <p><strong><b>(vô lý)</b></strong></p>
+    <p><img width="500px" src="./img/lamport2.PNG"></p>
+    <hr>
+
+    <p>vậy để làm cái đồng hồ hết vô lý thì làm như thế nào, cùng xem thuật toán tự điều chỉnh đồng hồ của lamport xem sao</p>
+    <p>bằng cách cập nhật, tự điều chỉnh thời gian theo thông tin của gói tin nhận được, các node có thể đảm bảo đồng hồ của mình chạy <b>phù hợp</b> với node gửi</p>
+    <div class="display-flex flex-wrap-wrap">
+        <p><img src="./img/lamport3.PNG"></p>
+        <p><img src="./img/lamport4.PNG"></p>
+        <p><img src="./img/lamport5.PNG"></p>
+    </div>
+
+    <h3>lưu ý</h3>
+    <ul>
+        <li>đây chưa liên quan gì tới xử lí mà chỉ đơn giản là điều chỉnh đồng hồ cho phù hợp</li>
+        <li>về mặt thứ tự ở đây đã có sự được đảm bảo, gói tin sẽ được sử lí chỉ khi sau thời gian gửi + 1</li>
+        <li>để áp dụng vào thực tế trong môi trường song song, đa luồng thì cần implement một cách phức tạp hơn</li>
+    </ul>
+
+    <hr>
+    <h2>vector clock</h2>
+    <p>dựa vào ý tưởng đảm bảo thứ tự ở trên ta có thể triển khai advance hơn trên mạng phân tán</p>
+    <p>để đảm bảo thứ tự thực hiện như trên</p>
+    <p>bài toán ở trong hệ phân tán là ai sẽ là người được đi vào trước, trong khi ai cũng có thể đi vào</p>
+    <p>và nếu "dễ dãi" chấp nhận cả 2 thì khi đồng bộ sẽ có tranh chấp về dữ liệu</p>
+    <p>VD: con rút tiền, mẹ gửi tiền</p>
+    <p><img src="./img/vector-clock-1.PNG"></p>
+
+    <p>bằng cách sử dụng một biến đếm số lượng các task đã thực thi nhằm chính xác thứ tự thực hiện <br> và chỉ thực hiện khi điều kiện đáp ứng</p>
+    <p>sau đó mỗi khi sự kiện này sảy ra sẽ thêm vào biến đếm từ đó khi được truyền đi bên nhận sẽ biết được thứ tự nên thực hiện</p>\
+    <div class="display-flex flex-wrap-wrap">
+        <p><img src="./img/vector-clock-2.PNG"></p>
+        <p><img src="./img/vector-clock-3.PNG"></p>
+    </div>
+
+    <p>phía dưới là một ví dụ việc đảm bảo thứ tự, node nhận gói tin chỉ thực thi khi đáp ứng điều kiện bên gửi</p>
+    <p><img src="./img/vector-clock-4.PNG"></p>
+
+    <p><strong><b>EM CÓ CÂU HỎI</b></strong></p>
+    <p><img src="./img/vector-clock-deadlock.PNG"></p>
+
+</body>
+
+</html>
