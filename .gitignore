@@ -263,3 +263,4 @@ tests/
 .vscode/
 .idea/
 *.iml
+tools/
