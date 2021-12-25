@@ -21,8 +21,7 @@ function main() {
     const fetchAppendElements = Array.from(document.getElementsByClassName("fetchAppend"));
     for (const element of fetchAppendElements) {
         let url = element.getAttribute("data-url");
-        let raw = element.getAttribute("data-raw");
-        if (raw) {
+        if (element.classList.contains("raw")) {
             fetchAppendRaw(element, url);
         } else {
             fetchAppendHtml(element, url);

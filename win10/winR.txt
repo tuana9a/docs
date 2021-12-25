@@ -1,0 +1,14 @@
+# Windows + R 
+services.msc
+devmgmt.msc
+dxdiag
+diskmgmt.msc
+regedit
+
+# hẹn tắt máy
+shutdown -s -t 3600 
+    -s          shutdown
+    -t 3600     thời gian tắt
+
+# hủy hẹn tắt máy
+shutdown -a

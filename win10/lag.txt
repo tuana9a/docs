@@ -1,0 +1,11 @@
+# restart Explorer nếu bị lag
+- mở task manager Ctrl Shift Esc
+- restart explorer.exe
+- hoặc kill explorer.exe và new task (gõ explorer.exe) ấn Enter
+
+# các phím tắt quan trọng khác
+Ctrl Alt Del
+- mở task manager, logout, ...
+
+# refresh khi bị đơ
+Win Ctrl Shift B

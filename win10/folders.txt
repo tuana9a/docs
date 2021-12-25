@@ -1,0 +1,7 @@
+# Folder
+
+# nếu paste các shortcut của program vào đây sẽ được gọi khi start up đéo mẹ
+%AppData%\Microsoft\Windows\Start Menu\Programs\Startup
+
+# để chỉnh sửa hosts
+C:\Windows\System32\drivers\etc\hosts

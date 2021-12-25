@@ -1,0 +1,3 @@
+# input language không có mà lại có
+- thêm lại chính language đó trong setting
+- sau đó xoá ngôn ngữ đó đi

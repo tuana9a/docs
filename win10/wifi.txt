@@ -1,0 +1,3 @@
+# sửa tên network bị ngu duplicate rồi (0) (1) (n)
+# chọn profile cũ hoặc xoá đi rồi kết nối lại cũng được
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles
