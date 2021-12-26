@@ -10,7 +10,7 @@ import lombok.ToString;
 public class AppConfig {
 
     public String DOCS_FIR = ".";
-    public String IGNORE_END_EXT_REGEX = ".*(\\.sh|\\.py|\\.yaml|\\.yml)$";
+    public String IGNORE_END_EXT_REGEX = ".*(\\.sh|\\.py|\\.yaml|\\.yml|\\.ps1|\\.cmd|\\.reg)$";
     public String IGNORE_START_EXT_REGEX = "^\\..*";
     public String EXPLORER_PREFIX = "/explorer/";
     public String LUCENE_INDEXES_DIR = "resource/";
