@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>learn js form</title>
+</head>
+
+<body>
+    <h1>JS FORM</h1>
+    <p>đại loại chắc là để gửi thông tin về phía database hoặc xử lí input data ngay tại client</p>
+    <p>
+        VD: <br />
+        cái này sẽ tạo ra một cái form điền thông tin và gửi về server và server trả về giá trị mình nhập vào <br />
+        cái này nếu xóa chữ return ở chỗ onsubmit="" thì nó sẽ vẫn gửi về bên server kể cả không có giá trị
+    </p>
+    <form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post">
+        Name: <input type="text" name="fname" />
+        <input type="submit" value="Submit" />
+    </form>
+    <script>
+        function validateForm() {
+            var x = document.forms["myForm"]["fname"].value;
+            //cái "myForm" là thuộc tính name="" của thẻ form và "fname" cũng là thuộc tính name="" của thẻ input
+            if (x == "") {
+                alert("Name must be filled out");
+                return false;
+            }
+        }
+    </script>
+</body>
+
+</html>
