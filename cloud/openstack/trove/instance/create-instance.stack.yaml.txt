@@ -1,4 +1,3 @@
-<pre>
 |-- trove/instance/service.py > InstanceController > create()
 |   |-- trove/instance/models.py > Instance > create()
 |   |   |-- trove/db/models.py > DatabaseModelBase > create()
@@ -80,5 +79,4 @@
             |   |   |-- self.create_user(): TODO
             |   |-- (if root_password and not backup_info)
             |       |-- self.enable_root_on_prepare(): TODO
-            |-- self.post_prepare(): TODO    
-</pre>
+            |-- self.post_prepare(): TODO

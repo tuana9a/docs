@@ -1,4 +1,3 @@
-<pre>
 |-- trove/cluster/service.py > ClusterController > create()
 |-- trove/cluster/models.py > Cluster > create()
 |-- (load Cluster Class)
@@ -11,4 +10,3 @@
     |       |-- <a href="../instance/create-instance.html">#create-instance</a>
     |-- trove/taskmanager/api.py > API > create_cluster()
         |-- trove/taskmanamger/api.py > API > _cast(): TODO
-</pre>
