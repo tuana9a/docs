@@ -1,0 +1,294 @@
+*	OVERWRITE THUỘC TÍNH THÌ BROWSER SẼ LẤY THUỘC TÍNH PHÍA SAU
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+.MẸO
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	!important
+		ko sợ bố con thằng nào :)))
+	
+*	margin-left:auto;   sẽ sang kịch dòng nhất có thể :)
+
+***	làm menu không cần display:flex mà chỉ cần float và overflow: hidden??;
+
+
+	combo căn ngang giữa
+		text-align:center; thằng bố
+		display:block; thằng con
+			sẽ căn giữa nội dung (text?) thằng con trong thằng bố
+	
+	combo căn ngang giữa menu (cao hơn của combo căn ngang giữa)
+		display:flex; thằng bố
+		text-align:center; thằng bố
+		justify-content:space-between; thằng bố
+	
+	combo căn ngang dọc items tức chính giữa khung nội dung thằng bố	
+		(dọc)display:flex;align-items:center;
+		(ngang)display:flex;justify-content:center;
+		(dọc + ngang)display:flex;align-items:center;justify-content:center;
+		(ngang)position:relative;left:50%;transform:translateX(-50%);
+	
+	combo layer	
+		position: relative; thằng bố
+		position: absolute; top:0;left:0; thằng con
+		visibility:hidden; sau khi hover thành visibility:visible;
+		opacity:0; sau khi hover thành opacity:1;
+		ngoài ra có thể thêm thuộc tính z-index để đè layer lên nhau nếu muốn
+
+	thuộc tính position:fixed sẽ làm thẻ đó không liên quan tới thẻ cùng cấp mà liên quan tới thẻ bố nên sẽ bị che nội dung thẻ cùng cấp
+		do vậy cần làm một số cách như
+			display:flex; thẻ cùng cấp và margin-top thẻ con của nó để ko bị che nội dung
+		hoặc	padding thẻ cùng cấp đó sao cho phần padding vừa đủ hoặc hơn phần fixed kia
+	
+	căn a để width:100%; 
+		để chỉ cần trỏ vào li là sẽ tự nhận a theo 
+	
+	giúp ảnh background luôn đẹp nhất có thể
+		background-position:center;
+			cái này sẽ giúp anh khi responsive hay co nội dung thì luôn ở giữa
+		background-size:cover;
+			ngoài ra còn có 100% 100%
+				thì khi kéo thì nó sẽ xé ảnh ra theo chiều rộng của màn hình hoặc thẻ gần nhất với nó
+				nếu fix cứng theo pixel thì nó chả khác gì width với height bình thường	
+			
+
+			thuộc tính tối thượng cho một cái background ảnh đẹp giúp ảnh k bao giờ bị méo luôn luôn đẹp nhất có thế
+		từ 2 thuộc tình trên thì luôn đẹp không bị lệch về một bên đồng thời cái ở dưới sẽ làm ảnh luôn che kín hết nội dung tránh ảnh không che hết nội dung
+	
+	giúp ảnh trôi theo trang web
+		background-attachment:fixed;
+			fix cứng background kéo scroll đến đâu thì ảnh chạy theo đến đó
+
+	combo chưa hiểu
+		top:50%;
+		right:50%;
+		transform: translateX(-50%) translateY(-50%);
+
+	làm cho hiệu ứng cuộn bằng cách đánh bookmark bằng thẻ a và id trở nên mượt bằng css
+		html{scroll-behavior:smooth;}
+
+	làm màu chữ có gradient
+		background: linear-gradient(to left, #ffffff,#aaaaaa);// là màu mà mình muốn
+*		-webkit-background-clip: text;// cái ý là chỉ có text thôi còn back ground bị vứt
+*		-webkit-text-fill-color: transparent;// cái này thì làm chữ trong suốt do đó phần màu của background sẽ được lộ lên
+		
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+.CHƯA PHÂN LOẠI, CHƯA HIỂU
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	kỹ thuật ::after và ::before
+		sẽ tạo ra một div ngay trước thẻ của mình vì vậy k cần thêm trong vode html mà trong css cũng có thể tạo thẻ
+		có thể set các thuộc tính sau vào thẻ after hoặc before
+			VD: 
+				content:'\f179';
+				font: normal 14px/1 FontAwesome;
+					icon là logo apple
+					cỡ chứ 14px
+					mã icon f129
+					có thể bỏ chứ normal
+					có thể bỏ  /1  không hiểu cái này để làm gì :V
+
+
+*	calc mạnh ở chỗ có thể thực hiện trên nhiều đơn vị khác nhau (em,%,px,...)
+		và nó còn có thể kết hợp với var(--tên_biến) khá hay
+	
+*	background-image: -webkit-linear-gradient(right,black,blue);
+		thuộc tính đổ màu như trên thì sẽ là bên phải sẽ là màu đen rồi sang dần bên trái là màu xanh nước biển
+	
+*	background-image: url(link ảnh);
+		đúng là set background
+
+*	background-image: -webkit-linear-gradient(right,red 0%,blue 50%,red 100%);
+		uầy trong ảnh ảo lòi chỗ phần trăm chính là vị trí đậm màu nhất của màu đó xong phai dần đúng theo thứ tự 0% chiều ngang rồi đến 50% chiều ngang và cuối cùng là 100% chiều ngang
+
+*	background:url(link ảnh) top center;
+		set ảnh ở trung tâm và ở chính giữa để tránh việc khi đưa lên màn 4k sẽ bị xé ảnh và lặp đi lặp lại
+	
+*** 	filter:invert(1);
+		có vẻ như đây là tương phản VD: nền đen chữ đen mà thêm thuộc tính này sẽ thành chữ trắng
+
+
+
+.CĂN CHỈNH CÁC KIỂU
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	.CĂN CHỈNH NỘI DUNG TRONG VÀ NGOÀI MỘT BLOCK
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		width:  đổi kích cỡ,độ dài chiều ngang
+			VD: width: 500px;
+			VD: width: calc(100% - 35px); chú ý là phải có dấu cách nếu không browser sẽ không nhận
+			ngoài ra còn đơn vị pt,pc,vh,... mấy cái này chưa test
+			giá trị có thể âm
+			dùng được: _img_ và không bị méo ảnh
+			dùng được: _hr_ và độ dài dòng kẻ sẽ tính từ trung điểm của trang web
+		margin: căn lề                        (margin:auto   và   margin-bottom oánh nhau)
+			margin-left: 30px;
+			margin: auto;   vào cái thẻ to nhất trong body sẽ ngon cả page	
+*			margin-left:auto;   sẽ sang kịch dòng nhất có thể :)
+*			giá trị có thể âm
+*			có thể dùng cho _hr_ thì sẽ ko auto kẻ từ giữa nữa
+		height: chiều cao	
+*			ko dùng được: mấy thẻ chữ
+*		line-height:
+			cái này sẽ làm cho chữ ra giữa mà không bị méo chữ hay phết	
+		outline:none;
+			cái này dùng cho mấy cái thẻ input bị viền màu xanh ở ngoài
+		
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	.CĂN CHỈNH BLOCK VỚI BLOCK
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		display: 
+			display: flex;
+				chia cột các block
+			display: inline;
+				khiến các block không xuống dòng nữa
+			display: block;
+				khiến inline thành block và dùng được margin,padding như một block thực thụ
+			display:none;
+				mất hình không tương tác được luôn
+		flex-wrap: wrap;
+			dùng cùng display:flex;
+			bình thường sẽ flex số cột bằng số block nhưng nếu có thuộc tính này thì đến độ rộng của thằng bố sẽ tự xuống dòng
+		justify-content: space-between;
+			lấy các phần trống còn lại để làm khoảng cách giữa các nội dung
+			VD: còn 5% trang web trống sẽ lấy 5% sẽ chia cho các chỗ trống
+		justify-content: center:	
+		text-align: center;
+			căn giữa nội dung TEXT bên trong
+		align-items:center;
+			căn dọc
+		position
+			hay đi kèm với
+				top: khoảng cách so với phần nội dung của thằng bố
+				ngoài top còn left, right, bottom với định nghĩa tương tự
+			VD: position: relative; đặt vị trí tuyệt đối cho thành phần cụ thể để dùng với cái dưới đây
+			VD: position: absolute; đặt vị trí tuyệt đối theo thành phần bao ngoài (relative ở trên) nếu ko có sẽ theo cửa sổ trình duyệt
+			VD: position: fixed; đặt vị trí tuyệt đối theo cửa sổ trình duyệt khi lăn xuống sẽ giữ nguyên vị trí nhưng một vài trường hợp nó bị điên điên kiểu l gì ý
+		
+		box-sizing:border-box;
+***			dù border lòi ra bao nhiều cũng max chỉ bằng thằng bố mà thôi
+		z-index:1;
+			cái này chỉ dùng cùng position: absolute
+			dùng để đè layer lên nhau số to thì đè lên số nhỏ
+		visibility: hidden;
+				mất hình không tương tác được
+		opacity: 0;
+			chỉ là làm mờ tất cả nội dung của thẻ đó ko mất hình vẫn tương tác được (chẳng qua là mờ=0 thì sẽ không nhìn thấy) 
+*		background-size:cover;
+			thuộc tính tối thượng cho một cái background ảnh đẹp giúp ảnh k bao giờ bị méo luôn luôn đẹp nhất có thế
+*		background-attachment:fixed;
+			fix cứng background kéo scroll đến đâu thì ảnh chạy theo đến đó
+			ngoài ra còn scroll là để không fixed như trên đây là mặc định của nó
+				thì khi bị kéo thì background sẽ không trôi xuống cùng mà như một cái div đứng yên ở đó một mình
+*		background-position:center;
+			cái này để nội dung background sẽ ra giữa ngoài ra còn có left right nếu muốn
+		float
+			VD: float:right; hoặc float:left;
+*			thuộc tính này không đi kèm với position:absolute vì nếu đi cùng thì nó không nhận cái position
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+.MÀU FONT TRANG TRÍ
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	color: đổi màu
+		VD: color: blue;
+		đổi được cả cho thẻ _a_ nhấp vào từ rang trang web mới
+		không đổi màu được các thẻ: hr,img,title
+	background-color: tô màu background
+	text-decoration: none;
+		dùng cho thẻ a sẽ không có dấu gạch dưới ở chữ nhìn xấu	
+	font-family: font chữ
+		VD: font-family: tên_font;
+	font-size: cỡ chữ
+		VD: font-size: 10px;
+		không dùng được thẻ p
+	list-style:none;
+		đặt ở li thì ko còn dấu chấm to ở đầu
+	text-transform:
+		text-transform: uppercase;
+		hoặc lowercase
+	line-height:20px;
+		set chiều cao của nội dung là chữ
+	letter-spacing:14px;
+		set khoảng cách giữa các chữ
+	box-shadow: ngang dọc độ_mờ độ_spread màu
+		hiệu ứng đổ bóng xung quanh các thẻ
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+.TƯƠNG TÁC CƠ BẢN
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	tên_thẻ:hover  đang di chuột vào
+		VD: div:hover{}
+			thì sẽ set thông số cho thẻ này khi được di chuột vào
+	tên_thẻ:active
+		hiện tại mình mới dùng cho thẻ label khi click vào để tác với thẻ input và set up cho thẻ label khi được click vào
+	tên_thẻ:visited
+		là khi được ghé thăm (khi đang dùng trang web đó)
+	tên_thẻ:focus
+		hiện tại mình mới dùng cho thẻ input[type="text"] để khi mình gõ chữ vào cái khung đó thì sẽ nhận thuộc tính khi nhập chữ
+	tên_thẻ:selection
+		set up thuộc tính css cho thẻ khi được bôi đen (hay phết)
+	tên_thẻ:first-letter
+		set up cho chữ cái đầu tiên, kiểu mấy tờ báo hay có chữ cái đầu tiên viết hoa vậy
+	
+	
+	
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+.HIỆU ỨNG ĐỘNG
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	transition   set thời gian trễ khi di chuột vào
+		VD: transition:0.5s
+			sẽ làm trễ giữa 2 trạng thái là 0.5s 
+		nếu áp dụng cho thẻ:hover sẽ được transition 2 chiều còn nếu k có nó sẽ tự hiểu là 2 chiều thời gian như nhau
+*		CHÚ Ý transition sẽ không đi được với combo display:none sau đó là display:block vì transition là chuyển giữa 2 trạng thái tức phần tử vẫn tồn tại còn display:none là nó sẽ không tồn tại thế nên là nó sẽ không nhận thuộc tính transition cho đến khi xuất hiện
+	transform:	
+		transform:scale(thông_số); để zoom to nhỏ nội dung
+			VD: transform:scale(0.4); tức zoom 40% tức bé lại cũng có thể to lên với 2 là tăng gấp đôi
+		transform:rotate(thông_số); để xoay nội dung
+			VD: transform:rotate(360deg); tức xoay 360 độ trong thời gian transition setup
+	animation: a1 2s linear infinite;
+		hiệu ứng tên "a1" trong "2s" theo "chiều thẳng không uốn lượn" lặp lại "vĩnh viễn"
+		@keyframes a1{
+			0%{}
+			10%{}
+			100%{}
+		}
+			trong đó phần trăm là tương ứng với thời gian hoạt ảnh và với mỗi phần trăm đó là một thuộc tính của thẻ đó
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+.BIẾN
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	:root{
+	--mau_vang:rgb(111,223,79);
+	--co_chu:13px;
+	}
+	
+	khi sử dụng chỉ cần thông_số:var(tên_biến)
+		VD:font-size:var(--co_chu);
+			sẽ set font-size giá trị 13px
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+.RESPONSIVE WEB DESIGN
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	@media not|only mediatype and (media feature) {
+		CSS-Code;
+	}
+	trong đó:
+		not|only 	là không phải hoặc chỉ một loại thiết bị (có thể bỏ)	
+		mediatype	là loại thiết bị
+			all	là dùng cho mọi thiết bị
+			print	là dùng cho máy in
+			screen	là dùng cho các thiết bị điện tử (lap,desk,smart)
+		media feature	là những thuộc tính của riêng thiết bị smart phone đó
+			width
+			height
+			min-width/max-width
+			min-height/max-height
+			orientation
+				landscape: nằm ngang tức chiều rộng lớn hơn chiều cao
+				portrait:  nằm dọc tức chiều rộng nhỏ hơn chiều cao
+***			-webkit-min-device-pixel-ratio:3
+***			-webkit-max-device-pixel-ratio:2
+			
+	VD:
+		@media only screen and (max-width: 480px) {.large{display: none;}}
+			//thì khi màn hình hiển thị của smartphone bé hơn 480px thì class large sẽ bị biến mất
+		@media only print and (max-width: 480px) {}
+		@media screen and (max-width: 480px) {}
+		@media only screen and (max-width: 480px),(orientation:landscape) {}// dấu "," là or
+		@media (max-width: 480px) {}// mặc định là all, tất cả các thiết bị
