@@ -1,0 +1,365 @@
+1.CÁC THẺ (theo mức độ quan trọng)
+<!DOCTYPE html> (cái này bắt buộc phải có ở đầu mỗi file html)
+<html lang="vi">
+	<head>	
+		<title>: tiêu đề khi view lên browser
+		<meta charset="UTF-8">: nếu ko có UTF-8 thì thỉnh thoảng bị lỗi phông
+			dùng để miêu tả trang web, từ khóa, tác giả,
+			được search engine tìm kiếm bằng từ khóa(keyword) đã nói trên và một vài các dịch vụ web khác
+			VD:
+				Define a description of your web page:
+					<meta name="description" content="Free Web tutorials">
+
+				Define keywords for search engines:
+					<meta name="keywords" content="HTML, CSS, XML, JavaScript">
+
+				Define the author of a page:
+					<meta name="author" content="John Doe">
+				
+*				Refresh document every 30 seconds:
+					<meta http-equiv="refresh" content="30">
+		<style> dùng để setup thuộc tính CSS ngay trong file HTML này
+		<script> dùng để gõ code ngay trong thẻ này
+
+
+		<base> element specifies the base URL and base target for all relative URLs in a page:
+
+			Example
+			<base href="https://www.w3schools.com/images/" target="_blank">
+		
+	<body> (nội dung hiển thị được trên trang web sẽ nằm trong thẻ này)	
+		
+		img: gắn ảnh 
+			VD: <img src="đường_dẫn_thư_mục_hoặc_link_trên_mạng" alt="tên_khi_SEO">
+			dùng ko bị xuống dòng
+*		map: liên kết với thẻ img và tạo ra ảnh có thể tương tác từng vùng riêng biệt trên từng ảnh
+			VD:
+				<img src="workplace.jpg" alt="Workplace" usemap="#workmap">
+				<map name="workmap">
+ 					<area shape="rect" coords="34,44,270,350" alt="Computer" href="computer.htm">
+  					<area shape="rect" coords="290,172,333,250" alt="Phone" href="phone.htm">
+  					<area shape="circle" coords="337,300,44" alt="Coffee" href="coffee.htm">
+				</map>
+*		picture + source + img: cái này có thể dùng trong việc web có nhiều kiểu thiết bị truy cập
+			cái này có thể dùng cho responsive web
+			VD:
+				<picture>
+					<source media="(min-width: 650px)" srcset="img_pink_flowers.jpg">
+  					<source media="(min-width: 465px)" srcset="img_white_flower.jpg">
+  					<img src="img_orange_flowers.jpg" alt="Flowers" style="width:auto;">
+				</picture>
+			với cái này thì với mỗi kích thước cửa sổ sẽ có một ảnh khác nhau
+			NOTE: phải có một thẻ img đề phòng không hỗ trợ HTML5 và không có source nào phù hợp
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		h1(h2,h3,h4,h4,h5,h6): độ to của chữ số càng to càng nhỏ
+			các thẻ h1 cũng dùng để SEO
+			các thẻ này thường có cỡ chữ nhất định nhưng cũng có thể tuỳ chỉnh
+		p: đoạn văn sẽ xuống hai dòng khi kết thúc thẻ
+		pre: đoạn văn bảo toàn format kể cả các khoảng trắng các thức các thứ kể cả xuống dòng khá tốt
+		ul: văn bản trong thẻ này sẽ được thụt vào một đoạn và không đánh số ở đầu mỗi li
+			dùng ko bị xuống dòng
+			VD:
+				tuấn
+				quỳnh anh
+				long
+*		ol: giống như ul nhưng sẽ được đánh số ở đầu mỗi li tùy theo thuộc tình type đi theo hoặc mặc định của trình duyệt
+			thuộc tính type
+				type="1" là 1,2,3
+				type="a" là a,b,c
+				type="A" là A,B,C
+				type="i" là số la mã viết thường
+				type="I" là số là mã viết hoa
+			thuộc tính start mặc định start từ 1 nhưng mình có thể start từ số bất kỳ
+				start="50"
+			VD:
+				1.tuấn
+				2.quỳnh anh
+				3.long
+		li: văn bản mặc định đánh dấu tròn to ở đầu, tự động xuống dòng thường dùng với ul hoặc ol
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		a: để link một từ hoặc một ảnh tới một trang web 
+			VD: <a href="link_web">chữ muốn link</a>
+*			đi kèm theo a là thẻ target với các đối số: _self(mặc định), _blank, _parent, _top
+				VD: target="_self" sẽ mở tại trang hiện tại luôn;
+*				_blank 	- Opens the linked document in a new window or tab
+*				_self 	- Opens the linked document in the same window/tab as it was clicked (this is default)
+***				_parent - Opens the linked document in the parent frame
+***				_top 	- Opens the linked document in the full body of the window							
+		b: bôi đen 
+		u: gạch chân 
+		i: chữ in nghiêng 
+		del: gạch ngang chữ 
+		strong: chữ nhấn mạnh (important text)
+		em: một kiểu nhấn mạnh khác
+		mark: bôi vàng chữ đúng kiểu marked tiếng anh
+		small: chữ nhỏ hơn một tí
+		sub: chữ bị thụt (thấp) hơn so với chữ thường
+		sup: chữ bị nhô (cao) hơn so với chữ thường kiểu số mũ
+		ins: defines inserted text
+		q: văn bản quoted (được trích dẫn)
+		blockquote: quoted nhưng là block và được thụt lề
+		abbr: thẻ viết tắt tốt cho SEO và Dịch Trang Web là block
+		address:??? là block
+		cite:???
+		bdo:???
+			VD: <bdo dir="rtl">This</bdo>
+				khi view lên browser sẽ được chữ ngược sihT
+		kbd
+			format chữ sẽ có dạng keyboard
+		samp
+			output có dạng chương trình hoặc màn hình máy tính
+		code
+			sẽ có đúng dạng code nếu cần
+		var
+			là variable, là biến trong các phép toán, sẽ có dạng các công thức toán học
+		pre
+			khi nest các cái ở trên vào trong thẻ này thì các format của nội dung bên trong sẽ được bảo toàn
+			ví dụ xuống dòng thì khi ra màn hình cũng sẽ xuống dòng, đại loại là bảo toàn format
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		span: inline không xuống dòng
+		div: cũng là đoạn văn nhưng chỉ xuống một dòng khi kết thúc
+		br: xuống dòng (ENTER) (chỉ cần <br> không cần thẻ đóng)
+		hr: kẻ ngang hết cả trang web (chỉ cần <hr> không cần thẻ đóng)
+		
+		b4 + phím Tab
+			để tạo file .html chứa slide, thực ra cần link tới bootstrap và link tới javascript ở cuối body
+		b4-carousel-default + phím Tab
+			để tạo nội dung cho slide, cụ thể là chỗ để nhét ảnh và 2 buttons next và previous
+*		form
+			thường chứa các nội dung để input kết hợp rất tốt khi chứa các thẻ input
+			khi input nằm trong form thì nó cũng có một số thứ hay ho
+				type ="submit" thì cái này khá là hay khi nó có thể gửi thông tin đi giúp mình
+			thuộc tính của thẻ form này có
+				action="đường_link" //thì cái đường link này sẽ được fired khi form được submit
+				target="gì_đó"	// cái này giống của thẻ a, self,parent,top,blank
+				method="get" hoặc method="post"	// xác định thể loại gửi đi trên internet
+					VD: /action_page.php?firstname=Mickey&lastname=Mouse	 
+			fieldset
+			legend
+				2 thẻ trên đi kèm trong form fieldset thì nó làm nhiệm vụ đóng gói các thẻ input vào trong một cái khung
+				còn legend thì sẽ giống như kiểu cái tiêu đề cho vùng input dữ liệu đó 
+			select và option
+				thẻ option là con của thẻ select thì đây gọi là danh sách xổ xuống, giống kiểu chọn quốc gia rồi thành phố vậy
+				thẻ select có thuộc tính
+					size// sẽ hiển thị kích cỡ số phần tử sẽ được hiển thị ra màn hình
+						mặc định của size là một khi đó mình sẽ có danh sách thả xuống
+						nếu lớn hơn 1 thì nó sẽ có dạng kiểu overflow:auto và mình sẽ chọn bằng cách click vào đó
+					multiple// sẽ cho phép mình chọn nhiều tùy chọn một lúc
+						nếu chọn sẽ dùng shift và mũi tên lên xuống hoặc dùng ctrl để chọn
+			datalist và option
+				The <datalist> element specifies a list of pre-defined options for an <input> element.
+				Users will see a drop-down list of the pre-defined options as they input data.
+				The list attribute of the <input> element, must refer to the id attribute of the <datalist> element.
+				// nôm na là cái này sẽ tạo sẵn các dữ liệu cho một cái thẻ input nào đó
+				VD:
+					<form action="/action_page.php">
+ 					  <input list="browsers">
+ 					  <datalist id="browsers">
+					  <option value="Internet Explorer">
+				  	  <option value="Firefox">
+					  <option value="Chrome">
+					  <option value="Opera">
+					  <option value="Safari">
+					  </datalist>
+					</form>
+					//cái thẻ input trước datalist sẽ lấy các cái gợi ý từ datalist phái dưới
+			textarea
+				là một vùng text giống như kiểu note vậy có thể kéo thả tùy ý
+				có một số thuộc tính
+					col// số cột khởi tạo tính theo ký tự
+					row// số hàng khởi tạo tính theo line
+			 
+
+				
+			input
+				thẻ này không có thẻ đóng
+				thẻ này dùng để nhập thông tin vào
+				VD:<input class="tim_kiem" type="text" value="Tìm kiếm">
+					trong ví dụ trên thì value là giá trị mặc định được khởi tạo khi tải trang web
+					type là loại dữ liệu nhập vào có rất nhiều loại giá trị có thể nhập vào
+				các thuộc tính đi kèm theo thẻ css
+	*				outline:none;
+					input[type=text] khi này thì chỉ set up thuộc tính cho mỗi thẻ input mà dữ liệu vào là text nếu không thì nó sẽ là tất cả các loại thẻ input
+					intput:focus
+						khi này sẽ set thuộc tính cho thẻ khi thẻ được đặt con trỏ chuột vào :V giống như kiểu : hover nhưng bây giờ là trỏ hẳn con trỏ chuột vào để gõ text cơ
+					placeholder=""
+						cái này dùng trong input text để kiểu trước khi nhìn thì là chữ tìm kiếm gõ vào khung thì nó sẽ là mới hoàn toàn và gõ lại từ đầu
+					min max
+						là các giá trị min max có thể có của một cái input
+			label
+				không khác gì thẻ khác ngoài việc có thể tương tác với thẻ input trong nó 
+				dùng khi custom thẻ input		
+
+*		iframe
+			display được cả một trang web trong một trang web bá đạo
+			có các thuộc tính đi kèm
+				src="link"// cái này khi load trang sẽ load luôn cả cái trang con
+				name="tên_của_nó"// cái này thì kết hợp với target của thẻ a thì bá
+
+		button
+			thẻ này đúng là button luôn thường dùng với thuộc tính onclick để chạy hàm javascript
+			VD: <button id="" onclick "human.speak()">
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		video
+			thẻ dùng để chứa video để chạy
+			VD:
+				<video width="320" height="240" controls>
+				  <source src="movie.mp4" type="video/mp4">
+				  <source src="movie.ogg" type="video/ogg">
+				Your browser does not support the video tag.
+				</video>	
+				// như này thì khi hiển thị thì nó sẽ là một khung video mặc định của chrome	
+			các thuộc tính đi kèm trong thẻ video
+				controls// nếu không có cái này thì không thể pause, play, tua, âm lượng
+				autoplay// auto chạy
+		audio
+			thẻ dùng để chứa audio
+			VD:
+				<audio controls>
+				  <source src="horse.ogg" type="audio/ogg">
+				  <source src="horse.mp3" type="audio/mpeg">
+				Your browser does not support the audio element.
+				</audio>
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		object
+			dùng để thêm plug in hoặc có thể là một html, ảnh
+			VD:
+				<object width="400" height="50" data="bookmark.swf"></object>// cái này là một plug in về banner quảng cáo
+				<object width="400" height="50" data="bookmark.swf"></object>// còn cái này lại giống na ná như iframe
+				<object data="audi.jpeg"></object>			     // cái này là một bức ảnh mẹ luôn	
+
+		embed
+			nhúng???
+			khác với object ở trên là nó không có thẻ đóng
+			VD:
+				<embed width="400" height="50" src="bookmark.swf">// giống y hệt object ở trên
+				<embed width="100%" height="500px" src="snippet.html">// cũng giống ở trên
+				<embed src="audi.jpeg">// cũng giống object ở trên
+		youtube
+			VD:
+				<iframe width="420" height="315"
+					src="https://www.youtube.com/embed/tgbNymZ7vqY">
+				</iframe>
+				//
+				<iframe width="420" height="315"
+				src="https://www.youtube.com/embed/tgbNymZ7vqY?autoplay=1">
+				</iframe>
+
+
+
+2.ATTRIBUTE thuộc tính của các thẻ	
+	href
+	src
+*	title	không phải tittle nhé
+		là thuộc tính khi di chuột vào đó sẻ show ra thông tin của thẻ đó
+			VD: <a tittle="Trang Facebook của mình">https://www.facebook.com/tuantaik/</a>
+			khi trỏ chuột vào thẻ a sẽ hiện ra dòng chữ "Trang Facebook của mình"	
+	
+-----------------------------------------------------------------------------------
+	alt
+		dùng trong SEO trang web
+	lang
+		để cho search engine hoạt động được
+		đặt ở thẻ <html>
+		2 chữ cái đầu xác định ngôn ngữ nếu có thêm lưu ý thêm 2 chữ
+			VD: lang="en-US"
+------------------------------------------------------------------------------
+	width
+	height
+	style
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	class
+		định nghĩa riêng cho từng thẻ trong cùng thẻ
+		trong các thẻ gõ thêm class để phân biệt với cùng thẻ
+			VD: <hr class="a"> thì trong css hr.a{} sẽ chỉ cho class="a" và hr{} sẽ cho toàn bộ thẻ <hr> ko quan tâm class nào
+		có thể gán nhiều class cho một đối tượng
+			VD: <a class="a b c"> mỗi dấu cách tương ứng với 1 class suy ra "a","b","c" 3 class
+	disabled
+		Specifies that an input element should be disabled
+	id
+		xác định duy nhất một id cho một thẻ
+		trong các thẻ sẽ có một cái gọi là id	
+			VD: <a id="gemdino">
+		do id chỉ là duy nhất nên trong dấu nháy thì cũng chỉ là một id chứ ko phải là 2 id như kiểu dấu cách trong class
+*		id có thể làm bookmark cho trang web kiểu có menu nội dung và click vào mục nào thì browser sẽ cuộn tới phần đó hoặc mở một trang mới và cuộn tới phần đó cũng được
+			VD: <a href="#chuong2">Chương 2</a>
+				khi click sẽ cuộn đến chương 2 ngay trong trang hiện tại
+			VD: <a href="/ecchi/tap3.html#chuong3">Chương 3 tập 3</a>
+				khi click sẽ chuyển sang trang mới và cuộn đến chương 3 của trang mới đó
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	
+	onclick
+		VD: onclick="human.speak()"
+			thì thuộc tính này sẽ làm thẻ đó khi click vào sẽ chạy hàm run() ở trong javascript
+	onmouseover
+		VD: onmouseover="alert('Don\'t touch that')"
+			thuộc tính này sẽ làm cho thẻ khi được trỏ vào kiểu hover nhưng dùng để chạy code javascript
+	onmouseout
+		VD: onmouseout="alert('Wait! Touch it :)) I\'m joking')
+			thuộc tính này sẽ làm cho thẻ khi chuột khi ra khỏi sẽ chạy code javascript trong nó
+	onkeydown
+		VD:
+			thuộc tính này sẽ làm cho thẻ khi được focus tức đang click hoặc input như nào đó mà ấn nút sẽ thực thu các dòng code trong đó
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+3.FONT AWESOME
+	fa.fa-tên_icon
+	có thể đổi thông số như font bình thường
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+.MẸO
+	kết hợp thẻ form chứa thẻ input để được một cái rất hay
+		VD:
+			<form>
+			  <input type="radio" name="gender" value="male" checked> Male<br>
+			  <input type="radio" name="gender" value="female"> Female<br>
+			  <input type="radio" name="gender" value="other"> Other  
+			</form> 
+		lưu ý khi dùng với thẻ form thì các cái thẻ input phải có name vì nếu không có thì bên server không biết nên nhận từ cái input nào		
+
+		
+*	khi cần lấy tài nguyên từ thư mục trước thì dùng ../
+*		nếu cần trước trước thì ../../
+	khi nào dùng nháy đơn khi nào dùng nháy đôi
+		khi mình muốn hiển thị nháy đôi thì mình dùng nháy đơn và ngược lại
+			VD: 'tuan "thích" Gem Dino'
+				tuan "thích" Gem Dino
+			VD: "tuan 'thích' Gem Dino"
+				tuan 'thích' Gem Dino
+
+	<input type="button" value="1"></input>
+		cái này sẽ không cho chỉnh sửa value mà hiện ra chỉ như một button bình thường
+		value ở đây sẽ là string
+	
+	<a target="blank">Click Me</a>
+		cái này để khi mở thì sẽ mở ra một trang mới hoàn toàn
+
+	<noscript>
+		thẻ này để chạy nếu trình duyệt không hỗ trợ script
+
+
+*	dấu < > trong html nên được viết thành &lt; or &#60;
+	ngoài ra còn các nhiều ký tự đặc biệt khác thì dùng ở link dưới
+		https://www.w3schools.com/html/html_entities.asp
+		https://www.w3schools.com/html/html_symbols.asp
+	trang web validate XHTML
+		https://validator.w3.org/nu/?doc=https%3A%2F%2Fwww.w3schools.com%2Fhtml%2Fhtml_validate.html
+
+
+	POST has no size limitations, and can be used to send large amounts of data.
+	Form submissions with POST cannot be bookmarked
+
+
+	<form action="/action_page.php"
+	  oninput="x.value=parseInt(a.value)+parseInt(b.value)">
+	  0
+	  <input type="range"  id="a" name="a" value="50">
+	  100 +
+	  <input type="number" id="b" name="b" value="50">
+	  =
+	  <output name="x" for="a b"></output>
+	  <br><br>
+	  <input type="submit">
+	</form>
+	// mô tả hiện tượng khi kéo thả cái input range thì kết quả đầu ra ở cái input thay đổi và khi ấn submit thì nó chỉ gửi 2 cái ab
+
+
