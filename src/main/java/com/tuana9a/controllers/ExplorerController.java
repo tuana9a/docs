@@ -9,18 +9,20 @@ import com.tuana9a.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.zip.GZIPOutputStream;
 
@@ -42,8 +44,8 @@ public class ExplorerController {
     @Autowired
     private ExplorerUtils explorerUtils;
 
-    @RequestMapping(value = {"/explorer/**/*", "/explorer/"}, method = RequestMethod.GET)
-    public void send(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    @RequestMapping(value = { "/explorer/**/*", "/explorer/" }, method = RequestMethod.GET)
+    public void send(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         // SECTION: Validate request file
         // ------------------------------------------------------------------
         String explorerPrefix = config.EXPLORER_PREFIX;
@@ -82,7 +84,7 @@ public class ExplorerController {
         resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
     }
 
-    @RequestMapping(value = {"/common.js"}, method = RequestMethod.GET)
+    @RequestMapping(value = { "/common.js" }, method = RequestMethod.GET)
     public ResponseEntity<Resource> commonJs() throws FileNotFoundException {
         File file = new File("common.js");
         InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
@@ -93,20 +95,28 @@ public class ExplorerController {
 
     }
 
-    private void sendFolder(File folder, HttpServletRequest req, HttpServletResponse resp, String parentPath) throws IOException {
+    private void sendFolder(File folder, HttpServletRequest req, HttpServletResponse resp, String parentPath)
+            throws IOException, ServletException {
         File[] files = folder.listFiles();
         StringBuilder html = new StringBuilder();
 
-        String fontSize = "<style> a { font-size: 20px; text-decoration: none; }</style>";
-        html.append(fontSize);
+        html.append("<head>");
+        String randomCode = Base64.getEncoder().encodeToString(parentPath.getBytes(StandardCharsets.UTF_8));
+        String randomIcon = "https://avatars.dicebear.com/api/identicon/" + randomCode + ".svg";
+        String favicon = "<link rel=\"shortcut icon\" href=\"" + randomIcon + "\" type=\"image/x-icon\">";
+        html.append(favicon);
+        String style = "<style> a { font-size: 20px; display:inline-block; padding: 2px 5px; text-decoration: none; } a:hover { background-color: #84a7db; }</style>";
+        html.append(style);
+        html.append("</head>");
 
+        html.append("<body>");
         String parentDir;
         if (parentPath.equals("/")) {
             parentPath = "";
         } else if (!parentPath.endsWith("/")) {
             parentPath += "/";
         }
-        parentDir = "<a href=\"" + config.EXPLORER_PREFIX + parentPath + ".." + "\">..<br/>";
+        parentDir = "<a href=\"" + config.EXPLORER_PREFIX + parentPath + ".." + "\">..</a><br/>";
         html.append(parentDir);
         if (files != null) {
             for (File file : files) {
@@ -121,9 +131,11 @@ public class ExplorerController {
                 html.append(a);
             }
         }
+        html.append("</body>");
 
         resp.setContentType("text/html; charset=utf-8;");
-        resp.getWriter().print(html);
+        PrintWriter printWriter = resp.getWriter();
+        printWriter.print(html);
     }
 
     private void sendFile(File file, HttpServletRequest req, HttpServletResponse resp) throws IOException {
