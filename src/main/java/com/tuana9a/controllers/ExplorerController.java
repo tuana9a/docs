@@ -7,6 +7,10 @@ import com.tuana9a.utils.HttpUtils;
 import com.tuana9a.utils.IoUtils;
 import com.tuana9a.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,10 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.RandomAccessFile;
+import java.io.*;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,7 @@ public class ExplorerController {
     @Autowired
     private ExplorerUtils explorerUtils;
 
-    @RequestMapping(value = { "/explorer/**/*", "/explorer/" }, method = RequestMethod.GET)
+    @RequestMapping(value = {"/explorer/**/*", "/explorer/"}, method = RequestMethod.GET)
     public void send(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         // SECTION: Validate request file
         // ------------------------------------------------------------------
@@ -81,8 +82,18 @@ public class ExplorerController {
         resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
     }
 
-    private void sendFolder(File folder, HttpServletRequest req, HttpServletResponse resp, String parentPath)
-            throws IOException {
+    @RequestMapping(value = {"/common.js"}, method = RequestMethod.GET)
+    public ResponseEntity<Resource> commonJs() throws FileNotFoundException {
+        File file = new File("common.js");
+        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+        return ResponseEntity.ok()
+                .contentLength(file.length())
+                .header("Content-Type", "text/css")
+                .body(resource);
+
+    }
+
+    private void sendFolder(File folder, HttpServletRequest req, HttpServletResponse resp, String parentPath) throws IOException {
         File[] files = folder.listFiles();
         StringBuilder html = new StringBuilder();
 
