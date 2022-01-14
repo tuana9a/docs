@@ -1,0 +1,82 @@
+business kinh tế tài chính lòng người kiếm tiền :))
+
+---------------------------------------------
+phương pháp học
++ học xong - ngủ - học
++ ghi bài file text
++ câu hỏi khi đọc sách
+
+-------------------------------------
+Xin việc
++ tìm hiểu (description, lương, ngày nghỉ)
++ thái độ (quan tâm, hỏi han, ...)
++ thái độ pv (cười đểu, bơ, không tôn trọng)
++ hỏi ngược
+    - nếu vào thì vào chỗ nào
+    - vào team nào, ngôn ngữ nào, ...
+    - quy trình:
+            + lơ mơ, k trả lời được
+    - loại nhân viên:
+            + chăm, ngoan, k cần done
+            + lười, hư, chỉ cần done
+    - phải hỏi nguồn vốn (startup):
+            + bị giữ chân k lương
+
+-----------------------------------------------
+Kinh nghiệm business
++ marketing bản thân (blog, github, ...) 
++ tiền kiếm được / dòng code
++ mắt xích trong chuỗi giá trị của công ty
++ góc nhìn user/business
++ làm lợi cho công ty, user
++ hỏi team lead làm những gì
++ GIÀ:
+    - trau dồi, làm nhiều, tham gia các công đoạn product
++ TRÂU: 
+    - nắm vững một công nghệ, frame work (adv & cons)
+    - biết lựa chọn công nghệ, phân tách vấn đề,...
++ NHÌN XA + TRÁCH NHIỆM: 
+    - phân tích module
+    - hướng dẫn team
+    - tình thần trách nhiệm, đồng đội
+    - coding guidline, làm gương làm mẫu, đầu tàu(thời gian của team)...
+
+---------------------------------------
+Áp lực
++ theo kịp công nghệ: hackernews, quora
+
+----------------------------------------
+Lúc làm
++ đi sớm về muộn, sắp xếp bàn ghế
++ làm checklist công vc mỗi ngày
++ công việc phải rõ ràng, k rõ phải hỏi lại
++ trao đổi vs xếp về hướng, tiến độ
++ viết code cho tốt (dễ mở rộng, dễ đọc,dễ bảo trì)
++ code không quan trọng: tốn cả ngày để tối ưu code (thuê server mạnh hơn) + sản phẩm,
+data mới quan trọng
++ có thể thiết kế không đúng chuẩn
++ tiếp cận vấn đề (bug) có hệ thống (ko cắm đầu cắm cổ)
++ thiết kế từ nhỏ đến lớn, xem doc của mấy ông trong công ty
+
+-------------------------------------------------------------------------------------------------------
+Quy trình làm việc
++ làm theo tuần (2-4 tuần)
++ tuần đầu: họp với khách, với team, BA, phân tách công việc, đánh giá, chia việc,... , bất đầu làm việc
++ sẽ có phần mềm hoặc excel quản lý công việc
++ tuần tiếp: code ngồi code luôn, tester chuẩn bị test key
++ code reivew: trước khi nộp code thì sẽ phải được một ong senier review code của mình (đặt tên hàm tên biến)
++ một buổi test chung, demo cho khách hàng
+
+------------------------------------------------------------------------------------------------------ 
+- fresher: làm ở các công ty lớn (đại loại là đi học bên ngoài) 
+- junior: ngồi fix bug, làm module nhỏ trong team
+- developer: web, c#, ...
+- senier: thiết kế hệ thống, tự đặt ra quy trình, nắm vững một công nghệ, có tầm nhìn tổng quan về công nghệ,...
+- hướng quản lý:
+    + team lead: cũng code nhưng k nhiều, giao vc cho team, task
+    + project manager: ko code, theo dõi dự án, làm vs vs khách hàng, quản lý nhân sự,...
+    +  manager: quản lý các pm ở trên
+- hướng kĩ thuật:
+    + tech lead: tự chọn công nghệ,...
+    + software architect: nhìn tổng thể, có code, thiết kế cả hệ thống
+

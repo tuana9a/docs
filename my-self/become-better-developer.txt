@@ -1,0 +1,32 @@
+NHỮNG MÁNH KHÓE “KHÔNG BAO GIỜ TIẾT LỘ” CỦA CÁC LẬP TRÌNH VIÊN VĨ ĐẠI
+Mánh khóe thứ nhất: Không bao giờ truyền dạy các “mánh khóe” này cho người khác. Hết bài.
+Đùa đấy, các bạn đừng gạch đá mình tội nghiệp, mình buồn. 
+Bài viết này là tổng hợp và chọn lọc những ý tưởng, câu trả lời hay của câu hỏi: What are the best-kept secrets of great programmers? – Những mánh khóe “không bao giờ tiết lộ” của các lập trình viên vĩ đại.
+
+📝 𝗠𝗮́𝗻𝗵 𝗸𝗵𝗼́𝗲 𝗰𝗼𝗱𝗲 𝘃𝗮̀ 𝘁𝗲𝘀𝘁
+- Bảo mật/mã hóa rất khó. Đừng tự làm MÀ hãy tái sử dụng (sử dụng thư viện, thuật toán có sẵn v…v), trừ khi bạn biết rõ mình đang làm gì.
+- Có vô vàn nguyên nhân làm crash một chương trình: deploy sai cách, input bị lỗi, người dùng dùng sai cách, quá tải … Chuẩn bị sẵn sàng cho những điều đó: Ghi log những exception gặp phải, deploy thử lên server test, đặt giới hạn cho bộ nhớ…
+- Kết nối mạng (HTTP, socket) rất dễ xảy ra vấn đề. Luôn nhớ đặt timeout cho các kết nối này, sử dụng thư viện để wrap chúng, retry nếu kết nối có vấn đề.
+- Mỗi dòng code thêm vào sẽ làm chương trình phức tạp thêm một chút, tăng khả năng có bug. Bỏ bớt code là cách hay nhất để giảm bớt số lượng bug =))).
+- Validate những thứ người dùng nhập vào, vừa đảm bảo tính bảo mật, lại hạn chế được bug.
+- Tái sử dụng code chưa chắc đã khiến code của bạn dễ bảo trì hơn. Tái sử dụng code giữa 2 domain khác nhau có thể làm chúng “dính chặt” với nhau hơn.
+- Chỉ test những thứ cần test, test ít thì dễ sót bug, test nhiều thì sẽ mất thời gian và tốn công update test case mỗi khi đổi requirement.
+- Mỗi khi commit code, hãy giữ số lượng code nhỏ, code chạy được, viết message rõ ràng bao gồm thứ bạn đã làm và lý do bạn làm thứ đó.
+- Với kiến trúc tốt, bạn vẫn có thể viết code lô. Tuy nhiên, với kiến trúc tốt, bạn có thể dễ dàng nâng cấp, thay thế phần code đểu đó. Tập trung xây dựng kiến trúc tốt, ít móc nối trước, về sau sẽ dễ thở hơn.
+- Code để lâu cũng rất dễ hư hỏng, do đó cần được refactor thường xuyên. Tuy nhiên cần tránh refactor code quá độ.
+
+👨‍💻 𝗠𝗮́𝗻𝗵 𝗸𝗵𝗼́𝗲 𝗹𝗮̀𝗺 𝘃𝗶𝗲̣̂𝗰
+- Rất khó để ước đoán thời gian cần làm để hoàn thành một module/dự án, đó là lý do người ta dùng Scrum.
+- Viết code để cho chính mình và người khác đọc. Thêm comment để giải thích “Vì sao”, thêm comment ở những nơi mà bạn nghĩ 1 năm sau bạn đọc code sẽ không hiểu gì.
+- Hiểu rõ thư viện/framework mà mình sử dụng, đừng có gắng viết lại từ đầu những thứ người khác đã tốn công viết rồi.
+- Cài đặt để việc build một project diễn ra nhanh chóng tiện lợi nhất có thể. Hãy chắc chắn bạn có thể build bằng command line, sẽ rất có ích (Có thể kích hoạt build từ xa, hoặc đưa project lên CI chẳng hạn).
+- Hiểu rõ những tool bạn sử dụng (IDE, source control, build tool, Photoshop). Cố gắng tìm hiểu và làm quen với việc dùng các hotkey, hạn chế dùng chuột. Bạn sẽ làm việc nhanh hơn và “pro” hơn.
+- Ngồi lâu rất có hại. Hãy tập một số thói quen để đảm bảo sức khỏe khi làm việc: Không ngồi nhiều, lâu lâu cho mắt nghỉ ngơi, sắp xếp bàn làm việc, bàn phím, chuột sao cho làm việc thoải mái…
+- Đừng áp dụng lung tung các framework/process/pattern vào dự án để “thể hiện”. Không phải lúc nào Test-Driven Development cũng tốt, không phải lúc nào cũng nên áp dụng DI/IoC.
+
+🚀 𝗠𝗮́𝗻𝗵 𝗸𝗵𝗼́𝗲 𝗽𝗵𝗮́𝘁 𝘁𝗿𝗶𝗲̂̉𝗻 𝗯𝗮̉𝗻 𝘁𝗵𝗮̂𝗻
+- Vọc code của các ứng dụng, framework Open Source là cách nhanh nhất để học hỏi và “lên trình”.
+- Code review là một trong những cách hay nhất giúp bạn tiến bộ, có người đánh giá code của bạn, giúp bạn phân biệt code giỏi và dở, tránh những lỗi lầm cơ bản.
+- Học một ngôn ngữ mới sẽ giúp bạn hiểu những khái niệm mới, có cái nhìn mới, cách suy nghĩ sẽ linh hoạt hơn. (Thử chuyển từ C#/Java sang scripting language như python/javascript bạn sẽ thấy một chân trời mới).
+- Học một ngôn ngữ hướng đối tượng là chuyện dễ. Biết cách thiết kế hệ thống theo hướng đối tượng là chuyện khó. Hãy tìm hiểu các nguyên lý SOLID và một số Design Pattern, chúng sẽ nâng cao hiểu biết của bạn về thiết kế hướng đối tượng.
+- Luôn giữ tinh thần học hỏi, nhưng đừng chạy theo công nghệ mới. Đừng chọn một công nghệ cho một dự án chỉ vì nó hot/mới/hay.    

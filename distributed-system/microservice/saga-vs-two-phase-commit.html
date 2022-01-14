@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>microservice</title>
+</head>
+
+<body>
+    <h1>saga vs two phase commit</h1>
+
+    <h2>saga</h2>
+    <p>
+        thay vì đóng cục như trước, giờ em sẽ chia nhỏ quá trình đặt hàng <br />
+        thành nhiều giai đoạn, vs mỗi giai đoạn sẽ có service xử lí <br />
+        nếu có lỗi hay gì thì ít nhất trạng thái của đơn hàng được <br />
+        bảo toàn ở giai đoạn trước đó và restore được <br />
+        local transaction + transac đặc biệt, để rollback tuần tự nếu trong <br />
+        quá trình có 1 service lỗi thì có thể rollback ngược lại các service <br />
+        và cái này phải code chứ không đc auto trong database <br />
+    </p>
+
+    <h2>two phase commit</h2>
+
+    <p>
+        sẽ có một ông trung gian gửi request tới tất cả các ông khác <br />
+        nếu tất cả say yesss thì commit, k thì thất bại... <br />
+        nhưng cái này sẽ phải hard code các service <br />
+        thứ 2 chính thằng quản lí này là bottle neck <br />
+        dù có chia nhỏ thì việc gửi request vẫn là bottle neck <br />
+        và một service phải làm nhiều việc hơn các service khác <br />
+        không đúng lắm với tính chất của microservice khi <br />
+        một service chỉ là một nhiệm vụ và làm tốt nhiệm vụ đó <br />
+    </p>
+</body>
+
+</html>

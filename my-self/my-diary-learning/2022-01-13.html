@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2022 01 13</title>
+</head>
+
+<body>
+    <h1>2022-01-13 why java string is immutable</h1>
+    <p>string pool and "==" operator là so sánh cùng địa chỉ do vậy 2 biến trình cùng trỏ tới vùng nhớ ở spring pool sẽ bằng nhau</p>
+    <p>khi biến tring được thay đổi string pool sẽ tạo string mới và biến sẽ được trỏ lại tới vị trí này</p>
+    <p>từ đó giải thích mặc dù 2 giá trị string bằng nhau nhưng một biến khởi tạo = new String("any") khi dùng "==" sẽ sai</p>
+    <p>sử dụng string immutable cho phép nhiều biến có giá trị string giống nhau trỏ về cùng một nơi, giảm thiểu bộ nhớ sử dụng</p>
+    <p>sử dụng string immutable cho phép thread safe khi có cả ngàn thread có biến string cùng giá trị này</p>
+    <p>đại loại java khác thông minh trong việc sử dụng immutable</p>
+</body>
+
+</html>
