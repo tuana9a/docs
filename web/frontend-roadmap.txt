@@ -1,0 +1,62 @@
+ROAD MAP FRONT-END
+- GIT, npm:
+	+ ...
+- UI, UX, PTS:
+	+ Rsponsive (Media queries, rem unít, mobile first)
+	+ UX stategies (PWAs, Live Updates) )
+	+ cắt PSD
+- SEO:
+	+ ảnh thu nhỏ của web (facebook,google search)
+-HTML, HTML5:
+	+ ...
+- CSS, CSS3:
+	+ postioning
+	+ box model
+	+ flex box
+	+ grid
+	+ SASS, LESS (CSS with super power)
+	+ ...
+- SASS:
+	+ ...
+- JS:
+	+ arrow function
+	+ promise
+	+ asynce/await
+	+ destructuring
+	+ template string
+	+ ...
+- JS FrameWork/Library:
+	+ Lodash
+	+ Angular
+	+ React Redux
+	+ Vue
+- API:
+	+ Rest: 
+		multiple endpoint(VD: /items/:item_id)
+		request gồm: 
+			get,post,... ; 
+			đường dẫn(path): /users; 
+			body(nột dung muốn gửi nếu có)
+	+ GraphQL:
+		only one endpoint(VD: /graphql)
+		request gồm: 
+			post (only); 
+			đường dẫn(path): /graphql; 
+			body(chứa GraphQL Query)
+
+
+(nâng cao)
+- ES6
+- design pattern (trong angular, react)
+- mô hình mvc, mvvm (tổ chức source code)
+- async (callback, promise, async/await)
+- js unit test (jasmine, jtest)
+- performance (image sprites(load ảnh 1 lần dùng nhiều lần))
+
+- CSS & naming convention
+- framework: foudation, bootstrap, materialize, sematicui
+- CSS3, CSS preprocessor LESS, SASS
+
+- responsive design
+- npm và tool: minify & bundling, webpack, linter
+- design + UI/UX: component, layout

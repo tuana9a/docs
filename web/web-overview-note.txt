@@ -1,0 +1,50 @@
+web overview tổng quan lập trình web
+
+fontend
+	- HTML, CSS, JS   - tự xem tutorial
+	- Browser có nhiệm vụ gửi request yêu cầu những file trên
+	gửi xong nhận lại và xử lí, render ra giao diện
+	- nếu làm quản lí sách thì sẽ liên quan tới ajax
+	để gửi request lấy thông tin sách cũng như cập nhật sách
+	- ajax sẽ phải học trong lúc học JS
+	
+
+backend
+	- tiếp nhận xử lí request từ browser, chạy code (database)
+	và trả về kết quả tương ứng
+	- xử lí ajax request (GET, POST, PUT, DELETE) và trả về kết quả
+	- connect database (MySQL, MongoDB)
+	xử lí request, join database, ...
+
+webserver
+	- là phần mềm dùng để deploy code lên và chạy
+	- với Java Spring thì bản thân nó đã đóng gói cùng với chương trình
+	- và NodeJS sẽ có module (thư viện) phải cài thêm VD: express
+	- có webserver rồi thì tìm hiểu bật server lên kiểu gì
+	- webserver mục tiêu chính là phục vụ file html, css, js
+	- ngoài ra nó hứng request và dùng code của mình để xử lí
+
+database
+	- là nơi lưu trữ dữ liệu khi backend xử lí xong
+	- có thể là MySQL, MongoDB, ... bất kì nơi nào lưu trữ được (thậm chí text file)
+
+#Cu the chi tiet vao tung ngon ngu
+	- java
+		servlet
+			la cong nghe cu cua ben java dung de chay server
+			phai dung di kem voi webserver (tomcat)
+		spring
+			là framework, học về các thứ liên quan
+			@Component
+			@RequestMapping
+			connect db = spring
+	==> spring thì config, set up mệt, nhiều thứ phải để tâm
+
+	- nodejs
+		express
+			code nhanh gon, de hieu, de su dung
+			lam quen hoi mat thoi gian
+			
+		code node js ngắn hơn, đơn giản hơn
+		ko đc dạy trên trường
+	==> mất tg để nghiên cứu và làm quen
