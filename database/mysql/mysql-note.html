@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="tags" content="mysql note sql query">
+    <title>mysql mysql note</title>
+    <link rel="stylesheet" href="../../common.css" />
+</head>
+
+<body>
+    <h1>1.Kiểu dữ liệu</h1>
+
+    <p>Kiểu dữ liệu của bảng:</p>
+
+    <p>myisam: tối đa 256TB, tối ưu tốc độ nén, thao tác với dữ liệu chậm <br>
+        vậy sử dụng với mục đích lưu trữ mà ít sử dụng liên tục</p>
+
+    <p>innodb: tối đa 64TB, hỗ trợ khóa ngoại, tối ưu hóa cho trao đổi dữ liệu <br>
+        vậy sử dụng với web do trao đổi dữ liệu liên tục</p>
+
+    <p>Kiểu dữ liệu cho bản ghi:</p>
+
+    <div style="display: grid; grid-template-columns: repeat(2, max-content); gap: 5px;">
+        <span>boolean</span><span>bit</span>
+        <span>số nguyên</span><span>int, integer, smallint, tinyint</span>
+        <span>số thực</span><span>float, double</span>
+        <span>ký tự</span><span>char, varchar, longvarchar (char cứng, varchar động), text, longtext (chứa được nhiều ký tự)</span>
+        <span>ngày giờ</span><span>datetime (yyyy-mm-dd hh:mm:ss phải đúng thứ tự, máy sẽ đọc từ phải sang)</span>
+        <span>ngày</span><span>date (như trên nhưng bỏ đi phần thời gian trong ngày hh:mm:ss)</span>
+        <span>timestamp</span><span>timestamp giống datetime nhưng lưu dạng text</span>
+        <span>blob</span><span>blob (binary data image, ...)</span>
+    </div>
+
+    <h1>2.Câu lệnh SQL</h1>
+
+    <h3>USE</h3>
+    <div class="fetchAppend" data-url="./use.sql"></div>
+
+    <h3>SHOW</h3>
+    <div class="fetchAppend" data-url="./show.sql"></div>
+
+    <h3>CREATE</h3>
+    <div class="fetchAppend" data-url="./create.sql"></div>
+
+    <h3>DROP</h3>
+    <div class="fetchAppend" data-url="./drop.sql"></div>
+
+    <h3>TRUNCATE</h3>
+    <div class="fetchAppend" data-url="./truncate.sql"></div>
+
+    <h3>INSERT</h3>
+    <div class="fetchAppend" data-url="./insert.sql"></div>
+
+    <h3>ALIAS</h3>
+    <div class="fetchAppend" data-url="./alias.sql"></div>
+
+    <h3>UPDATE</h3>
+    <div class="fetchAppend" data-url="./update.sql"></div>
+
+    <h3>ALTER TABLE</h3>
+    <div class="fetchAppend" data-url="./alter-table.sql"></div>
+
+    <h3>DELETE</h3>
+    <div class="fetchAppend" data-url="./delete.sql"></div>
+
+    <h3>SELECT</h3>
+    <div class="fetchAppend" data-url="./select.sql"></div>
+
+    <h1>3.Subquery</h1>
+    <div class="fetchAppend" data-url="./sub-query.sql"></div>
+
+    <h1>4.Các hàm trong SQL</h1>
+    <p>Thực hiện trên bảng kết quả trả về <br>
+        điều này sẽ rõ hơn khi kết hợp với where <br>
+        vì máy sẽ where trước rồi mới đến thực hiện hàm</p>
+    <div class="fetchAppend" data-url="./functions.sql"></div>
+
+    <h1>5.Các thứ khác</h1>
+
+    <h1>6.Tối ưu database</h1>
+    <p>suy diễn được thì không lưu trữ VD CPA,GPA,tuổi <br>
+        join nhanh hơn where :)) vì join đã có cơ chế lấy phần bảng có số phần tử ít hơn để đối chiếu cho nhanh <br>
+        left join sẽ chứa toàn bộ bảng bên trái và nếu bảng bên phải có thì join nếu không có thì sẽ là null cho bảng bên phải <br>
+        <br>
+        config conneciton pool <br>
+        config innodb buffer size (cache index, data, ...)
+    </p>
+
+    <script src="/common.js"></script>
+
+
+</body>
+
+</html>
