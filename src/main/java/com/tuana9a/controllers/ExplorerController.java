@@ -1,24 +1,10 @@
 package com.tuana9a.controllers;
 
-import com.tuana9a.config.AppConfig;
-import com.tuana9a.entities.Range;
-import com.tuana9a.utils.ExplorerUtils;
-import com.tuana9a.utils.HttpUtils;
-import com.tuana9a.utils.IoUtils;
-import com.tuana9a.utils.Utils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.core.io.Resource;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.io.RandomAccessFile;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -26,8 +12,45 @@ import java.util.Base64;
 import java.util.List;
 import java.util.zip.GZIPOutputStream;
 
+import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.tuana9a.config.AppConfig;
+import com.tuana9a.utils.ExplorerUtils;
+import com.tuana9a.utils.HttpUtils;
+import com.tuana9a.utils.IoUtils;
+import com.tuana9a.utils.Utils;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 @Controller
 public class ExplorerController {
+
+    private static class Range {
+        public long start;
+        public long end;
+        public long length;
+        public long total;
+    
+        /**
+         * Constructor
+         *
+         * @param start Start of byte-range
+         * @param end   End of byte-range
+         * @param total Total bytes of file
+         */
+        public Range(long start, long end, long total) {
+            this.start = start;
+            this.end = end;
+            this.total = total;
+            this.length = end - start + 1;
+        }
+    }
 
     @Autowired
     private AppConfig config;
@@ -82,17 +105,6 @@ public class ExplorerController {
         }
         // unknown what is this file
         resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-    }
-
-    @RequestMapping(value = { "/common.js" }, method = RequestMethod.GET)
-    public ResponseEntity<Resource> commonJs() throws FileNotFoundException {
-        File file = new File("common.js");
-        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
-        return ResponseEntity.ok()
-                .contentLength(file.length())
-                .header("Content-Type", "text/css")
-                .body(resource);
-
     }
 
     private void sendFolder(File folder, HttpServletRequest req, HttpServletResponse resp, String parentPath)
