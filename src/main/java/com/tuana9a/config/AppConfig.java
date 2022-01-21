@@ -9,8 +9,7 @@ import lombok.ToString;
 public class AppConfig {
 
     public String DOCS_FIR = ".";
-    public String IGNORE_END_EXT_REGEX = ".*(\\.sh|\\.py|\\.yaml|\\.yml|\\.ps1|\\.cmd|\\.reg)$";
-    public String IGNORE_START_EXT_REGEX = "^\\..*";
+    public String IGNORE_REGEX = ".*(\\.ps1|\\.cmd|\\.reg)$";
     public String EXPLORER_PREFIX = "/explorer/";
 
     public int BUFFER_SIZE = 1024; // 1KB

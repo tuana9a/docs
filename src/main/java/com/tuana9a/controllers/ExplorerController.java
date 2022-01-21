@@ -36,7 +36,7 @@ public class ExplorerController {
         public long end;
         public long length;
         public long total;
-    
+
         /**
          * Constructor
          *
@@ -264,10 +264,18 @@ public class ExplorerController {
         boolean acceptsGzip = false; // set default GZIP support and
         String disposition = "inline"; // set default content disposition.
 
-        // If content type is unknown, then set the default value.
-        if (contentType == null) {
-            // To add new content types, add new mime-mapping entry in web.xml.
-            contentType = "application/octet-stream";
+        /*
+         * đoạn code origin
+         * // If content type is unknown, then set the default value.
+         * if (contentType == null) {
+         * // To add new content types, add new mime-mapping entry in web.xml.
+         * contentType = "application/octet-stream";
+         * }
+         */
+
+        // mình custom để mọi thứ là text
+        if (contentType == null || contentType.equals("application/octet-stream") || contentType.equals("application/x-sh")) {
+            contentType = "text/plain";
         }
 
         // If content type is text, check GZIP encoding is supported by the browser

@@ -12,7 +12,7 @@ public class ExplorerUtils {
     private AppConfig config;
 
     public boolean isSkip(String filename) {
-        if (filename.matches(config.IGNORE_END_EXT_REGEX) || filename.matches(config.IGNORE_START_EXT_REGEX)) {
+        if (filename.matches(config.IGNORE_REGEX)) {
             return true;
         }
         return false;
