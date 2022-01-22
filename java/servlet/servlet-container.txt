@@ -1,0 +1,11 @@
+provide runtime environment for java application.
+người dùng chỉ có thể truy cập các web pages từ web server (không cần đến Servlet Container)
+nếu người dùng có input hoặc request khác thì khi đó web server sẽ dùng servlet container
+servlet container là một phần của web server nhưng có thể là một process riêng biệt
+    stand-alone: servlet container và web server là một phần của single program
+        VD: Tomcat tự chạy
+    in-process: servlet container là sub-program run bên trong (chung địa chỉ) web server program
+        giống như plug in của một chương trình
+        VD: Tomcat chạy bên trong JBoss
+    out-of-process: servlet container và web server là 2 program riêng biệt, để giao tiếp
+        web server phải dùng plug in cung cấp bởi servlet container

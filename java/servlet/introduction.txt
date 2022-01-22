@@ -1,0 +1,13 @@
+trước đó là công nghệ CGI đã cũ và có nhiều disadvantage
+    tốn tài nguyên CPU, RAM
+    ứng với mỗi request là một process (process number is limited)
+    chỉ việc chuyển đổi giữa các process đã tốn xăng vl
+    support C, C++, Perl
+    platform dependent
+là công nghệ để tạo web app (web động, web tĩnh,...)
+    ít tốn tài nguyên CPU, RAM
+    do chỉ cần thread là đủ
+    các thread lại dùng chung code, tài nguyên,...
+    nên chuyển đổi giữa các thread là light weight
+    is Java nên independent
+ngoài web app thì mọi request đều có thể xử lý bởi servlet

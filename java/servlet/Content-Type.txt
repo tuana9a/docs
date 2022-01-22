@@ -1,0 +1,26 @@
+Content-Type
+
+nằm trong HTTP header nhằm thông báo cho browser biết client gửi gì đi
+ra đời nhằm mở rộng sự hạn chế gửi file âm thanh, video của hệ thống mail
+
+feature
+    supports non-ASCII characters
+    supports multiple attachments in a single message
+    supports attachment which contains executable audio, images and video files etc
+    supports unlimited message length
+
+Common
+    text/html
+    text/plain
+    application/msword	
+    application/vnd.ms-excel
+    application/jar
+    application/pdf	
+    application/octet-stream	
+    application/x-zip
+    images/jpeg
+    images/png
+    images/gif
+    audio/mp3
+    video/mp4
+    video/quicktime	

@@ -1,0 +1,13 @@
+Web Server
+
+chỉ chứa web pages hoặc servlet container
+ngoài web thì nó có thể làm FTP, Mail, Storage, Gaming
+VD: apache tomcat; Resin
+other
+    If the requested web page at the client side is not found
+        then web server will sends the HTTP response: Error 404 Not found.
+    When the web server searching the requested page if requested page is found
+        then it will send to the client with an HTTP response.
+    If the client requests some other resources then web server will contact to application server
+        and data is store for constructing the HTTP response. (mp3, mp4, jpeg, service)
+            and maybe web container did join this process

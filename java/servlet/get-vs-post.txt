@@ -1,0 +1,39 @@
+GET vs POST
+
+GET
+    In case of Get request, only limited amount of data can be sent because data is sent in header
+    Get request is not secured because data is exposed in URL bar
+    Get request can be bookmarked
+    Get request is idempotent
+        It means second request will be ignored until response of first request is delivered	
+    Get request is more efficient and used more than Post
+    VD:
+        GET/RegisterDao.jsp?name1=value1&name2=value2
+        <headers>
+        // các header
+        // thông tin request dễ dàng bị expose (bắt và phân tích, đọc được,...)
+    other
+        get remains in the browser history
+        get can be bookmarked
+        get can be cached
+        get have length restrictions
+        get should never be used when dealing with sensitive data
+        get should only be used for retrieving the data
+POST
+    In case of post request, large amount of data can be sent because data is sent in body
+    Post request is secured because data is not exposed in URL bar
+    Post request cannot be bookmarked
+    Post request is non-idempotent
+    Post request is less efficient and used less than get
+    VD:
+        POST/RegisterDao.jsp HTTP/1.1
+        <headers>				
+        // các header
+        <body>
+        name1=value1&name2=value2
+        // thông tin nằm trong body (content) nên an toàn hơn
+    other
+        post requests cannot be bookmarked
+        post requests have no restrictions on length of data
+        post requests are never cached
+        post requests do not retain in the browser history

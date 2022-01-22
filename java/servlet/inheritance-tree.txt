@@ -1,0 +1,37 @@
+Inheritance Tree
+
+Servlet - GenericServlet - HttpServlet
+GenericServlet
+    kế thừa Servlet  có thêm các method như
+        public ServletContext getServletContext()
+            returns the object of ServletContext
+        public String getInitParameter(String name)
+            returns the parameter value for the given parameter name.
+        public Enumeration getInitParameterNames()
+            returns all the parameters defined in the web.xml file.
+        public String getServletName()
+            returns the name of the servlet object.
+        public void log(String msg)
+            writes the given message in the servlet log file.
+        public void log(String msg,Throwable t)
+            writes the explanatory message in the servlet log file and a stack trace.
+            
+HttpServlet
+    kế thừa từ GenericServlet có thêm các method như
+        protected void doGet(HttpServletRequest req, HttpServletResponse res)
+            handles the GET request. It is invoked by the web container.
+        protected void doPost(HttpServletRequest req, HttpServletResponse res)
+            handles the POST request. It is invoked by the web container.
+        protected void doHead(HttpServletRequest req, HttpServletResponse res)
+            handles the HEAD request. It is invoked by the web container.
+        protected void doOptions(HttpServletRequest req, HttpServletResponse res)
+            handles the OPTIONS request. It is invoked by the web container.
+        protected void doPut(HttpServletRequest req, HttpServletResponse res)
+            handles the PUT request. It is invoked by the web container.
+        protected void doTrace(HttpServletRequest req, HttpServletResponse res)
+            handles the TRACE request. It is invoked by the web container.
+        protected void doDelete(HttpServletRequest req, HttpServletResponse res)
+            handles the DELETE request. It is invoked by the web container.
+        protected long getLastModified(HttpServletRequest req)
+            returns the time when HttpServletRequest was last modified
+                since midnight January 1, 1970 GMT :))

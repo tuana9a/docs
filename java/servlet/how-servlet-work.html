@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Servlet Work</title>
+</head>
+
+<body>
+    <p>The server checks if the servlet is requested for the first time.</p>
+    <p>If YES <br>
+        - loads the servlet class. <br>
+        - instantiates the servlet class. <br>
+        - calls the init method passing the ServletConfig object</p>
+    <p>If NOT <br>
+        - calls the service method passing request
+        - response objects</p>
+
+    <p>Web container calls the destroy method when it needs to remove the servlet such as at time of stopping server or undeploying the project.</p>
+</body>
+
+</html>

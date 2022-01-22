@@ -1,0 +1,10 @@
+maps the request with the servlet in the web.xml file.
+creates request and response objects for this request
+calls the service method on the thread
+The public service method internally calls the protected service method
+The protected service method calls the doGet method depending on the type of request.
+The doGet method generates the response and it is passed to the client.
+After sending the response
+    web container deletes the request and response objects
+    the thread is contained in the thread pool or deleted
+        depends on the server implementation.

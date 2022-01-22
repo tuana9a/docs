@@ -1,0 +1,7 @@
+Application Server
+
+chứa cả web server và EJB (EJB là một app phía server ???)
+là kiến trúc nằm ở trung gian của một hệ thống
+cung cấp các dịch vụ IT (bao gồm cả web, data,...) cho client lẫn tổ chức
+cảm giác nó kiểu một hệ thống doanh nghiệp lớn không chỉ mỗi web :V
+VD: JBoss, Glassfish, Weblogic, Websphere

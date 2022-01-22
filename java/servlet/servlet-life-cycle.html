@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servlet Life Cycle</title>
+</head>
+
+<body>
+    <h1>Life Cycle of a Servlet</h1>
+
+    <p>web container maintain the life cycle of a servlet instance</p>
+    <img src="./servlet-life-cycle.jpg">
+
+    <ol>
+        <li>
+            <p>Servlet class is loaded. <br>
+                when web container receive a request it load Servlet class <br>
+                ClassLoader is responsible to load Servlet class it find and load class to JVM (or MEM)</p>
+        </li>
+        <li>
+            <p>Servlet instance is created. <br>
+                web container create instance of Servlet after loading it <br>
+                this intance is created only once in life cycle</p>
+        </li>
+        <li>
+            <p>init method is invoked. <br>
+                after creating the servlet instance The init method (contructor) is called <br>
+                web container calls init method only once</p>
+        </li>
+        <li>
+            <p>service method is invoked. <br>
+                web container calls the service method each time request for servlet is received <br>
+                If servlet isn't initialized, it follows three steps above then calls the service method <br>
+                If servlet is initialized, it calls the service method</p>
+        </li>
+        <li>
+            <p>destroy method is invoked. <br>
+                web container calls destroy method before removing servlet instance from the service <br>
+                It gives the servlet an opportunity to clean up any resource (MEM, thread,...)</p>
+        </li>
+    </ol>
+    
+</body>
+
+</html>

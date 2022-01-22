@@ -1,0 +1,17 @@
+Static
+    chỉ là tập các web pages (html, css, js)
+    không cần code xử lý service, get, post,...
+    do vậy nội dung html gần như là cố định
+    chỉ thay đổi khi ai đó (admin, client) update, submit web page (html, css, js)
+    mọi lần response, content đều giống nhau
+
+Dynamic
+    cũng có các web pages nhưng nội dung có thể thay đổi
+    thay đổi dựa theo thông tin lấy đc từ database, CMS, client,...
+    khi CMS, database update or alter thì web pages tự update theo
+    "uses client-side or server-side scripting, or both to generate dynamic content"
+    "client-side scripting generates content at the client computer on the basis of user input"
+    "the web browser downloads the web page from the server then
+        processes the code within the page to render information to the user"
+    "server-side scripting, the software runs on the server and
+        processing is completed in the server then plain pages are sent to the user."

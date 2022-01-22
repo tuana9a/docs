@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tomcat note</title>
+    <link rel="stylesheet" href="../../common.css" />
+
+</head>
+
+<body>
+    <h1>config tomcat note</h1>
+
+    config port
+    "apache-tomcat/conf/server.xml"
+    config 2 chỗ
+    1 cái mặc định không có gì đặc biệt
+    1 cái sử dụng executor="tomcatThreadPool"
+    2 chỗ này port phải khác nhau
+
+
+    Directory Structure
+    (cấu trúc là cấu trúc không đc đạo chế thay đổi)
+
+    <div class="display-flex">
+        <div><p><img src="./tomcat-directory-structure.jpg"></p></div>
+        <div class="fetchAppend" data-url="./tomcat-directory-structure.txt"></div>
+    </div>
+    <h2>cấu trúc web.xml (ngoài ra còn rất nhiều config khác)</h2>
+    <h2>VD: web.xml</h2>
+    <div class="fetchAppend raw" data-url="./web.xml"></div>
+    <script src="../../common.js"></script>
+</body>
+
+</html>

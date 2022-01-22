@@ -1,0 +1,19 @@
+là bố của mọi servlet
+
+gồm 5 phương thức
+    
+3 phương thức chính tương ứng với vòng đời của một servlet
+
+public void init(ServletConfig config)
+    initializes the servlet, invoked by the web container only once.
+public void service(ServletRequest request,ServletResponse response)
+    provides response for the incoming request, invoked at each request by web container.
+public void destroy()
+    invoked only once and indicates that servlet is being destroyed.
+
+2 phương thức khác
+
+public ServletConfig getServletConfig()
+    returns the object of ServletConfig.
+public String getServletInfo()
+    returns information about servlet such as writer, copyright, version etc.
