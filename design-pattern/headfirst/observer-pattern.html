@@ -1,20 +1,26 @@
-<link rel="stylesheet" href="./common.css" />
+<!DOCTYPE html>
+<html lang="en">
 
-<h2>bài toán máy đo thời tiết</h2>
-<p>
-    một chương trình đo thời tiết(các thông số, độ ẩm, gió,...) <br />
-    chương trình đo sau đó sẽ được hiển thị trên nhiều máy hiển thị <br />
-    mỗi máy hiển thị trên các máy tính khác nhau <br />
-    số lượng máy có thể thay đổi theo thời gian (thêm hoặc bớt) <br />
-</p>
-<p>
-    giải quyết bài toán này bằng cách áp dụng mô hình pub/sub <br />
-    khi quan hệ là 1 nhiều thì mô hình trên hoạt động rất hiệu quả <br />
-    các máy hiển thị sẽ subscribe vào nguồn data thời tiết <br />
-    sau đó nguồn data cập nhật sẽ broadcast tới toàn bộ subscribers của mình
-</p>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://avatars.dicebear.com/api/identicon/observer-pattern.svg" type="image/x-icon">
+    <title>Observer Pattern</title>
+</head>
 
-<script src="./common.js"></script>
-<script>
-    //TODO: load class data
-</script>
+<body>
+    <h2>bài toán máy đo thời tiết</h2>
+    <p>một chương trình đo thời tiết(các thông số, độ ẩm, gió,...) <br />
+        chương trình đo sau đó sẽ được hiển thị trên nhiều máy hiển thị <br />
+        mỗi máy hiển thị trên các máy tính khác nhau <br />
+        số lượng máy có thể thay đổi theo thời gian (thêm hoặc bớt)</p>
+
+    <p>giải quyết bài toán này bằng cách áp dụng mô hình pub/sub <br />
+        khi quan hệ là 1 nhiều thì mô hình trên hoạt động rất hiệu quả <br />
+        các máy hiển thị sẽ subscribe vào nguồn data thời tiết <br />
+        sau đó nguồn data cập nhật sẽ broadcast tới toàn bộ subscribers của mình</p>
+ 
+</body>
+
+</html>

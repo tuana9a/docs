@@ -1,45 +1,60 @@
-<h1>decorator pattern, design pattern</h1>
-<h2>bài toán quán cafe starbuzz</h2>
-<p>
-    yêu cầu của quán caffee, làm sao để tính hóa đơn cho khách hàng <br />
-    nhà hàng có rất nhiều nguyên liệu và mỗi khách hàng có thể lựa chọn tùy ý <br />
-    khách hàng có thể mix các loại khác nhau, chưa kể cùng một loại có thể có size <br />
-    và khách hàng có thể chọn một nguyên liệu nhiều lần <br />
-</p>
-<p>
-    giải pháp ban đầu là mỗi nguyên liệu code một cái mới và có hàm cost riêng <br />
-    nhưng như vậy sau này mở rộng cửa hàng, thêm nguyên liệu thì toang <br />
-    "CLASS EXPLOSION" : )) vãi cả tên <br />
-</p>
-<p>
-    giải pháp tiếp theo là viết toàn bộ các nguyên liệu bằng cách bật on/off các thuộc tính của class nguyên liệu <br />
-    nhưng như vậy chả qua là chuyển từ vấn đề này sang vấn đề khác
-</p>
+<!DOCTYPE html>
+<html lang="en">
 
-<hr />
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://avatars.dicebear.com/api/identicon/decorator-pattern.svg" type="image/x-icon">
+    <title>decorator pattern</title>
+</head>
 
-<p><strong style="color: red">DESIGN PRINCIPLE:</strong></p>
-<p>
-    Classes should be open for extension, but closed to modification <br />
-    nghe có vẻ oánh nhau nhưng thực ra là có, "cái gì càng đẹp càng phức tạp" <br />
-    tuy nhiên phải nói thật là áp dụng cái này vào không hề đơn giản và KHÔNG THỂ áp dụng bừa bãi <br />
-    vì áp dụng sẽ tăng tính phức tạp, làm code khó đọc, khó bảo trì <br />
-</p>
+<body>
+    <h1>decorator pattern, design pattern</h1>
+    <h2>bài toán quán cafe starbuzz</h2>
+    <p>
+        yêu cầu của quán caffee, làm sao để tính hóa đơn cho khách hàng <br />
+        nhà hàng có rất nhiều nguyên liệu và mỗi khách hàng có thể lựa chọn tùy ý <br />
+        khách hàng có thể mix các loại khác nhau, chưa kể cùng một loại có thể có size <br />
+        và khách hàng có thể chọn một nguyên liệu nhiều lần <br />
+    </p>
+    <p>
+        giải pháp ban đầu là mỗi nguyên liệu code một cái mới và có hàm cost riêng <br />
+        nhưng như vậy sau này mở rộng cửa hàng, thêm nguyên liệu thì toang <br />
+        "CLASS EXPLOSION" : )) vãi cả tên <br />
+    </p>
+    <p>
+        giải pháp tiếp theo là viết toàn bộ các nguyên liệu bằng cách bật on/off các thuộc tính của class nguyên liệu <br />
+        nhưng như vậy chả qua là chuyển từ vấn đề này sang vấn đề khác
+    </p>
 
-<hr />
-<p>
-    <strong>decorator pattern</strong> <br />
-    đại việc đa dạng hóa của cái hóa đơn có thể giải quyết bằng cách tạo một thứ đủ linh động <br />
-    nhưng cũng đủ có cấu trúc để có thể code được <br />
-    đó chính là bằng cách sử dụng đệ quy, cụ thể như nào xem phía dưới
-</p>
+    <hr />
 
-<img src="./decorator.jpg"  />
+    <p><strong style="color: red">DESIGN PRINCIPLE:</strong></p>
+    <p>
+        Classes should be open for extension, but closed to modification <br />
+        nghe có vẻ oánh nhau nhưng thực ra là có, "cái gì càng đẹp càng phức tạp" <br />
+        tuy nhiên phải nói thật là áp dụng cái này vào không hề đơn giản và KHÔNG THỂ áp dụng bừa bãi <br />
+        vì áp dụng sẽ tăng tính phức tạp, làm code khó đọc, khó bảo trì <br />
+    </p>
 
-<p><strong>NHẬN XÉT:</strong></p>
+    <hr />
+    <p>
+        <strong>decorator pattern</strong> <br />
+        đại việc đa dạng hóa của cái hóa đơn có thể giải quyết bằng cách tạo một thứ đủ linh động <br />
+        nhưng cũng đủ có cấu trúc để có thể code được <br />
+        đó chính là bằng cách sử dụng đệ quy, cụ thể như nào xem phía dưới
+    </p>
 
-<ul>
-    <li>giải quyết được bài toán mix của người dùng</li>
-    <li>giải quyết được bài toán chọn 2 lần 1 loại của người dùng</li>
-    <li>vấn đề size, giảm giá sẽ được giải quyết nội bộ của class đó</li>
-</ul>
+    <img src="./decorator.jpg" />
+
+    <p><strong>NHẬN XÉT:</strong></p>
+
+    <ul>
+        <li>giải quyết được bài toán mix của người dùng</li>
+        <li>giải quyết được bài toán chọn 2 lần 1 loại của người dùng</li>
+        <li>vấn đề size, giảm giá sẽ được giải quyết nội bộ của class đó</li>
+    </ul>
+</body>
+
+</html>

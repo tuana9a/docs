@@ -1,46 +1,61 @@
-<h1>factory pattern, bài toán nhà hàng pizza xuyên quốc gia</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-<p>
-    một nhà hàng xuyên quốc gia sản xuất pizza <br />
-    mỗi chiêc bánh pizza ở mỗi nơi có thể được sản xuất khác nhau <br />
-    có thể khác về nguyên liệu, giá tiền,... nhưng quy trình làm ra một chiếc bánh thì tương tự <br />
-</p>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://avatars.dicebear.com/api/identicon/factory-pattern.svg" type="image/x-icon">
+    <title>factory partern</title>
+</head>
 
-<p>
-    để giải quyết bài toán đa dạng trong việc khởi tạo một object Pizza ở các quốc gia <br />
-    thì cần đóng gói việc khởi tạo này lại và tách chúng khỏi phần ít thay đổi <br />
-    từ đó sinh ra factory pattern, <br />
-    bằng việc để việc khởi tạo object Pizza cho một class chuyên biệt và kết tập chúng vào một class <br />
-    từ đó linh động trong việc thay đổi giữa các loại factory mong muốn
-</p>
+<body>
+    <h1>factory pattern, bài toán nhà hàng pizza xuyên quốc gia</h1>
 
-<div style="display: flex; align-items: center">
-    <img src="./factory1.jpg"  /> <b style="font-size: 50px">vs</b> <img src="./factory2.jpg"  />
-</div>
+    <p>
+        một nhà hàng xuyên quốc gia sản xuất pizza <br />
+        mỗi chiêc bánh pizza ở mỗi nơi có thể được sản xuất khác nhau <br />
+        có thể khác về nguyên liệu, giá tiền,... nhưng quy trình làm ra một chiếc bánh thì tương tự <br />
+    </p>
 
-<p><strong>Nhận Xét</strong></p>
+    <p>
+        để giải quyết bài toán đa dạng trong việc khởi tạo một object Pizza ở các quốc gia <br />
+        thì cần đóng gói việc khởi tạo này lại và tách chúng khỏi phần ít thay đổi <br />
+        từ đó sinh ra factory pattern, <br />
+        bằng việc để việc khởi tạo object Pizza cho một class chuyên biệt và kết tập chúng vào một class <br />
+        từ đó linh động trong việc thay đổi giữa các loại factory mong muốn
+    </p>
 
-<ul>
-    <li>với cách cũ thì việc khởi tạo nằm toàn bộ trong một method khiến method này siêu to (if-else explode)</li>
-    <li>
-        class này trở nên siêu nặng, siêu phụ thuộc "TOÀN BỘ" các class Pizza
-        <ul>
-            <li>điều này khiến việc maintain trở nên nặng, mệt</li>
-            <li>chưa áp dụng principle isolate thằng nào vary (cô lập thằng đa dạng)</li>
-        </ul>
-    </li>
-    <li>
-        nếu áp dụng pattern trên thì giờ factory chính thì phụ thuộc một class gốc Pizza là abstract
-        <ul>
-            <li>từ đó áp dụng được tính trừ tượng, đa hình trong OOP</li>
-            <li>giờ cái mà đa dạng đã được co lại nằm trong vùng dữ liệu, không phải code logic của chương trình</li>
-        </ul>
-    </li>
-    <li>
-        áp dụng pattern giảm sự phụ thuộc (nặng) của class logic
-        <ul>
-            <li>giờ chiều phụ thuộc thực ra là cái đa dạng sẽ phụ thuộc một gốc duy nhất</li>
-            <li>khởi tạo class dữ liệu được phân tải, tách biệt, chuyên biệt cho một class khác</li>
-        </ul>
-    </li>
-</ul>
+    <div style="display: flex; align-items: center">
+        <img src="./factory1.jpg" /> <b style="font-size: 50px">vs</b> <img src="./factory2.jpg" />
+    </div>
+
+    <p><strong>Nhận Xét</strong></p>
+
+    <ul>
+        <li>với cách cũ thì việc khởi tạo nằm toàn bộ trong một method khiến method này siêu to (if-else explode)</li>
+        <li>
+            class này trở nên siêu nặng, siêu phụ thuộc "TOÀN BỘ" các class Pizza
+            <ul>
+                <li>điều này khiến việc maintain trở nên nặng, mệt</li>
+                <li>chưa áp dụng principle isolate thằng nào vary (cô lập thằng đa dạng)</li>
+            </ul>
+        </li>
+        <li>
+            nếu áp dụng pattern trên thì giờ factory chính thì phụ thuộc một class gốc Pizza là abstract
+            <ul>
+                <li>từ đó áp dụng được tính trừ tượng, đa hình trong OOP</li>
+                <li>giờ cái mà đa dạng đã được co lại nằm trong vùng dữ liệu, không phải code logic của chương trình</li>
+            </ul>
+        </li>
+        <li>
+            áp dụng pattern giảm sự phụ thuộc (nặng) của class logic
+            <ul>
+                <li>giờ chiều phụ thuộc thực ra là cái đa dạng sẽ phụ thuộc một gốc duy nhất</li>
+                <li>khởi tạo class dữ liệu được phân tải, tách biệt, chuyên biệt cho một class khác</li>
+            </ul>
+        </li>
+    </ul>
+</body>
+
+</html>
