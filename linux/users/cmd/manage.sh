@@ -9,4 +9,7 @@ sudo groupadd GROUPNAME
 sudo groupdel GROUPNAME
 
 # xoá người dùng khỏi group
-gpasswd -d USERNAME GROUPNAME	
+gpasswd -d USERNAME GROUPNAME
+
+# đổi password của root user
+sudo passwd
