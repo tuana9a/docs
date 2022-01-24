@@ -30,7 +30,6 @@ apropos
 # an interface to the on-line reference manuals
 man
 
-
 # =================================================================================
 # TEXT FILES 
 # concatenate files and print on the standard output
@@ -42,20 +41,6 @@ less
 
 # command line text editor
 nano
-
-# =================================================================================
-# USERS
-# execute a command as superuser
-sudo
-
-# change user ID or become another user
-su
-
-# print the user names of users currently logged in
-users
-
-#print real and effective user and group IDs
-id 
 
 # =================================================================================
 # KILLING PROGRAMS AND LOGGING OUT
