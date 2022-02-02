@@ -1,0 +1,376 @@
+Chung
+void add(Componant c)
+	để thêm componant vào đối tương hiện tại
+void setSize(int width,int height)
+	set kích thước cho componant
+void setBounds(int x,int y,int width,int height)
+	set kích thước và vị trí của thẻ không biết có phải theo cái
+void setLayout(LayoutManager lm)
+	set layout manager cho componant
+void setVisible(boolean b)
+	true là có thể nhìn thấy, mặc định là false tức không nhìn thấy
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+Event
+Object getSource()
+	nói chung cái này trả về đối tượng mà trực tiếp liên quan tới event đó, giống this trong addEventListener của js
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+Chưa Phân Loại + Éo Hiểu
+thanh icon của window (jframe) có chiều cao là 25px
+
+
+void setTittle(String s)
+	đặt tên cho componant đó
+void add(Componant c)
+	cái này chưa hiểu lắm
+VD:
+	JOptionPane.showConfirmDialog(jFrame,"Are you sure when choosing "+jCheckBox.getText());
+		// sẽ popup lên một cái cửa sổ confirm, sẽ gắn vô cái jFrame là parent componant
+	f.addMouseListener(new MouseAdapter() {  
+            	public void mouseClicked(MouseEvent e)
+			popupmenu.show(f , e.getX(), e.getY());
+		}                 
+         	});
+		// dùng interface ở trên có thể đọc được vị trí của chuột trong frame
+	new String[] { "Opt-1", "Opt-2", "Opt-3", "Opt-4" }
+		//cách khởi tạo ???
+jtextarea có các phương thức copy paste selectAll vùng text của nó
+	
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+JFrame
+	là cái để chứa tất cả mọi thứ, là cái khung window mà một chương trình chạy
+.setTitle(String s)
+	set title cho cái frame chính là cái tên của chương trình, tên của window, cửa sổ chương trình
+.setSize(int width,int height)
+	set chiều dài và chiều dọc của khung Jrame
+.setMinimumSize(Dimension d)
+	set chiều dài min và chiều dọc min của khung Jframe
+	Dimension có cons structor là new Dimension(int width,int height)
+	VD: jFrame.setMinimumSize(new Dimension(100,100))
+		set 100 pixcel dọc và 100 pixcel ngang
+.setDefaultCloseOperation(Jframe.EXIT_ON_CLOSE)
+	đóng chương trình khi khung đóng, không chạy ngầm luôn
+.setVisible(boolean b)
+	set có hiện lên hay không của một componant, mặc định là false tức không nhìn thấy
+	nếu gọi trước khi render sẽ không hiển thị componant, nhưng vẫn có
+.repaint()
+	nếu gọi cái này thì cái visible ở trên được giải quyết
+.add(Componant c)
+	để thêm một componant vào Jframe, Jpanel chẳng hạn
+.setAlwaysOnTop(boolean b)
+	true thì luôn ở trên các cửa sổ khác, mặc định là false tức bình thường
+.setResizeable(boolean b)
+	false thì không cho resize, mặc định là true tức cho resize các cửa sổ
+.pack()
+	sẽ auto fit khung dựa theo kích thước của các componant
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+JPanel
+	chứa các content, giống thẻ div ở html dùng để chứa các thẻ khác ở các vị trí xác định
+----------------------------------------------------------------------------------------------------------------------------------------------------------JLabel
+	là một dòng text label của java swing, không thể modify
+	các method và constructor gần như giống JButton
+	
+JLabel()
+	tạo jlabel không text cũng không icon luôn
+JLabel(String s)
+	tạo jlabel với text có trước
+JLabel(Icon i)
+	tạo jlabel với icon giống như jbutton
+JLabel(String s, Icon i, int horizontalAlignment)
+	tạo jlabel với tất cả ở trên và căn ngang
+
+String getText()
+	trả về text mà label hiển thị
+void setText(String text)
+	set text sẽ hiển thị ra màn hình
+void setHorizontalAlignment(int alignment)
+	set căn ngang cho text bên trong, sẽ có một con số cho việc này (hằng số)
+	VD:
+		.setVerticalAlignment(SwingConstants.CENTER)// tham số truyền vào là 0
+		ngoài ra còn SwingConstans.BOTTOM, RIGHT, TOP,...
+void setVerticalAlignment(int alignment)
+	set căng dọc cho text bên trong, sẽ có một con số cho việc này
+	VD:
+		tương tự set horizontal ở trên
+int getHorizontalAlignment()
+	trả về tham số căn ngang của jlabel
+int getVerticalAlignment()
+	trả về tham số căn dọc của jlabel
+void setIcon(Icon i)
+	set icon cho jlabel giống như jbutton
+Icon getIcon()
+	trả về image mà đã hiển thị cho button này (sẽ là một đường link tới anh ở resource)
+	
+----------------------------------------------------------------------------------------------------------------------------------------------------------JTextField
+	là vùng chứa input text trên một dòng thôi
+	
+JTextField()
+	Creates a new TextField
+JTextField(String text)
+	Creates a new TextField initialized with the specified text.
+JTextField(String text, int columns)
+	Creates a new TextField initialized with the specified text and columns.
+JTextField(int columns)
+	Creates a new empty TextField with the specified number of columns.
+
+void addActionListener(ActionListener l)
+	It is used to add the specified action listener to receive action events from this textfield.
+	ngoài ra còn rất nhiều các event khác có thể tìm hiểu thêm ở trên javatpoint để biết thêm chi tiết
+Action getAction()
+	It returns the currently set Action for this ActionEvent source, or null if no Action is set.
+void setFont(Font f)
+	It is used to set the current font.
+void removeActionListener(ActionListener l)
+	It is used to remove the specified action listener so that it no longer receives action events from this textfield.
+----------------------------------------------------------------------------------------------------------------------------------------------------------JPasswordField
+	là vùng chứa input password (dạng ****)
+JPasswordField()
+	Constructs a new JPasswordField, with a default document, null starting text string, and 0 column width.
+JPasswordField(int columns)
+	Constructs a new empty JPasswordField with the specified number of columns.
+JPasswordField(String text)
+	Constructs a new JPasswordField initialized with the specified text.
+JPasswordField(String text, int columns)
+	Construct a new JPasswordField initialized with the specified text and columns.
+
+char[] getPassword()
+	lấy password nhưng trả về một mảng các char
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------JButton
+	là button, và có thể add sự kiện và callback function như js
+	khi button có text thì thôi icon và ngược lại nếu không muốn xấu
+
+JButton()
+	tạo một button mới không text và không icon
+JButton(String s)
+	tạo một button mới có text cụ thể
+JButton(Icon i)
+	tạo một button mới có đối tượng icon cụ thể
+
+void setText(String s)
+	set text trên nút button đó, giống cái constructor có String ở trên
+String getText()
+	trả về text của button, cụ thể là chữ trên cái nut đó
+void setIcon(Icon i)
+	set icon cụ thể nào đó cho button
+	kích thước ảnh không tự co dãn theo kích thước button, khuất
+	VD:
+		.setIcon(new ImageIcon("C:\\Users\\gemdino.png"));
+Icon getIcon()
+	trả về đối tượng icon của cái button đó
+void setEnabled(boolean b)  void
+	false thì button không ấn dược, mặc định là true tức button ấn được
+void setBounds(...)
+void setSize(...)
+void setVisible(...)
+	
+void setMnemonic(int a)  void
+	đây là set phím tắt cho button này
+	VD: .setMnemonic(KeyEvent.VK_B);
+		cụ thể trong trường hợp này là "Alt" + "B"
+		hình như phím tắt là auto có "Alt" khác nhau ở mỗi cái sau "_"
+
+void addActionListener(ActionListener a)  void
+	thêm action listener cho button, khi nó được click
+	VD:
+		.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// làm gì đó
+			}
+		})
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+JTextArea
+	cũng là vùng text nhưng có thể xuống dòng
+JTextField()
+	Creates a new TextField
+JTextField(String text)
+	Creates a new TextField initialized with the specified text.
+JTextField(String text, int columns)
+	Creates a new TextField initialized with the specified text and columns.
+	chú ý là columns mình chưa rõ
+JTextField(int columns)
+	Creates a new empty TextField with the specified number of columns.
+	chú ý là colums mình chưa rõ
+
+void addActionListener(ActionListener l)
+	It is used to add the specified action listener to receive action events from this textfield.
+Action getAction()
+	It returns the currently set Action for this ActionEvent source, or null if no Action is set.
+void setFont(Font f)
+	It is used to set the current font.
+void removeActionListener(ActionListener l)
+	It is used to remove the specified action listener so that it no longer receives action events from this textfield.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+JCheckBox
+	là check box
+JJCheckBox()
+	Creates an initially unselected check box button with no text, no icon.
+JChechBox(String s)
+	Creates an initially unselected check box with text.
+JCheckBox(String text, boolean selected)
+	Creates a check box with text and specifies whether or not it is initially selected.
+JCheckBox(Action a)
+	Creates a check box where properties are taken from the Action supplied.
+
+boolean isSelected()
+	trả về boolean xem check box này đã được check hay chưa
+String getText()
+	trả về text mà check box đó nắm giữ
+AccessibleContext getAccessibleContext()
+	trả về đối tượng accessible context, cái này đúng như nghĩa của nó là nhưng thành phần có thể truy cập
+void addActionListener(ActionListener l)
+	được gọi khi check hoặc uncheck cái check box đó
+void addItemListener(ItemListener i)
+	thêm một đối tượng lắng nghe các trạng thái của item	
+	VD:
+		jCheckBox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				label.setText("C++ Checkbox: " + (e.getStateChange()==1?"checked":"unchecked"));
+			}
+		});    
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+JRadioButton
+	cũng là check box nhưng ccó thể set up để chỉ check được một đáp án một lúc
+	và nếu muốn vậy thì phải add chúng vô object ButtonGroup
+JRadioButton()
+	Creates an unselected radio button with no text.
+JRadioButton(String s)
+	Creates an unselected radio button with specified text.
+JRadioButton(String s, boolean selected)
+	Creates a radio button with the specified text and selected status.
+
+void setText(String s)
+	It is used to set specified text on button.
+String getText()
+	It is used to return the text of the button.
+void setEnabled(boolean b)
+	It is used to enable or disable the button.
+void setIcon(Icon b)
+	It is used to set the specified Icon on the button.
+Icon getIcon()
+	It is used to get the Icon of the button.
+void setMnemonic(int a)
+	It is used to set the mnemonic on the button.
+void addActionListener(ActionListener a)
+	It is used to add the action listener to this object.
+	sẽ được kích hoạt khi check vô
+boolean isSelected()
+	trả về trạng thái đã được check hay chưa
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+JComboBox
+	là danh sách xổ xuống (dropdown list), rồi chọn trong các option đó
+JComboBox()
+	Creates a JComboBox with a default data model.
+JComboBox(Object[] items)
+	Creates a JComboBox that contains the elements in the specified array.
+JComboBox(Vector<?> items)
+	Creates a JComboBox that contains the elements in the specified Vector.
+	cái vector này hơn cái mảng ở chỗ nó có thể thêm các đối tượng không dùng kiểu, String và Interger
+
+void addItem(Object anObject)
+	It is used to add an item to the item list.
+void removeItem(Object anObject)
+	It is used to delete an item to the item list.
+void removeAllItems()
+	It is used to remove all the items from the list.
+void setEditable(boolean b)
+	It is used to determine whether the JComboBox is editable.
+	edit được nhưng không lưu được
+void addActionListener(ActionListener a)
+	It is used to add the ActionListener.
+	Ngoài ra còn có các loại listenner khác nữa
+void addItemListener(ItemListener i)
+	It is used to add the ItemListener.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+JTable
+	là table theo đúng nghĩa đen
+JTable()
+	Creates a table with empty cells.
+JTable(Object[][] rows, Object[] columns)
+	Creates a table with the specified data.
+không hiểu tại sao jtable phải là con của một pane thì mới có tên cột. còn lại các chức năng của nó chạy bình thường
+
+int getSelectedRow()
+	trả về hàng mà đang được chọn
+int getSelectedColumn()
+	trả về cột mà đang được chọn
+Object getValueAt(int row,int column)
+	trả về giá trị tại hàng row cột column
+có thể add một số sự kiện như thay đổi giá trị của bảng
+VD:
+	jTable.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		cái này để chỉ chọn một giá trị nhưng bôi đen một dòng
+	jTable.setCellSelectionEnabled(true);
+		cài này toàn diện nhất, chỉ chọn được một, nhưng kéo thả chuột thì là chọn đúng những vùng được bôi đen
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+JList
+	tạo ra một list các item có thể select dược
+	có event khi chọn item
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+JOptionPane
+	một class chuyên cung cấp các cửa số option như dialong, input, confirm, alert, ...
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+JScrollBar
+	là một scroll bar chính hiệu
+	có event listener rõ ràng và có thể đọc được vị trí của nó
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+Java JMenuBar, JMenu and JMenuItem
+	là class để tạo menu cho jrame hoặc sub menu của chính nó
+	jmenubar sẽ chứa các jmenu
+	jmenu sẽ chứa jmenu con hoặc jmenuitem
+	jmenuitem chứa các lựa chọn cuối cùng
+	event thì hiện tại  thì có actionperformed (là click vô nó)
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+JPopupMenu
+	là popupmenu thực sự, và trong đó là adding các menu item đã nêu ở trên
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+JCheckBoxMenuItem
+	là check box của một menu item
+	có thể có shortcut
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+JSeparator
+	là một separator thực thụ để chia menu item ra, chia có 1 tí à
+	thêm vào bằng cách jmenu.addseparator
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+JProgressBar
+	là progress bar thực thụ, có phần trăm và vạch kẻ tương ứng rõ ràng
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+JTree, DefaultMutableTreeNode
+	jtree là một cây thực thụ, có thể có các nhánh và lá
+	DefaultMutableTreeNode là nút lá hoặc rút mạng hoặc nút bố của chính nó
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+JColorChooser
+	là một class để cho mình chọn color thật
+	có một phương thức sẽ show một cái popup để cho mình chọn màu và trả về màu mà mình đã chọn
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+JTablePane
+	là một cái bảng thực thụ, có thể chuyển qua chuyển lại các tab của chương trình giống kiểu đang từ tab home sang tab cá nhân rồi messenger
+	
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+JSlider
+	là một slide thực thụ có thẻ kéo thả có thể có chia độ, chia vạch
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+JSpinner
+	là cái cho chọn số khi ấn mũi tên lên hoặc xuống, giống kiểu input button trong html mà có max và min value ý
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+JDialog
+	có vẻ như là một dialog thực thụ, có thể gắn nó theo một owner hoặc có thể đứng độc lập
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+JFileChooser
+	là một frame có thể chọn được file
+int showOpenDialog(Componant owner)
+	mở một dialog để browse file có thể cancel và chọn file
+File getSelectedFile()
+	trả về file đã được chọn và bắt đầu thao tác như bình thường
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+JToggleButton
+	thì là button có thể toggle
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
