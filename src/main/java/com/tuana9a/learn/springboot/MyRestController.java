@@ -1,3 +1,4 @@
+package com.tuana9a.learn.springboot;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController("/api/rest")
-public class TestController {
+public class MyRestController {
     @GetMapping("/get/:id")
     public Object get(@PathVariable(value = "id", required = false) String id,
             @RequestParam(value = "name", required = false, defaultValue = "tuana9a") String name) {
@@ -32,7 +33,7 @@ public class TestController {
     }
 
     @PostMapping("/post")
-    public Object post(@RequestBody User user) {
+    public Object post(@RequestBody Object user) {
         System.out.println(user);
         return user;
     }

@@ -1,3 +1,4 @@
+package com.tuana9a.learn.springboot;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -10,10 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
  */
 
 @Transactional
-public class TestService {
+public class TransactionalService {
 
     @Transactional(rollbackFor = { NullPointerException.class }, timeout = 15000)
-    public void update(User user) {
+    public void update(Object user) {
         // do some update here
     }
 

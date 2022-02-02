@@ -23,6 +23,8 @@ function main() {
         let url = element.getAttribute("data-url");
         if (element.classList.contains("raw")) {
             fetchAppendRaw(element, url);
+        } else if (element.classList.contains("root")) {
+            fetchAppendHtml(element, ROOT + url);
         } else {
             fetchAppendHtml(element, url);
         }
