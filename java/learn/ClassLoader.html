@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://avatars.dicebear.com/api/identicon/ClassLoader.svg" type="image/x-icon">
+    <title>Class Loader</title>
+</head>
+
+<body>
+    <h1>ClassLoader</h1>
+    <img src="./ClassLoader.jpg" width="700px">
+    <p>java không load toàn bộ class vào JVM (or MEM) vì nếu thế thì toang vl <br>
+        cũng như OS khi chạy chương trình chỉ load một phần chương trình chứ không load toàn bộ</p>
+    <p>ClassLoader là một phần của JRE <br>
+        do vậy JVM không cần quan tâm việc thừa thiếu class, cần thì gọi ClassLoader, có thì dùng <br>
+        không có thì sẽ là ClassNotFoundException</p>
+    <hr>
+
+    <h1>Các loại ClassLoader</h1>
+    <h2>Application (or System) ClassLoader</h2>
+    <p>con của Extension ??? <br>
+        load classes found in the classpath environment variable <br>
+        cụ thể là trong "-classpath or -cp in cmd"</p>
+    <h2>Extension ClassLoader</h2>
+    <p>con của Boostrap ??? <br>
+        load classes that are extension of standard java core <br>
+        cụ thể là trong "%JAVA_HOME%/lib/ext"</p>
+    <h2>Boostrap (or Primordial) ClassLoader</h2>
+    <p>phục vụ các ClassLoader khác như "bố" <br>
+        các ClassLoader khác đều phải đc load qua thằng này =)) <br>
+        không phải là class trong java (native code) <br>
+        cụ thể là "rt.jar" và các libraries "%JAVA_HOME%/jre/lib" <br>
+        do vậy nó mới load đc các ClassLoader khác <br>
+        platform dependent</p>
+    <hr>
+
+    <h1>Delegation Model</h1>
+    <p>ClassLoader con sẽ ủy nhiệm việc tìm class cho bố liền trước nó</p>
+    <p>cụ thể khi có request tìm class thì Application là đầu tiên
+        và ủy thác cho Extension => lại ủy thác cho Boostrap <br>
+        Application => Extension => Boostrap <br>
+        chỉ khi Boostrap và Extension không tìm thấy <br>
+        thì Application phải tự tìm</p>
+    <h2>Visibility ???</h2>
+    <p>(phần này k biết dịch có đúng không)</p>
+    <p>các class được load bởi ClassLoader bố thì visible với các ClassLoader con</p>
+    <p>VD: ClassA load bởi Application và ClassB load bởi Extension <br>
+        thì Application thấy ClassA và ClassB <br>
+        nhưng Extension thì chỉ thấy ClassB <br>
+        và Boostrap thì éo thấy gì cả (ClassNotFoundException)</p>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" href="https://avatars.dicebear.com/api/identicon/data-types.svg" type="image/x-icon">
+	<title>Data Types</title>
+</head>
+
+<body>
+	<h1>KIỂU DỮ LIỆU VÀ KHAI BÁO</h1>
+	<h1>CÁC LOẠI DỮ LIỆU CƠ BẢN VÀ BIẾN</h1>
+	<div class="fetchAppend" data-url="/explorer/src/main/java/com/tuana9a/learn/DataTypes.java"></div>
+
+	<h1>TỰ ĐỘNG ÉP KIỂU DỮ LIỆU</h1>
+	<p>trong phép tính sẽ tự nâng kiểu dữ liệu sang kiểu cao hơn và không có tự động ép kiểu thấp hơn <br>
+		byte < short or char < int < long < float < double <br>
+			VD: int a=5;double b=3.5; a=b; thì a sẻ là 3 là ép tự động <br>
+			hoặc có thể ép kiểu dữ liệu chủ quan bằng cách <br>
+			(kiểu_dữ_liệu_muốn_ép)tên_biến_muốn_ép <br>
+			VD: i=(float)i; sẽ chuyển i thành float từ int (giả sử i kiểu int) <br>
+			KHÔNG ép được boolean sang char,int,và các dữ liệu số khác và ngược lại <br>
+			char thì ép sang được dữ liệu số và ngược lại cũng được <br>
+			VD: char c='c'; int a=(int)c; thì cũng có int a=100;char c=(char)a;</p>
+
+	<script src="../../../fetchAppend.js"></script>
+</body>
+
+</html>
