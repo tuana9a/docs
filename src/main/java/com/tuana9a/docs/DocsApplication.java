@@ -1,4 +1,4 @@
-package com.tuana9a;
+package com.tuana9a.docs;
 
 import java.io.IOException;
 

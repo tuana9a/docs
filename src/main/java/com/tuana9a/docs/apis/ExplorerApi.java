@@ -1,10 +1,19 @@
-package com.tuana9a.controllers;
+package com.tuana9a.docs.apis;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.io.RandomAccessFile;
+import com.tuana9a.docs.config.Config;
+import com.tuana9a.docs.utils.HttpUtils;
+import com.tuana9a.docs.utils.IoUtils;
+import com.tuana9a.docs.utils.Utils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -12,24 +21,8 @@ import java.util.Base64;
 import java.util.List;
 import java.util.zip.GZIPOutputStream;
 
-import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.tuana9a.config.AppConfig;
-import com.tuana9a.utils.ExplorerUtils;
-import com.tuana9a.utils.HttpUtils;
-import com.tuana9a.utils.IoUtils;
-import com.tuana9a.utils.Utils;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
 @Controller
-public class ExplorerController {
+public class ExplorerApi {
 
     private static class Range {
         public long start;
@@ -53,7 +46,7 @@ public class ExplorerController {
     }
 
     @Autowired
-    private AppConfig config;
+    private Config config;
 
     @Autowired
     private HttpUtils httpUtils;
@@ -64,10 +57,7 @@ public class ExplorerController {
     @Autowired
     private Utils utils;
 
-    @Autowired
-    private ExplorerUtils explorerUtils;
-
-    @RequestMapping(value = { "/explorer/**/*", "/explorer/" }, method = RequestMethod.GET)
+    @RequestMapping(value = {"/explorer/**/*", "/explorer/"}, method = RequestMethod.GET)
     public void send(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         // SECTION: Validate request file
         // ------------------------------------------------------------------
@@ -84,7 +74,7 @@ public class ExplorerController {
         // URL-decode the file name (might contain spaces and on) and prepare file
         // object.
         String pathDecoded = URLDecoder.decode(pathRequest, "UTF-8");
-        File file = new File(config.DOCS_FIR, pathDecoded);
+        File file = new File(config.ROOT_DIR, pathDecoded);
 
         // Check if file actually exists in filesystem.
         if (!file.exists()) {
@@ -105,6 +95,10 @@ public class ExplorerController {
         }
         // unknown what is this file
         resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+    }
+
+    private boolean isSkip(String filename) {
+        return filename.matches(config.IGNORE_REGEX);
     }
 
     private void sendFolder(File folder, HttpServletRequest req, HttpServletResponse resp, String parentPath)
@@ -133,7 +127,7 @@ public class ExplorerController {
         if (files != null) {
             for (File file : files) {
                 String filename = file.getName();
-                if (explorerUtils.isSkip(filename)) {
+                if (isSkip(filename)) {
                     continue;
                 }
                 String path = parentPath + filename;

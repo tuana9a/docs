@@ -1,6 +1,6 @@
-package com.tuana9a.utils;
+package com.tuana9a.docs.utils;
 
-import com.tuana9a.config.AppConfig;
+import com.tuana9a.docs.config.Config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +10,7 @@ import java.io.*;
 public class IoUtils {
 
     @Autowired
-    private AppConfig config;
+    private Config config;
 
     //SECTION: general purpose
     public void writeFileToOutput(RandomAccessFile input, OutputStream output, long start, long length) throws IOException {
@@ -51,12 +51,11 @@ public class IoUtils {
     }
 
     public void close(Closeable closeable) {
-        if (closeable != null) {
-            try {
-                closeable.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        if (closeable == null) return;
+        try {
+            closeable.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

@@ -1,4 +1,4 @@
-package com.tuana9a.utils;
+package com.tuana9a.docs.utils;
 
 import org.springframework.stereotype.Component;
 
