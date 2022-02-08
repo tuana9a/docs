@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geting Started</title>
+</head>
+
+<body>
+    <h1>khởi động</h1>
+    <p>khởi chạy một container nhỏ <br>
+        sau đó bạn mở trình duyệt vào địa chỉ localhost:PORT</p>
+    <div class="fetchAppend" data-url="./first-container.sh"></div>
+    <hr>
+    <h1>công nghệ container</h1>
+    <p>bản chất container là một process chạy trên linux và <b>đặc biệt được "isolate"</b> khỏi các process khác</p>
+    <p>cái này đã có trên linux từ rất lâu</p>
+    <hr>
+    <h1>container image là gì</h1>
+    <p>do container muốn hoạt động được như một "máy ảo" thì cần phải có filesystem <br>
+        và filesystem này phải khác với filesystem của máy host cũng như các container khác <br>
+        từ đó cần một hệ thống file system rành riêng cho container đó</p>
+    <p>đó chính là container image chứa toàn bộ source, binary để container có thể chạy được</p>
+
+    <script src="../../../fetchAppend.js"></script>
+</body>
+
+</html>

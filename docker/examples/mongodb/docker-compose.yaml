@@ -9,6 +9,6 @@ services:
             - /etc/mongod.conf
         volumes:
             - /home/tuana9a/mongod.container.conf:/etc/mongod.conf
-        # ports:
-        #     - 27017:27017
-        network_mode: host
+        ports:
+            - 27017:27017
+        # network_mode: host
