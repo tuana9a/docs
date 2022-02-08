@@ -1,11 +1,14 @@
 package com.tuana9a.docs.apis;
 
 import com.tuana9a.docs.config.Config;
+import com.tuana9a.docs.data.FileObject;
+import com.tuana9a.docs.data.Range;
 import com.tuana9a.docs.utils.HttpUtils;
 import com.tuana9a.docs.utils.IoUtils;
 import com.tuana9a.docs.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -16,34 +19,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
+import java.util.*;
 import java.util.zip.GZIPOutputStream;
 
 @Controller
 public class ExplorerApi {
-
-    private static class Range {
-        public long start;
-        public long end;
-        public long length;
-        public long total;
-
-        /**
-         * Constructor
-         *
-         * @param start Start of byte-range
-         * @param end   End of byte-range
-         * @param total Total bytes of file
-         */
-        public Range(long start, long end, long total) {
-            this.start = start;
-            this.end = end;
-            this.total = total;
-            this.length = end - start + 1;
-        }
-    }
 
     @Autowired
     private Config config;
@@ -57,8 +37,9 @@ public class ExplorerApi {
     @Autowired
     private Utils utils;
 
-    @RequestMapping(value = {"/explorer/**/*", "/explorer/"}, method = RequestMethod.GET)
-    public void send(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+    @RequestMapping(value = { "/explorer/**/*", "/explorer/" }, method = RequestMethod.GET)
+    public String explorer(HttpServletRequest req, HttpServletResponse resp, Model model)
+            throws IOException, ServletException {
         // SECTION: Validate request file
         // ------------------------------------------------------------------
         String explorerPrefix = config.EXPLORER_PREFIX;
@@ -81,67 +62,75 @@ public class ExplorerApi {
             // Throw an exception, or send 404, or show default/warning page, or just ignore
             // it.
             resp.sendError(HttpServletResponse.SC_NOT_FOUND);
-            return;
+            return null;
         }
 
         if (file.isDirectory()) {
-            sendFolder(file, req, resp, pathRequest);
-            return;
+            sendFolder(file, req, resp, pathRequest, model);
+            return "_explorer.render";
         }
 
         if (file.isFile()) {
             sendFile(file, req, resp);
-            return;
+            return null;
         }
         // unknown what is this file
         resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        return null;
     }
 
     private boolean isSkip(String filename) {
         return filename.matches(config.IGNORE_REGEX);
     }
 
-    private void sendFolder(File folder, HttpServletRequest req, HttpServletResponse resp, String parentPath)
-            throws IOException, ServletException {
+    private String makeDiceBearIcon(String string) {
+        final String dicebear = "https://avatars.dicebear.com/api/identicon/";
+        // add favicon
+        byte[] bytes = string.getBytes(StandardCharsets.UTF_8);
+        String url = dicebear + Base64.getEncoder().encodeToString(bytes) + ".svg";
+        return url;
+    }
+
+    private void sendFolder(File folder, HttpServletRequest req, HttpServletResponse resp, String parentPath,
+            Model model) throws IOException, ServletException {
         File[] files = folder.listFiles();
-        StringBuilder html = new StringBuilder();
-
-        html.append("<head>");
-        String randomCode = Base64.getEncoder().encodeToString(parentPath.getBytes(StandardCharsets.UTF_8));
-        String randomIcon = "https://avatars.dicebear.com/api/identicon/" + randomCode + ".svg";
-        String favicon = "<link rel=\"shortcut icon\" href=\"" + randomIcon + "\" type=\"image/x-icon\">";
-        html.append(favicon);
-        String style = "<style> a { font-size: 20px; display:inline-block; padding: 2px 5px; text-decoration: none; } a:hover { background-color: #84a7db; }</style>";
-        html.append(style);
-        html.append("</head>");
-
-        html.append("<body>");
-        String parentDir;
+        final List<FileObject> fileObjects = new LinkedList<>();
+        model.addAttribute("files", fileObjects);
+        // add favicon
+        model.addAttribute("faviconUrl", makeDiceBearIcon(parentPath));
+        // add tile
         if (parentPath.equals("/")) {
             parentPath = "";
         } else if (!parentPath.endsWith("/")) {
             parentPath += "/";
         }
-        parentDir = "<a href=\"" + config.EXPLORER_PREFIX + parentPath + ".." + "\">..</a><br/>";
-        html.append(parentDir);
-        if (files != null) {
-            for (File file : files) {
-                String filename = file.getName();
-                if (isSkip(filename)) {
-                    continue;
-                }
-                String path = parentPath + filename;
-                String url = config.EXPLORER_PREFIX + path;
-                String type = file.isDirectory() ? "d" : "f";
-                String a = "<a href=\"" + url + "\" data-type=\"" + type + "\">" + filename + "</a><br/>";
-                html.append(a);
-            }
-        }
-        html.append("</body>");
+        model.addAttribute("title", parentPath);
+        // add files
+        FileObject parentDirObject = new FileObject();
+        String parentDirUrl = config.EXPLORER_PREFIX + parentPath + "..";
+        parentDirObject.setName("..");
+        parentDirObject.setUrl(parentDirUrl);
+        parentDirObject.setType("d");
+        fileObjects.add(parentDirObject);
 
-        resp.setContentType("text/html; charset=utf-8;");
-        PrintWriter printWriter = resp.getWriter();
-        printWriter.print(html);
+        if (files == null) {
+            return;
+        }
+        for (File file : files) {
+            String filename = file.getName();
+            if (isSkip(filename)) {
+                continue;
+            }
+            String path = parentPath + filename;
+            String url = config.EXPLORER_PREFIX + path;
+            String type = file.isDirectory() ? "d" : "f";
+            FileObject fileObject = new FileObject();
+            fileObject.setName(filename);
+            fileObject.setUrl(url);
+            fileObject.setType(type);
+            // add to the list
+            fileObjects.add(fileObject);
+        }
     }
 
     private void sendFile(File file, HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -268,7 +257,8 @@ public class ExplorerApi {
          */
 
         // mình custom để mọi thứ là text
-        if (contentType == null || contentType.equals("application/octet-stream") || contentType.equals("application/x-sh")) {
+        if (contentType == null || contentType.equals("application/octet-stream")
+                || contentType.equals("application/x-sh")) {
             contentType = "text/plain";
         }
 
