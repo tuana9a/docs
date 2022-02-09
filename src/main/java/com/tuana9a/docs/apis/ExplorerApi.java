@@ -67,7 +67,7 @@ public class ExplorerApi {
 
         if (file.isDirectory()) {
             sendFolder(file, req, resp, pathRequest, model);
-            return "_explorer.render";
+            return config.TEMPLATE_EXPLORER_RENDER;
         }
 
         if (file.isFile()) {
