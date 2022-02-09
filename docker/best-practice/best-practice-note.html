@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Practice Note</title>
+</head>
+
+<body>
+    <hr>
+    <!--  -->
+    <h1>Luôn sử dụng offical image</h1>
+    <p>luôn sử dụng các image chính thống nếu có sẵn</p>
+    <p>và luôn luôn có thêm version tag vì có thể lần build tiếp theo phiên bản latest sẽ break thing</p>
+    <hr>
+    <!--  -->
+    <h1>cố gắng giảm size image càng tốt</h1>
+    <p>việc này vừa tăng khả năng luân chuyển image, build time <br>
+        hơn thế gián tiếp giảm khả năng bị hack do số package giảm đi</p>
+    <hr>
+    <!--  -->
+    <h1>cố gắng sử dụng docker caching càng nhiều càng tốt</h1>
+    <p><a href="./layer/note.html">note</a></p>
+    <p>khi build image sẽ có các layer không thay đổi như install dependency, injet config file<br>
+        thì nên cho các layer này lên trước thì khi build sẽ đc cache lại, <br>
+        còn nếu cho sau thì mỗi lần chỉnh sửa file thì sẽ install lại toàn bộ image</p>
+    <hr>
+    <!--  -->
+    <h1>Giới hạn quyền truy cập của user trong container</h1>
+    <p>nên giới hạn quyền truy cập user (do mặc định là user root) <br>
+        nếu app có bị hack thì hacker không chiếm toàn quyền root để cài bot hay đào coin được</p>
+    <div class="fetchAppend" data-url="./user-privilege/Dockerfile"></div>
+    <hr>
+    <!--  -->
+    <h1>Sử dụng docker scan để scan các vấn đề về bảo mật</h1>
+    <script src="../../fetchAppend.js"></script>
+</body>
+
+</html>

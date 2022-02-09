@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Layer Cache</title>
+</head>
+
+<body>
+    <h1>các layer của docker hoạt động khá hay và hiệu quả</h1>
+    <hr>
+    <h1>Tìm hiểu về Overlay filesystem</h1>
+    <!-- TODO -->
+    <p>TODO: mình không nhớ nữa khá lâu rồi nếu cần thiết thì phải tìm hiểu lại, còn phía dưới chỉ là sơ lược</p>
+    <p>đại loại các layer là immutable muốn thay đổi thêm sửa xoá chỉ chỉnh sửa ở layer cao nhất <br>
+        việc immutable cho phép tối ưu bộ nhớ cho các ứng dụng sử dụng chung phần layer thấp hơn <br>
+        thậm chí cải thiện tốc độ build image kể cả với 2 image khác nhau Dockerfile, chỉ cần chung một, một vài layer sẽ có thể share phần layer này</p>
+    <p>cùng xem ví dụ ở trong 2 thư mục <a href="./ex1/">ex1/</a> và <a href="./ex2/">ex2/</a> <br>
+        mặc dù ở 2 app khác nhau nhưng phần nội dung của 2 bên giống nhau và thậm chí khi build docer sẽ sử dụng tất layer của 2 bên</p>
+    <p>cùng xem ảnh phía dưới</p>
+    <p><img src="./img.PNG" alt="img"></p>
+</body>
+
+</html>
