@@ -6,7 +6,7 @@ git remote -v
 # liên kết local repository lên trên mạng để chia sẻ với đồng nghiệp
 git remote add tên_muốn_đặt link_đến_server_git
 
-# xem info remote,…
+# xem info remote,...
 git remote show remote_name
 
 # đổi tên remote

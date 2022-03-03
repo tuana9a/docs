@@ -1,0 +1,3 @@
+-- đưa ra các kết quả không trùng nhau nếu select hai bảng (hoặc hơn) chỉ cần không trùng một trong hai bảng đều sẽ được đưa ra
+SELECT DISTINCT tên_cột_1, tên_cột_2, ...
+-- lấy ra giá trị unique trên các cột tương ứng

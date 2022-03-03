@@ -4,8 +4,8 @@ Mánh khóe thứ nhất: Không bao giờ truyền dạy các “mánh khóe”
 Bài viết này là tổng hợp và chọn lọc những ý tưởng, câu trả lời hay của câu hỏi: What are the best-kept secrets of great programmers? – Những mánh khóe “không bao giờ tiết lộ” của các lập trình viên vĩ đại.
 
 📝 𝗠𝗮́𝗻𝗵 𝗸𝗵𝗼́𝗲 𝗰𝗼𝗱𝗲 𝘃𝗮̀ 𝘁𝗲𝘀𝘁
-- Bảo mật/mã hóa rất khó. Đừng tự làm MÀ hãy tái sử dụng (sử dụng thư viện, thuật toán có sẵn v…v), trừ khi bạn biết rõ mình đang làm gì.
-- Có vô vàn nguyên nhân làm crash một chương trình: deploy sai cách, input bị lỗi, người dùng dùng sai cách, quá tải … Chuẩn bị sẵn sàng cho những điều đó: Ghi log những exception gặp phải, deploy thử lên server test, đặt giới hạn cho bộ nhớ…
+- Bảo mật/mã hóa rất khó. Đừng tự làm MÀ hãy tái sử dụng (sử dụng thư viện, thuật toán có sẵn v...v), trừ khi bạn biết rõ mình đang làm gì.
+- Có vô vàn nguyên nhân làm crash một chương trình: deploy sai cách, input bị lỗi, người dùng dùng sai cách, quá tải ... Chuẩn bị sẵn sàng cho những điều đó: Ghi log những exception gặp phải, deploy thử lên server test, đặt giới hạn cho bộ nhớ...
 - Kết nối mạng (HTTP, socket) rất dễ xảy ra vấn đề. Luôn nhớ đặt timeout cho các kết nối này, sử dụng thư viện để wrap chúng, retry nếu kết nối có vấn đề.
 - Mỗi dòng code thêm vào sẽ làm chương trình phức tạp thêm một chút, tăng khả năng có bug. Bỏ bớt code là cách hay nhất để giảm bớt số lượng bug =))).
 - Validate những thứ người dùng nhập vào, vừa đảm bảo tính bảo mật, lại hạn chế được bug.
@@ -21,7 +21,7 @@ Bài viết này là tổng hợp và chọn lọc những ý tưởng, câu tr�
 - Hiểu rõ thư viện/framework mà mình sử dụng, đừng có gắng viết lại từ đầu những thứ người khác đã tốn công viết rồi.
 - Cài đặt để việc build một project diễn ra nhanh chóng tiện lợi nhất có thể. Hãy chắc chắn bạn có thể build bằng command line, sẽ rất có ích (Có thể kích hoạt build từ xa, hoặc đưa project lên CI chẳng hạn).
 - Hiểu rõ những tool bạn sử dụng (IDE, source control, build tool, Photoshop). Cố gắng tìm hiểu và làm quen với việc dùng các hotkey, hạn chế dùng chuột. Bạn sẽ làm việc nhanh hơn và “pro” hơn.
-- Ngồi lâu rất có hại. Hãy tập một số thói quen để đảm bảo sức khỏe khi làm việc: Không ngồi nhiều, lâu lâu cho mắt nghỉ ngơi, sắp xếp bàn làm việc, bàn phím, chuột sao cho làm việc thoải mái…
+- Ngồi lâu rất có hại. Hãy tập một số thói quen để đảm bảo sức khỏe khi làm việc: Không ngồi nhiều, lâu lâu cho mắt nghỉ ngơi, sắp xếp bàn làm việc, bàn phím, chuột sao cho làm việc thoải mái...
 - Đừng áp dụng lung tung các framework/process/pattern vào dự án để “thể hiện”. Không phải lúc nào Test-Driven Development cũng tốt, không phải lúc nào cũng nên áp dụng DI/IoC.
 
 🚀 𝗠𝗮́𝗻𝗵 𝗸𝗵𝗼́𝗲 𝗽𝗵𝗮́𝘁 𝘁𝗿𝗶𝗲̂̉𝗻 𝗯𝗮̉𝗻 𝘁𝗵𝗮̂𝗻

@@ -45,10 +45,10 @@ Nhưng khi muốn sử dụng biến đó trong một file khác thì chắc ch�
         double>float>(char và short convert sang int)>long
         tức là nếu xuất hiện cùng lúc thì thằng ưu tiên thấp sẽ phải convert sang thằng ưu tiên cao hơn
 
-    (double) x tức là chuyển x sang dạng double tương tự cho các loại khác khi thay double bằng float, int, …
+    (double) x tức là chuyển x sang dạng double tương tự cho các loại khác khi thay double bằng float, int, ...
         VD: double x=3.14; khi đó (int)x sẽ là 3 tức bị mất phần phân :V
 
-Toán tử (cộng trừ nhân chia, …)
+Toán tử (cộng trừ nhân chia, ...)
 Toán từ bình thường
     Số học là:  +  -  *  /  %  
     trong đó % là chia lấy phần dư (chỉ dùng với 2 toán tử là số nguyên được ưu tiên như nhân chia)

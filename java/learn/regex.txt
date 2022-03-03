@@ -34,9 +34,9 @@ $	Đánh dấu Kết thúc của một dòng
 \B	Không phải ranh giới của một từ
 
 |	Hoặc				22|33			33
-( … )	Group các ký tự và chụp lại	A(nt|pple)		Ant, Apple
+( ... )	Group các ký tự và chụp lại	A(nt|pple)		Ant, Apple
     (?="gì_đó") cái này thì có ý nghĩa là toàn bộ
 \1	Nội dung của Group 1		r(\w)g\1x		regex
 \2	Nội dung của Group 2		(\d\d)\+(\d\d)=\2\+\1	12+65=65+12
-(?: … )	Group không được chụp lại, 	A(?:nt|pple)		Ant, Apple
+(?: ... )	Group không được chụp lại, 	A(?:nt|pple)		Ant, Apple
     bạn không thể sử dụng \1
