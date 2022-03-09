@@ -121,6 +121,9 @@ public class ExplorerApi {
             if (isSkip(filename)) {
                 continue;
             }
+            if (file.isDirectory()) {
+                filename += "/";
+            }
             String path = parentPath + filename;
             String url = config.EXPLORER_PREFIX + path;
             String type = file.isDirectory() ? "d" : "f";
