@@ -1,0 +1,24 @@
+body {
+    background-color: black;
+}
+.Entry {
+    padding: 2px 5px;
+}
+a {
+    font-size: 20px;
+    text-decoration: none;
+    transition: 0.1s;
+    font-family: "Courier New", Courier, monospace;
+}
+a.f {
+    color: white;
+}
+a.d {
+    color: lime;
+}
+a:hover {
+    text-decoration: underline;
+    background-color: rgba(24, 94, 185, 0.712);
+}
+
+

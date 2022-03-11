@@ -10,7 +10,7 @@ public class Config {
     public String ROOT_DIR = ".";
     public String IGNORE_REGEX = ".*(\\.ps1|\\.cmd|\\.reg)$";
     public String EXPLORER_PREFIX = "/explorer/";
-    public String TEMPLATE_EXPLORER_RENDER = "_explorer.render";
+    public String TEMPLATE_FOLER_RENDER = "explorer.folder.render";
 
     public int BUFFER_SIZE = 1024; // 1KB
     public long DEFAULT_EXPIRE_TIME = 604800000L; // 1 weeks
