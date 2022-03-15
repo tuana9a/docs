@@ -11,4 +11,5 @@ sudo nano /etc/fstab
 
 # remove a swap
 # if add to /etc/fstab so delete it also
-sudo swapoff -v /swap.img sudo rm /swap.img
+sudo swapoff -v /swap.img
+sudo rm /swap.img
