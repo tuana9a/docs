@@ -7,7 +7,6 @@ body {
 a {
     font-size: 20px;
     text-decoration: none;
-    transition: 0.1s;
     font-family: "Courier New", Courier, monospace;
 }
 a.f {
