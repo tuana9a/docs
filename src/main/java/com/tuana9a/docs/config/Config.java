@@ -1,5 +1,6 @@
 package com.tuana9a.docs.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import lombok.ToString;
@@ -7,7 +8,8 @@ import lombok.ToString;
 @ToString
 @Component
 public class Config {
-    public String ROOT_DIR = ".";
+    @Value("${custom.root_dir}")
+    public String ROOT_DIR;
     public String IGNORE_REGEX = ".*(\\.ps1|\\.cmd|\\.reg)$";
     public String EXPLORER_PREFIX = "/explorer/";
     public String TEMPLATE_FOLER_RENDER = "explorer.folder.render";

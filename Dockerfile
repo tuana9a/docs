@@ -9,6 +9,6 @@ RUN mvn -f /app/pom.xml clean package
 #
 # Package stage
 #
-FROM 8u322-jre-slim-bullseye
+FROM openjdk:8u322-jre-slim-bullseye
 COPY --from=build /app/target/docs-1.0.0.jar /app/docs-1.0.0.jar
 ENTRYPOINT ["java","-jar","/app/docs-1.0.0.jar"]
