@@ -1,10 +1,5 @@
-# IntelliJ
-.idea/*
-out/*
-target/*
-
 # @tuana9a
-.vscode/
-.idea/
-*.iml
+node_modules
+.vscode
 .env
+*.local*
