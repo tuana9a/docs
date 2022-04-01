@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <% entries.forEach(entry => { %><div class="Entry"><a class="<%- entry.type -%>" href="<%- entry.url -%>" ><%- entry.name -%></a></div><% }) %>
+    <% entries.forEach(e => { %><div class="Entry"><a class="<%- e.type -%>" href="<%- e.url -%>" ><%- e.name -%></a></div><% }) %>
 </body>
 
 </html>
