@@ -32,6 +32,11 @@ api gốc query các api khác để frontend adapt vs thay đổi url của bac
 -   theo ngày
 -   nhiều version
 
+## auto update
+
+-   cần phải có chức năng auto update
+    -   CI / CD, docker, k8s
+
 # microservice
 
 -   không bắt service phải biết về thông tin của các service khác nếu không cần thiết
@@ -39,4 +44,11 @@ api gốc query các api khác để frontend adapt vs thay đổi url của bac
 
 # scale solution in a nutshell
 
-![](./scale-solution-in-nutshell.PNG)
+| Problems:                    | Solutions:                |
+| ---------------------------- | ------------------------- |
+| 1. Cascading Failure         | 1. Rate Limiting          |
+| 2. Going viral               | 2. Pre Scale              |
+| 3. Predictable load increase | 3. Auto Scale             |
+| 4. Bulk Job Scheduling       | 4. Batch Processing       |
+| 5. Popular Posts             | 5. Approximate Statistics |
+
