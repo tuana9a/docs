@@ -1,6 +1,6 @@
 # CAUTIONS
 
-Trong terminal dấu or ký tự "*" trong câu lệnh Ubuntu cần thêm "\" trước nó tức "\*" nếu không muốn bị hiểu thành tất cả file trong cái thư mục đó
+Trong terminal dấu or ký tự "\*" trong câu lệnh Ubuntu cần thêm "\" trước nó tức "\*" nếu không muốn bị hiểu thành tất cả file trong cái thư mục đó
 
 # apt
 
@@ -27,10 +27,10 @@ cat gemdino.txt
 
 ```bash
 # chuyển thư mục trong thư mục hiện tại
-#   - nếu tên có khoảng trống phải có hai nháy đơn 
+#   - nếu tên có khoảng trống phải có hai nháy đơn
 #   - hoặc giữa 2 từ cần thêm "\ " với mỗi một dấu cách tương ứng
 #   VD: " 'tuan thich  gemdino' " hay "tuan\ thich\ \ gemdino"
-cd name	
+cd name
 
 # đưa về thư mục home của người dùng hiện tại
 cd  # ~ cd /home/tuana9a
@@ -78,7 +78,7 @@ df -m
 du -h
 
 # VD: xem kích thước của thư mục người dùng
-du -sh ~ 
+du -sh ~
 ```
 
 # ln
@@ -100,7 +100,7 @@ ln -s /etc/letsencrypt/live/tuana9a.tech/fullchain.pem /home/ubuntu/ssl/cert.pem
 # sẽ locate đường dẫn file mà bạn muốn tìm ko kể viết hoa hay viết thường
 # giống như search trên window
 locate FILENAME
-    
+
 # VD: sẽ tìm file mà tên chứa "gemdino"
 locate -i gemdino
 
@@ -112,10 +112,10 @@ locate -i *gem*dino
 
 ```bash
 # show file ở thự mục hiện tại (ko hiện file ẩn)
-ls	
+ls
 
 # show cả file ẩn
-ls -a	
+ls -a
 
 # show dạng list
 ls -l
@@ -143,12 +143,12 @@ mv OLDNAME NEWNAME
 
 ```bash
 # sửa config network lúc startup
-        
-# thêm file yaml trong netplan
-# có thể đặt tên bất kì 
-sudo vi /etc/netplan/install.yaml 
 
-# sau đó apply các config như trên        
+# thêm file yaml trong netplan
+# có thể đặt tên bất kì
+sudo vi /etc/netplan/install.yaml
+
+# sau đó apply các config như trên
 sudo netplan apply
 ```
 
@@ -294,6 +294,7 @@ sudo COMMAND
 # vào root mode
 sudo bash
 ```
+
 # sudo visudo
 
 ```bash
@@ -301,7 +302,7 @@ sudo bash
 sudo visudo
 
 # cấu hình
-%sudo ALL=(ALL:ALL) ALL   # mặc định của ubuntu 
+%sudo ALL=(ALL:ALL) ALL   # mặc định của ubuntu
 %sudo ALL=(ALL:ALL) ALL   # không cần nhập password
 
 # sau đó thêm dòng sau cho user tuana9a bố đời không cần nhập pass khi sudo
@@ -348,12 +349,12 @@ sudo usermod -aG GROUPNAME USERNAME
 
 ```bash
 # sửa config network lúc startup
-        
-# thêm file yaml trong netplan
-# có thể đặt tên bất kì 
-sudo vi /etc/netplan/install.yaml 
 
-# sau đó apply các config như trên        
+# thêm file yaml trong netplan
+# có thể đặt tên bất kì
+sudo vi /etc/netplan/install.yaml
+
+# sau đó apply các config như trên
 sudo netplan apply
 ```
 
@@ -429,7 +430,7 @@ PORT=4000 ADDRESS=127.0.0.1 nohup java -jar docs-1.0.0.jar >> run.log 2>&1 & ech
 
 ```bash
 # mở editor để edit file này :V
-crontab -e				
+crontab -e
 
 # sau đó sửa theo format sau ref: https://crontab.guru/
 # m h dom mon dow command
@@ -537,10 +538,97 @@ whereis pkg_name
 
 ```bash
 # zip toàn bộ thư mục, files từ thư mục .
-tar czf resource.tar.gz *	
+tar czf resource.tar.gz *
 
 # unzip toàn bộ file vào thư mục hiện tại
 tar -xvf archive.tar.gz
+```
+
+# grep
+
+[https://linuxhandbook.com/grep-command-examples/](https://linuxhandbook.com/grep-command-examples/)
+
+## 1. Find all occurrences of a string (basic usage)
+
+```bash
+# Ex: Search package.json for any nashorn word
+grep nashorn package.json
+```
+
+## 2. Case insensitive search in a file set
+
+```bash
+# Ex: Search for any file in npm/test that ends with .js
+# that has nashorn with case insensitive
+grep -i nashorn npm/test/*.js
+
+# so "Nashorn" still match
+```
+
+## 3. Find all the non-matching files
+
+**note**: cái này **KHÔNG** recursive tìm trong folder con
+
+```bash
+# Ex: Search for all files that don't have the word "nashorn"
+# in npm/test/
+grep -iL nashorn npm/test/*
+```
+
+**note**: cái này **CÓ** recursive tìm trong folder con<br>
+nhưng **KHÔNG** tìm được các hidden files VD: `.env`, `.git`<br>
+do vậy xem [phần 4](#4-finding-patterns-into-hidden-files-and-recursively-into-sub-directories)
+
+```bash
+# Ex: Search for all files that don't have the word "nashorn"
+# in npm/ and It sub directories
+grep -iL nashorn npm/**/*
+
+# will search in "npm/" and "npm/test/" and "npm/module"
+```
+
+## 4. Finding patterns into hidden files and recursively into sub-directories
+
+```bash
+# This is not efficient as it will spawn a new grep process for each file
+find npm/test/ -type f -exec grep -iL nashorn \{} \;
+
+# This may have issues with filenames containing space-like characters
+grep -iL nashorn $(find npm/test/ -type f)
+
+# -r for recursive include hidden ones
+grep -irL nashorn npm/test/
+
+#
+grep -irL nashorn npm/
+```
+
+## 5. Filtering files by their name (using regular expressions)
+
+```bash
+# The first one is to use grep to find all files containing the pattern “nashorn”,
+# then pipe the output of that first command to a second grep instance
+# filtering out non-java source files:
+grep -ir nashorn ./ | grep "^[^:]*\.java"
+```
+
+**note**: Unless you specify the -F option, grep assumes the search pattern is a regular expression.
+
+-   `^` the start of the line
+-   `[^:]*` followed by a sequence of any characters except a colon
+-   `\.` followed by a dot (the dot has a special meaning in regex,<br>
+    so I had to protect it with a backslash to express I want a literal match)
+-   java and followed by the four letters “java.”
+
+In practice, since grep will use a colon to separate the filename from the context,<br>
+I keep only lines having `.java` in the filename section.<br>
+Worth mention it would match also `.javascript` filenames.<br>
+This is something I let try solving by yourself if you want.
+
+##  6. Filtering files by their name using grep
+
+```bash
+grep -ir nashorn ./ --include='*.java'
 ```
 
 # Navigation
