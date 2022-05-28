@@ -254,7 +254,296 @@ touch gemdino.txt
 users
 ```
 
-# NAVIGATION
+# id
+
+```bash
+# print real and effective user and group IDs
+id
+```
+
+# passwd
+
+```bash
+# đổi password cho user hiện tại
+passwd
+
+# đổi pass cho root
+sudo passwd
+```
+
+# su
+
+```bash
+# Switch User
+# change user ID or become another user
+su
+
+# chuyển sang user mớI
+su USERNAME
+
+# mặc định sẽ chọn root
+su
+```
+
+# sudo
+
+```bash
+# làm một lệnh gì đó với quyền root
+sudo COMMAND
+
+# vào root mode
+sudo bash
+```
+# sudo visudo
+
+```bash
+# chỉnh sửa các thứ liên quan tới quền
+sudo visudo
+
+# cấu hình
+%sudo ALL=(ALL:ALL) ALL   # mặc định của ubuntu 
+%sudo ALL=(ALL:ALL) ALL   # không cần nhập password
+
+# sau đó thêm dòng sau cho user tuana9a bố đời không cần nhập pass khi sudo
+tuana9a ALL=(ALL) NOPASSWD:ALL
+```
+
+# add user
+
+```bash
+# quản lý người dùng
+sudo adduser USERNAME
+sudo userdel USERNAME
+```
+
+# gpasswd
+
+```bash
+# xoá người dùng khỏi group
+gpasswd -d USERNAME GROUPNAME
+```
+
+# groupadd
+
+```bash
+# tao group moi
+sudo groupadd GROUPNAME
+```
+
+# groupdel
+
+```bash
+# xoa group
+sudo groupdel GROUPNAME
+```
+
+# usermod
+
+```bash
+# them user vao group
+sudo usermod -aG GROUPNAME USERNAME
+```
+
+# netplan
+
+```bash
+# sửa config network lúc startup
+        
+# thêm file yaml trong netplan
+# có thể đặt tên bất kì 
+sudo vi /etc/netplan/install.yaml 
+
+# sau đó apply các config như trên        
+sudo netplan apply
+```
+
+# ifconfig
+
+```bash
+# config interface card mạng cho nó chạy nè
+ifconfig eth0 172.16.25.125 netmask 255.255.255.224 broadcast 172.16.25.63
+
+# VD:
+sudo ifconfig enp0s8 \ #  card mạng enp0s8
+192.168.200.3 \ #  địa chỉ cho card này 192.168.200.3
+netmask 255.255.255.0 \ #  netmask là 255.255.255.0
+up # up là bật card này lên
+```
+
+# net emulator
+
+```bash
+# chú ý lệnh đầu cần add dev (card mạng) các lệnh sau chỉ cần update lại đống này
+
+# delay
+sudo tc qdisc add dev ens38 root netem delay 100ms
+
+sudo tc qdisc change dev ens38 root netem delay 100ms
+
+sudo tc qdisc change dev ens38 root netem delay 100ms 10ms
+
+sudo tc qdisc change dev ens38 root netem delay 100ms 10ms 25%
+
+# packet loss
+sudo tc qdisc change dev ens38 root netem loss 0.1%
+
+sudo tc qdisc change dev ens38 root netem loss 0.3% 25%
+
+sudo tc qdisc change dev ens38 root netem loss 20% 25%
+
+# other
+sudo tc qdisc change dev ens38 root netem duplicate 40%
+
+sudo tc qdisc change dev ens38 root netem corrupt 40%
+
+sudo tc qdisc change dev ens38 root netem reorder 5% gap 5 delay 10ms
+
+# khi xong rồi để hủy các giả lập trước đó chỉ cần remove chúng khỏi emulator
+sudo tc qdisc del dev ens38 root
+```
+
+# how to run command in background
+
+```bash
+# pattern không log pid
+nohup COMMAND >> run.log 2>&1 &
+
+# pattern log cả pid
+nohup COMMAND >> run.log 2>&1 & echo $! > run.pid
+
+# example with python
+nohup python main.py >> run.log 2>&1 &
+nohup python main.py >> run.log 2>&1 & echo $! > run.pid
+
+# example nodejs
+nohup node dist/main.js >> run.log 2>&1 &
+nohup node dist/main.js >> run.log 2>&1 & echo $! > run.pid
+
+# example with java
+nohup java -jar docs-1.0.0.jar >> run.log 2>&1 &
+nohup java -jar docs-1.0.0.jar >> run.log 2>&1 & echo $! > run.pid
+PORT=4000 ADDRESS=127.0.0.1 nohup java -jar docs-1.0.0.jar >> run.log 2>&1 & echo $! > run.pid
+```
+
+# cronjob
+
+```bash
+# mở editor để edit file này :V
+crontab -e				
+
+# sau đó sửa theo format sau ref: https://crontab.guru/
+# m h dom mon dow command
+# VD:
+*/15 * * * * /bin/bash /home/tuana9a/somebashscript.sh
+
+# save file lại và restart cronjob
+
+# ubuntu
+systemctl restart cron
+
+# fedora
+systemctl restart crond
+```
+
+# how to generate password
+
+```bash
+# $1 is param for length of password
+date +%s | sha256sum | base64 | head -c $1 ; echo
+
+# === or ===
+
+# $1 is param for length of password
+date +%s | sha256sum | base64 | head -c $1 ; echo
+```
+
+# set timezone
+
+```bash
+sudo timedatectl set-timezone Asia/Ho_Chi_Minh
+```
+
+# setup ssh
+
+```bash
+# copy existing ssh keys to ssh directory
+cd ~
+mkdir .ssh
+chmod 700 .ssh
+cp KEYFILE .ssh/id_rsa
+cp PUBKEYFILE .ssh/id_rsa.pub
+chmod 600 .ssh/id_rsa
+chmod 644 .ssh/id_rsa.pub
+
+# cài ssh server
+sudo apt install openssh-server
+
+# inject ssh keys
+# sau đó add public key của bạn vào server
+cd ~
+mkdir .ssh
+chmod 700 .ssh
+echo ssh-rsa PUBLICKEY > .ssh/authorized_keys
+chmod 600 .ssh/authorized_keys
+```
+
+# setup swap
+
+```bash
+# create new swap
+SWAP_NAME=/swap.img
+SWAP_NAME=/swapfile
+
+sudo fallocate -l 1G $SWAP_NAME
+sudo chmod 600 $SWAP_NAME
+sudo mkswap $SWAP_NAME
+sudo swapon $SWAP_NAME
+
+# make new swap pernament
+sudo nano /etc/fstab
+
+# add these new content
+/swap.img swap swap defaults 0 0
+# change to /swapfile if you use /swapfile above
+/swapfile swap swap defaults 0 0
+
+# remove a swap
+sudo swapoff -v $SWAP_NAME
+sudo rm $SWAP_NAME
+
+# if add to /etc/fstab so delete it also
+sudo nano /etc/fstab
+```
+
+# journalctl
+
+```bash
+# xem thông tin một service
+journalctl -u service-name.service
+```
+
+# apt
+
+```bash
+# tự động xóa các apt không cần thiết
+sudo apt-get autoremove
+sudo apt autoremove
+
+# xem địa của của một package
+whereis pkg_name
+```
+
+# tar
+
+```bash
+# zip toàn bộ thư mục, files từ thư mục .
+tar czf resource.tar.gz *	
+
+# unzip toàn bộ file vào thư mục hiện tại
+tar -xvf archive.tar.gz
+```
+
+# Navigation
 
 ```bash
 # put working directory on a stack
@@ -274,7 +563,7 @@ which
 history
 ```
 
-# GETTING HELP 
+# Getting Help
 
 ```bash
 # display the on-line manual descriptions
@@ -287,7 +576,7 @@ apropos
 man
 ```
 
-# TEXT FILES 
+# Text Files
 
 ```bash
 # concatenate files and print on the standard output
@@ -301,7 +590,7 @@ less
 nano
 ```
 
-# KILLING PROGRAMS AND LOGGING OUT
+# Kill Programs and Log out
 
 ```bash
 # kill a running command
