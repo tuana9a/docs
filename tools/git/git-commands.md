@@ -240,4 +240,7 @@ git pull [remote_name] [branch_name]
 
 # đẩy lên remote
 git push [remote_name] [branch_name]
+
+# thay đổi url remote
+git remote set-url [remote_name] [new_url]
 ```
