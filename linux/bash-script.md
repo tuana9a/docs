@@ -39,6 +39,48 @@ do
 done
 ```
 
+# builtin env variables
+
+```bash
+# print random value between 0 - 32767
+echo $RANDOM
+
+# print current shell
+echo $SHELL
+
+echo $USER
+
+echo $PWD
+
+echo $HOSTNAME
+```
+
+# Calculation
+
+```bash
+echo $(( 2 + 2 ))
+# output: 4
+
+echo $(( 2 * 3 ))
+# output: 6
+
+echo $(( 2 /3 ))
+# output: 0
+
+echo $(( 10 / 3 ))
+# output: 3
+
+echo $(( 10 % 3 ))
+# output: 1
+
+# Tips
+echo $(( $RANDOM % 100 ))
+# output: random number between 0 - 99
+```
+
+-   This only apply to arithmetic operation
+    not like command in normal $(comand...)
+
 # Examples
 
 ## add-all-rules-to-iptables from file

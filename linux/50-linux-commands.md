@@ -309,11 +309,16 @@ sudo visudo
 tuana9a ALL=(ALL) NOPASSWD:ALL
 ```
 
-# add user
+# adduser
 
 ```bash
 # quản lý người dùng
 sudo adduser USERNAME
+```
+
+# userdel
+
+```bash
 sudo userdel USERNAME
 ```
 
