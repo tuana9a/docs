@@ -37,6 +37,23 @@ cd  # ~ cd /home/tuana9a
 
 # trở về thư mục cha thư mục hiện tại
 cd ..
+
+# return to previous directory NOT parent directory
+cd -
+```
+
+# pushd
+
+```bash
+# push current directory to stack
+pushd dir_name
+```
+
+# popd
+
+```bash
+# pop directory from stack
+popd
 ```
 
 # chmod
@@ -376,6 +393,39 @@ netmask 255.255.255.0 \ #  netmask là 255.255.255.0
 up # up là bật card này lên
 ```
 
+# head
+
+```bash
+# show head portion of the file
+head text.txt
+```
+
+# tail
+
+```bash
+# show tail portion of the file with 100 lines
+tail /var/log/mongo/mongod.log -n 100
+
+# watch the change with -f flag
+# this will update the terminal in realtime
+tail -f /var/log/mongo/mongod.log
+```
+
+# less
+
+```bash
+less LICENSE
+```
+
+| type      | action            |
+| --------- | ----------------- |
+| g         | go to head file   |
+| Shift + g | go to end of file |
+| q         | quit              |
+| / + word  | search            |
+| n         | next              |
+| Shift + n | previous          |
+
 # net emulator
 
 ```bash
@@ -630,7 +680,7 @@ I keep only lines having `.java` in the filename section.<br>
 Worth mention it would match also `.javascript` filenames.<br>
 This is something I let try solving by yourself if you want.
 
-##  6. Filtering files by their name using grep
+## 6. Filtering files by their name using grep
 
 ```bash
 grep -ir nashorn ./ --include='*.java'

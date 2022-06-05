@@ -1,29 +1,22 @@
-# redirect stdout
-
-```bash
-# VD: ghi đè toàn bộ nội dung file gemdino.txt
-# nếu chưa có file sẽ tạo file mới
-echo hi Im Nguyen Quynh Anh > gemdino.txt
-
-# VD: ghi tiếp vào file "gemdino.txt" dòng text trước dấu ">>"
-# không ghi đè mà là ghi tiếp !!!
-echo hi Im Nguyen Quynh Anh >> gemdino.txt
-```
-
-# USEFUL SHORTCUTS
+# Shortcuts
 
 ![](./img/terminal-shortcut.jpeg)
 
+| key binds  | action                                  |
+| ---------- | --------------------------------------- |
+| Ctrl + D   | signal bash that there is no more input |
+| Ctrl + L   | redraw the screen                       |
+| Ctrl + `+` | make text bigger in terminal emulator   |
+| Ctrl + `-` | make text smaller in terminal emulator  |
+
 ```bash
-# signal bash that there is no more input
-Ctrl + D
+# error permission denied
+apt update
 
-# redraw the screen
-Ctrl + L
+# take previous command with !!
+sudo !!
+# this time success
 
-# make text bigger in terminal emulator
-Ctrl + +
-
-# make text smaller in terminal emulator
-Ctrl + -
+# run the 102 th command in the history
+!102
 ```
