@@ -100,15 +100,12 @@ du -sh ~
 
 # ln
 
-```bash
-# how to create a shortcut or symbol link sym link in linux
+**how to create a shortcut or symbol link sym link in linux**
 
+```bash
 # example
 ln -s /etc/letsencrypt/live/tuana9a.tech/fullchain.pem /home/ubuntu/ssl/cert.pem
 ln -s /etc/letsencrypt/live/tuana9a.tech/privkey.pem /home/ubuntu/ssl/key.pem
-
-# how to create a shortcut
-ln -s /etc/letsencrypt/live/tuana9a.tech/fullchain.pem /home/ubuntu/ssl/cert.pem
 ```
 
 # locate
@@ -177,15 +174,27 @@ nohup COMMAND >> run.log 2>&1 &
 
 # pattern log cả pid
 nohup COMMAND >> run.log 2>&1 & echo $! > run.pid
+```
 
+**python**
+
+```bash
 # example with python
 nohup python main.py >> run.log 2>&1 &
 nohup python main.py >> run.log 2>&1 & echo $! > run.pid
+```
 
+**nodejs**
+
+```bash
 # example nodejs
 nohup node dist/main.js >> run.log 2>&1 &
 nohup node dist/main.js >> run.log 2>&1 & echo $! > run.pid
+```
 
+**java**
+
+```bash
 # example with java
 nohup java -jar docs-1.0.0.jar >> run.log 2>&1 &
 nohup java -jar docs-1.0.0.jar >> run.log 2>&1 & echo $! > run.pid
@@ -428,10 +437,11 @@ less LICENSE
 
 # net emulator
 
-```bash
-# chú ý lệnh đầu cần add dev (card mạng) các lệnh sau chỉ cần update lại đống này
+**chú ý**: lệnh đầu cần add dev (card mạng) các lệnh sau chỉ cần update lại đống này
 
-# delay
+## delay
+
+```bash
 sudo tc qdisc add dev ens38 root netem delay 100ms
 
 sudo tc qdisc change dev ens38 root netem delay 100ms
@@ -439,46 +449,41 @@ sudo tc qdisc change dev ens38 root netem delay 100ms
 sudo tc qdisc change dev ens38 root netem delay 100ms 10ms
 
 sudo tc qdisc change dev ens38 root netem delay 100ms 10ms 25%
+```
 
-# packet loss
+## packet loss
+
+```bash
 sudo tc qdisc change dev ens38 root netem loss 0.1%
 
 sudo tc qdisc change dev ens38 root netem loss 0.3% 25%
 
 sudo tc qdisc change dev ens38 root netem loss 20% 25%
-
-# other
-sudo tc qdisc change dev ens38 root netem duplicate 40%
-
-sudo tc qdisc change dev ens38 root netem corrupt 40%
-
-sudo tc qdisc change dev ens38 root netem reorder 5% gap 5 delay 10ms
-
-# khi xong rồi để hủy các giả lập trước đó chỉ cần remove chúng khỏi emulator
-sudo tc qdisc del dev ens38 root
 ```
 
-# how to run command in background
+## duplicate
 
 ```bash
-# pattern không log pid
-nohup COMMAND >> run.log 2>&1 &
+sudo tc qdisc change dev ens38 root netem duplicate 40%
+```
 
-# pattern log cả pid
-nohup COMMAND >> run.log 2>&1 & echo $! > run.pid
+## corrupt
 
-# example with python
-nohup python main.py >> run.log 2>&1 &
-nohup python main.py >> run.log 2>&1 & echo $! > run.pid
+```bash
+sudo tc qdisc change dev ens38 root netem corrupt 40%
+```
 
-# example nodejs
-nohup node dist/main.js >> run.log 2>&1 &
-nohup node dist/main.js >> run.log 2>&1 & echo $! > run.pid
+## reorder
 
-# example with java
-nohup java -jar docs-1.0.0.jar >> run.log 2>&1 &
-nohup java -jar docs-1.0.0.jar >> run.log 2>&1 & echo $! > run.pid
-PORT=4000 ADDRESS=127.0.0.1 nohup java -jar docs-1.0.0.jar >> run.log 2>&1 & echo $! > run.pid
+```bash
+sudo tc qdisc change dev ens38 root netem reorder 5% gap 5 delay 10ms
+```
+
+## reset
+
+```bash
+# khi xong rồi để hủy các giả lập trước đó chỉ cần remove chúng khỏi emulator
+sudo tc qdisc del dev ens38 root
 ```
 
 # cronjob
@@ -519,57 +524,7 @@ date +%s | sha256sum | base64 | head -c $1 ; echo
 sudo timedatectl set-timezone Asia/Ho_Chi_Minh
 ```
 
-# setup ssh
 
-```bash
-# copy existing ssh keys to ssh directory
-cd ~
-mkdir .ssh
-chmod 700 .ssh
-cp KEYFILE .ssh/id_rsa
-cp PUBKEYFILE .ssh/id_rsa.pub
-chmod 600 .ssh/id_rsa
-chmod 644 .ssh/id_rsa.pub
-
-# cài ssh server
-sudo apt install openssh-server
-
-# inject ssh keys
-# sau đó add public key của bạn vào server
-cd ~
-mkdir .ssh
-chmod 700 .ssh
-echo ssh-rsa PUBLICKEY > .ssh/authorized_keys
-chmod 600 .ssh/authorized_keys
-```
-
-# setup swap
-
-```bash
-# create new swap
-SWAP_NAME=/swap.img
-SWAP_NAME=/swapfile
-
-sudo fallocate -l 1G $SWAP_NAME
-sudo chmod 600 $SWAP_NAME
-sudo mkswap $SWAP_NAME
-sudo swapon $SWAP_NAME
-
-# make new swap pernament
-sudo nano /etc/fstab
-
-# add these new content
-/swap.img swap swap defaults 0 0
-# change to /swapfile if you use /swapfile above
-/swapfile swap swap defaults 0 0
-
-# remove a swap
-sudo swapoff -v $SWAP_NAME
-sudo rm $SWAP_NAME
-
-# if add to /etc/fstab so delete it also
-sudo nano /etc/fstab
-```
 
 # journalctl
 
@@ -669,11 +624,11 @@ grep -ir nashorn ./ | grep "^[^:]*\.java"
 
 **note**: Unless you specify the -F option, grep assumes the search pattern is a regular expression.
 
--   `^` the start of the line
--   `[^:]*` followed by a sequence of any characters except a colon
--   `\.` followed by a dot (the dot has a special meaning in regex,<br>
-    so I had to protect it with a backslash to express I want a literal match)
--   java and followed by the four letters “java.”
+- `^` the start of the line
+- `[^:]*` followed by a sequence of any characters except a colon
+- `\.` followed by a dot (the dot has a special meaning in regex,<br>
+  so I had to protect it with a backslash to express I want a literal match)
+- java and followed by the four letters “java.”
 
 In practice, since grep will use a colon to separate the filename from the context,<br>
 I keep only lines having `.java` in the filename section.<br>
