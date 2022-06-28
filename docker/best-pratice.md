@@ -9,9 +9,48 @@ vì có thể lần build tiếp theo phiên bản latest sẽ break thing
 việc này vừa tăng khả năng luân chuyển image, build time <br>
 hơn thế gián tiếp giảm khả năng bị hack do số package giảm đi
 
+## multi-stage build
+
+cực kì hữu dụng do có rất nhiều app sau khi build <br>
+thì không cần dùng các tool trước đó nữa
+
+ví dụ với java servlet <br>
+sau khi đóng gói với maven thì chỉ cần file war là chạy app <br>
+cỏn maven thì vứt được
+
+```dockerfile
+# bước đầu chỉ cần tải maven và build file war
+FROM maven AS build
+WORKDIR /app
+COPY . .
+RUN mvn package
+
+# bước 2 copy file war ở bước 1 và cho vào tomcat image
+# để ý --from là build ứng với alias maven ở trên
+FROM tomcat:10.0-jdk8-openjdk-slim
+COPY --from=build /app/target/file.war /usr/local/tomcat/webapps 
+```
+
+react thi cung tuong tu
+
+```dockerfile
+# đại loại là build
+FROM node:12 AS build
+WORKDIR /app
+COPY package* yarn.lock ./
+RUN yarn install
+COPY public ./public
+COPY src ./src
+RUN yarn run build
+
+# sau đó copy toàn bộ file build vào image cuối
+FROM nginx:alpine
+COPY --from=build /app/build /usr/share/nginx/html
+```
+
 # cố gắng sử dụng docker caching càng nhiều càng tốt
 
-[xem them](./docker-layers-explain.md)
+[docker-layers-explain.md](./docker-layers-explain.md)
 
 khi build image sẽ có các layer không thay đổi như
 - install dependency

@@ -57,18 +57,18 @@ docker inspect \
 version: "2"
 
 services:
-    webserver:
-        image: nginx
-        container_name: web-server
-        networks:
-            customnetwork:
-                ipv4_address: 172.20.0.10
+  webserver:
+    image: nginx
+      container_name: web-server
+      networks:
+        customnetwork:
+          ipv4_address: 172.20.0.10
 
 networks:
-    customnetwork: # name of docker network
-        ipam:
-            config:
-                - subnet: 172.20.0.0/16
+  customnetwork: # name of docker network
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
 ```
 
 # mongodb
@@ -90,16 +90,16 @@ sudo docker run \
 version: "3.1"
 
 services:
-    mongo:
-        container_name: mongo
-        image: mongo:4.4.8
+  mongo:
+    container_name: mongo
+      image: mongo:4.4.8
         command:
-            - --config
-            - /etc/mongod.conf
+          - --config
+          - /etc/mongod.conf
         volumes:
-            - /home/tuana9a/mongod.container.conf:/etc/mongod.conf
+          - /home/tuana9a/mongod.container.conf:/etc/mongod.conf
         ports:
-            - 27017:27017
+          - 27017:27017
 ```
 
 # mysql
