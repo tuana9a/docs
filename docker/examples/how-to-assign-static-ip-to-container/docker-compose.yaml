@@ -1,0 +1,15 @@
+version: "2"
+
+services:
+  webserver:
+    image: nginx
+    networks:
+      customnetwork:
+        ipv4_address: 172.20.0.10
+
+networks:
+  customnetwork:
+    # name of docker network
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

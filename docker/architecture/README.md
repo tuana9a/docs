@@ -19,7 +19,10 @@ cái này đã có trên linux từ rất lâu
 
 # container image là gì
 
-do container muốn hoạt động được như một "máy ảo" thì cần phải có filesystem <br>
-và filesystem này phải khác với filesystem của máy host cũng như các container khác <br>
-từ đó cần một hệ thống file system rành riêng cho container đó <br>
-đó chính là container image chứa toàn bộ source, binary để container có thể chạy được <br>
+do container muốn hoạt động được như một "máy ảo" thì cần phải có filesystem
+
+và filesystem này phải khác với filesystem của máy host cũng như các container khác
+
+từ đó cần một hệ thống file system rành riêng cho container đó
+
+đó chính là container image chứa toàn bộ source, binary để container có thể chạy được
