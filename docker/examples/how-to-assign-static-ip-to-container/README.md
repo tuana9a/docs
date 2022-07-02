@@ -1,21 +1,33 @@
 # how to assign static ip to container
 
-[link tham khảo](https://www.cloudsavvyit.com/14508/how-to-assign-a-static-ip-to-a-docker-container/)
+## 1. with inline cmd
+
+create new separate network
 
 ```bash
-docker network create --subnet=172.20.0.0/16 test1
+docker network create --subnet=172.20.0.0/16 customnetwork
 # trong đó
 #   127.20.0.0/16 là card mạng + subnet
-#   test1 là tên network mà bạn muốn tạo
-
-docker run --net test1 --ip 172.20.0.3 --name test2 -d mongo:5.0
-
-# kiểm tra lại ip của container xem có chuẩn không
-docker inspect \
-    -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' \
-    name_or_id
+#   customnetwork là tên network mà bạn muốn tạo
 ```
 
-## docker-compose
+attach new container to network above
 
-[`docker-compose.yaml`](./docker-compose.yaml)
+```bash
+docker run --net customnetwork --ip 172.20.0.9 -d mongo:5.0
+```
+
+let's check it
+
+```bash
+# kiểm tra lại ip của container xem có chuẩn không
+docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' name_or_id
+```
+
+## 2. with docker-compose
+
+see [`docker-compose.yaml`](./docker-compose.yaml)
+
+# Refs
+
+[https://www.cloudsavvyit.com/14508/how-to-assign-a-static-ip-to-a-docker-container/](https://www.cloudsavvyit.com/14508/how-to-assign-a-static-ip-to-a-docker-container/)
