@@ -1,1 +1,0 @@
-openssl req -new -subj "/C=VN/ST=HN/O=TechPro Inc./CN=techpro.local" -x509 -sha256 -days 365 -key rootCA.key -out rootCA.crt

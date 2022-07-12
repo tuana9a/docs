@@ -4,55 +4,78 @@ Thanks **[Bui Manh Truong](https://github.com/mtb-hust)** and **[TechPro.vn](htt
 
 # Steps to create your SSL with your own CA (Self Sign Certificate)
 
-- ## create ca key
+## 1. create ca key
 
-  ```bash
-  openssl genrsa -out rootCA.key 4096
-  ```
+```bash
+openssl genrsa -out rootCA.key 4096
+```
 
-- ## create ca cert
+## 2. create ca cert
 
-  ```bash
-  openssl req -new -subj "/C=VN/ST=HN/O=Tech Pro Corp/CN=techpro.local" -x509 -sha256 -days 365 -key rootCA.key -out rootCA.crt
-  ```
+```bash
+openssl req -new \
+-subj "/C=VN/ST=HN/O=TechPro/CN=TechPro" -x509 -sha256 \
+-days 365 \
+-key rootCA.key \
+-out rootCA.crt
+```
 
-- ## create server key
+## 3. create server key
 
-  ```bash
-  openssl genrsa -out server.key 4096
-  ```
+```bash
+openssl genrsa -out server.key 4096
+```
 
-- ## create cert request
+## 4. create cert request
 
-  ```bash
-  openssl req -new -sha256 -subj "/CN=Tech Pro AI" -key server.key -out server.csr
-  ```
+```bash
+openssl req -new -sha256 \
+-subj "/CN=TechPro AI" \
+-key server.key \
+-out server.csr
+```
 
-- ## create cert
+## 5. create cert
 
-  ```bash
-  echo "subjectAltName=DNS.1:techpro.local,DNS.2:*.techpro.local" > extfile.cnf
+```bash
+echo "subjectAltName=DNS.1:techpro-ai.local,DNS.2:*.techpro-ai.local" > extfile.cnf
 
-  openssl x509 -req -sha256 -days 365 -in server.csr -CA rootCA.crt -CAkey rootCA.key -out server.crt -extfile extfile.cnf -CAcreateserial
-  ```
+openssl x509 -req -sha256 \
+-days 365 \
+-in server.csr \
+-CA rootCA.crt \
+-CAkey rootCA.key \
+-out server.crt \
+-extfile extfile.cnf -CAcreateserial
 
-- ## (optional) create full chain cert
+# or
 
-  ```bash
-  cat server.crt rootCA.crt > fullchain.crt
-  ```
+openssl x509 -req -sha256 \
+-days 365 \
+-in server.csr \
+-CA rootCA.crt \
+-CAkey rootCA.key \
+-out server.crt \
+-extfile <(printf "subjectAltName=IP.1:172.19.0.11,IP.2:172.19.0.12,IP.3:172.19.0.13") -CAcreateserial
+```
 
-- ## (optional) import CA to your operating system
+## 6. (optional) create full chain cert
 
-  ```bash
-  # remove old CA (if has)
-  sudo rm /usr/local/share/ca-certificates/ca.crt
-  sudo update-ca-certificates -f
+```bash
+cat server.crt rootCA.crt > fullchain.crt
+```
 
-  # copy new ca to destination
-  sudo cp rootCA.crt /usr/local/share/ca-certificates/ca.crt
-  sudo update-ca-certificates
-  ```
+## 7. (optional) import CA to your operating system
+
+```bash
+# remove old CA (if has)
+sudo rm /usr/local/share/ca-certificates/ca.crt
+sudo update-ca-certificates -f
+
+# copy new ca to destination
+sudo cp rootCA.crt /usr/local/share/ca-certificates/ca.crt
+sudo update-ca-certificates
+```
 
 # Bonus
 
@@ -85,7 +108,6 @@ So after import your CA to you operating system. You may also need to do that ag
 - result
 
   ![](./img/Screenshot%20from%202022-06-29%2020-37-30.png)
-
 
 ## Firefox
 
