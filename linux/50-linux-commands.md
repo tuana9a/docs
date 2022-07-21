@@ -524,8 +524,6 @@ date +%s | sha256sum | base64 | head -c $1 ; echo
 sudo timedatectl set-timezone Asia/Ho_Chi_Minh
 ```
 
-
-
 # journalctl
 
 ```bash
@@ -557,6 +555,22 @@ tar -xvf archive.tar.gz
 # grep
 
 [https://linuxhandbook.com/grep-command-examples/](https://linuxhandbook.com/grep-command-examples/)
+
+# dpkg
+
+locate installed package
+
+```bash
+dpkg -L package-name
+```
+
+install .deb package
+
+```bash
+dpkg -i docker-debs/docker-ce-cli_20.10.14~3-0~ubuntu-bionic_amd64.deb
+dpkg -i docker-debs/containerd.io_1.5.10-1_amd64.deb
+dpkg -i docker-debs/docker-ce_20.10.13~3-0~ubuntu-bionic_amd64.deb
+```
 
 ## 1. Find all occurrences of a string (basic usage)
 
