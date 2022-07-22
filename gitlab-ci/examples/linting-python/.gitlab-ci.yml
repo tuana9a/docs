@@ -1,0 +1,13 @@
+image: python:3.8.13-slim-bullseye
+
+test:
+  stage: test
+  image: python:3.8.13-slim-bullseye
+  before_script:
+    - python --version
+    - pip install virtualenv
+    - virtualenv venv
+    - source venv/bin/activate
+  script:
+    - pip install pyflakes==2.4.0
+    - pyflakes src/

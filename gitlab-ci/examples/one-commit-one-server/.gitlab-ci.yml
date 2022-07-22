@@ -1,0 +1,47 @@
+# do not use "latest" here, if you want this to work in the future
+image: docker:19.03
+
+stages:
+  - test
+  - build
+  - run
+  - deploy
+
+test:
+  stage: test
+  image: python:3.8.13-slim-bullseye
+  before_script:
+    - python --version # For debugging
+    - pip install virtualenv
+    - virtualenv venv
+    - source venv/bin/activate
+  script:
+    - pip install pyflakes==2.4.0
+    - pyflakes src/
+
+build_image:
+  stage: build
+  needs: []
+  before_script:
+    - docker info
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:latest || true
+    - docker build --cache-from $CI_REGISTRY_IMAGE:latest --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA --tag $CI_REGISTRY_IMAGE:latest .
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker push $CI_REGISTRY_IMAGE:latest
+
+run_container:
+  stage: run
+  needs:
+    - build_image
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  before_script:
+    - docker info
+    # previously login-ed in stage "build" but in general relogin not so affect the performant
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - docker run -d --name $CI_PROJECT_NAME-$CI_COMMIT_SHORT_SHA $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - CONTAINER_IP=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $CI_PROJECT_NAME-$CI_COMMIT_SHORT_SHA)
+    - echo $CONTAINER_IP
