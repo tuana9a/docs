@@ -1,4 +1,13 @@
-# Commands
+_add **sudo** if needed_
+
+# Create certs
+
+```bash
+certbot certonly \
+-d tuana9a.tech -d calendar.tuana9a.tech
+```
+
+wildcard
 
 ```bash
 certbot certonly \
@@ -6,10 +15,14 @@ certbot certonly \
 -d tuana9a.tech -d *.tuana9a.tech
 ```
 
-add sudo if needed
+# Display certs
 
 ```bash
-sudo certbot certonly \
---dns-cloudflare --dns-cloudflare-credentials cloudflare.ini \
--d tuana9a.tech -d *.tuana9a.tech
+certbot certificates
+```
+
+# Revoke and delete certs
+
+```bash
+certbot revoke --cert-name tuana9a.tech
 ```
