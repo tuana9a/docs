@@ -2,7 +2,13 @@
 
 ```bash
 ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'
+```
+or
+```bash
 ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'
+```
+or
+```bash
 ifconfig wlan0 | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'
 ```
 
@@ -18,9 +24,8 @@ grep nashorn package.json
 ```bash
 # Ex: Search for any file in npm/test that ends with .js
 # that has nashorn with case insensitive
-grep -i nashorn npm/test/*.js
-
 # so "Nashorn" still match
+grep -i nashorn npm/test/*.js
 ```
 
 # Find all the non-matching files
@@ -35,14 +40,13 @@ grep -iL nashorn npm/test/*
 
 **note**: cái này **CÓ** recursive tìm trong folder con<br>
 nhưng **KHÔNG** tìm được các hidden files VD: `.env`, `.git`<br>
-do vậy xem [phần 4](#4-finding-patterns-into-hidden-files-and-recursively-into-sub-directories)
+do vậy xem [phần 4](#finding-patterns-into-hidden-files-and-recursively-into-sub-directories)
 
 ```bash
 # Ex: Search for all files that don't have the word "nashorn"
 # in npm/ and It sub directories
-grep -iL nashorn npm/**/*
-
 # will search in "npm/" and "npm/test/" and "npm/module"
+grep -iL nashorn npm/**/*
 ```
 
 # Finding patterns into hidden files and recursively into sub-directories
@@ -50,14 +54,19 @@ grep -iL nashorn npm/**/*
 ```bash
 # This is not efficient as it will spawn a new grep process for each file
 find npm/test/ -type f -exec grep -iL nashorn \{} \;
+```
 
+```bash
 # This may have issues with filenames containing space-like characters
 grep -iL nashorn $(find npm/test/ -type f)
+```
 
+```bash
 # -r for recursive include hidden ones
 grep -irL nashorn npm/test/
+```
 
-#
+```bash
 grep -irL nashorn npm/
 ```
 
@@ -95,16 +104,24 @@ grep -ir nashorn ./ --include='*.java'
 # put working directory on a stack
 pushd
 popd
+```
 
+```bash
 # determine file type
 file
+```
 
+```bash
 # update database for locate
 updatedb
+```
 
+```bash
 # locate a command
 which
+```
 
+```bash
 # display bash command history
 history
 ```
@@ -114,10 +131,14 @@ history
 ```bash
 # display the on-line manual descriptions
 whatis
+```
 
+```bash
 # search the manual page names and descriptions
 apropos
+```
 
+```bash
 # an interface to the on-line reference manuals
 man
 ```
@@ -127,11 +148,15 @@ man
 ```bash
 # concatenate files and print on the standard output
 cat file1 file2 file3 ...
+```
 
+```bash
 # file perusal filter for crt viewing
 more
 less
+```
 
+```bash
 # command line text editor
 nano
 ```
@@ -141,10 +166,14 @@ nano
 ```bash
 # kill a running command
 Ctrl + C
+```
 
+```bash
 # kill processes by name
 killall
+```
 
+```bash
 # log out of bash
 exit
 ```

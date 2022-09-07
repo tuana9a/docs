@@ -4,22 +4,33 @@ Trong terminal dấu or ký tự "\*" trong câu lệnh Ubuntu cần thêm "\" t
 
 # apt
 
-```bash
-# tự động xóa các apt không cần thiết
-sudo apt-get autoremove
-sudo apt autoremove
+tự động xóa các apt không cần thiết
 
-# xem địa của của một package
+```bash
+sudo apt-get autoremove
+```
+
+```bash
+sudo apt autoremove
+```
+
+xem location của của một package
+
+```bash
 whereis pkg_name
 ```
 
 # cat
 
-```bash
-# show nội dung của FILEPATH
-cat FILEPATH
+show nội dung của FILEPATH
 
-# VD: xem nội dung của file gemdino.txt
+```bash
+cat FILEPATH
+```
+
+VD: xem nội dung của file gemdino.txt
+
+```bash
 cat gemdino.txt
 ```
 
@@ -44,15 +55,17 @@ cd -
 
 # pushd
 
+push current directory to stack
+
 ```bash
-# push current directory to stack
 pushd dir_name
 ```
 
 # popd
 
+pop directory from stack
+
 ```bash
-# pop directory from stack
 popd
 ```
 
@@ -60,41 +73,55 @@ popd
 
 ![](./img/chmod.png)
 
-```bash
-# change permissions of a file
-chmod
+change permissions of a file
 
-# lam cho file co the execute duoc
+```bash
+chmod
+```
+
+make file executable
+
+```bash
 chmod +x filename
 ```
 
 # copy
 
-```bash
-# copy file từ chỗ này qua chỗ khác
-cp OLDPATH NEWPATH
+copy file từ chỗ này qua chỗ khác
 
-# VD:
+```bash
+cp OLDPATH NEWPATH
+```
+
+```bash
 cp gemdino.txt /home/tuana9a/test
 ```
 
 # df
 
-```bash
-# phân tích bộ nhớ của các partitions (phân vùng) đơn vị KB
-df
+phân tích bộ nhớ của các partitions (phân vùng) đơn vị KB
 
-# đơn vị MB
+```bash
+df
+```
+
+đơn vị MB
+
+```bash
 df -m
 ```
 
 # du
 
-```bash
-# xem thong tin kich thuoc file
-du -h
+xem thong tin kich thuoc file
 
-# VD: xem kích thước của thư mục người dùng
+```bash
+du -h
+```
+
+VD: xem kích thước của thư mục người dùng
+
+```bash
 du -sh ~
 ```
 
@@ -102,232 +129,265 @@ du -sh ~
 
 **how to create a shortcut or symbol link sym link in linux**
 
+example
+
 ```bash
-# example
 ln -s /etc/letsencrypt/live/tuana9a.tech/fullchain.pem /home/ubuntu/ssl/cert.pem
+```
+
+```bash
 ln -s /etc/letsencrypt/live/tuana9a.tech/privkey.pem /home/ubuntu/ssl/key.pem
 ```
 
 # locate
 
+sẽ locate đường dẫn file mà bạn muốn tìm ko kể viết hoa hay viết thường
+
 ```bash
-# sẽ locate đường dẫn file mà bạn muốn tìm ko kể viết hoa hay viết thường
-# giống như search trên window
 locate FILENAME
+```
 
-# VD: sẽ tìm file mà tên chứa "gemdino"
+VD: sẽ tìm file mà tên chứa "gemdino"
+
+```bash
 locate -i gemdino
+```
 
-# VD: tìm file chứa "gem" và "dino"
+VD: tìm file chứa "gem" và "dino"
+
+```bash
 locate -i *gem*dino
 ```
 
 # ls
 
+show file ở thự mục hiện tại (ko hiện file ẩn)
+
 ```bash
-# show file ở thự mục hiện tại (ko hiện file ẩn)
 ls
+```
 
-# show cả file ẩn
+show cả file ẩn
+
+```bash
 ls -a
+```
 
-# show dạng list
+show dạng list
+
+```bash
 ls -l
 ```
 
 # mkdir
 
+tạo thư mục ở thư mục hiện tại
+
 ```bash
-# tạo thư mục ở thư mục hiện tại
 mkdir FOLDERNAME
 ```
 
 # mv
 
-```bash
-# di chuyển file từ chỗ này qua chỗ khác
-# có ghi đè
-mv OLDPATH NEWPATH
+di chuyển file từ chỗ này qua chỗ khác **có ghi đè** neu ton tai
 
-# có thể dùng để đổi tên file luôn
+```bash
+mv OLDPATH NEWPATH
+```
+
+có thể dùng để đổi tên file luôn
+
+```bash
 mv OLDNAME NEWNAME
 ```
 
 # netplan
 
+sửa config network lúc startup
+
+thêm file yaml trong netplan
+có thể đặt tên bất kì
+
 ```bash
-# sửa config network lúc startup
-
-# thêm file yaml trong netplan
-# có thể đặt tên bất kì
 sudo vi /etc/netplan/install.yaml
+```
 
-# sau đó apply các config như trên
+```bash
 sudo netplan apply
 ```
 
 # nohup
 
-```bash
-# pattern không log pid
-nohup COMMAND >> run.log 2>&1 &
+không log pid
 
-# pattern log cả pid
+```bash
+nohup COMMAND >> run.log 2>&1 &
+```
+
+pattern log cả pid
+
+```bash
 nohup COMMAND >> run.log 2>&1 & echo $! > run.pid
 ```
 
 **python**
 
 ```bash
-# example with python
 nohup python main.py >> run.log 2>&1 &
+```
+
+```bash
 nohup python main.py >> run.log 2>&1 & echo $! > run.pid
 ```
 
 **nodejs**
 
 ```bash
-# example nodejs
 nohup node dist/main.js >> run.log 2>&1 &
+```
+
+```bash
 nohup node dist/main.js >> run.log 2>&1 & echo $! > run.pid
 ```
 
 **java**
 
 ```bash
-# example with java
 nohup java -jar docs-1.0.0.jar >> run.log 2>&1 &
+```
+
+```bash
 nohup java -jar docs-1.0.0.jar >> run.log 2>&1 & echo $! > run.pid
+```
+
+```bash
 PORT=4000 ADDRESS=127.0.0.1 nohup java -jar docs-1.0.0.jar >> run.log 2>&1 & echo $! > run.pid
 ```
 
 # passwd
 
-```bash
-# đổi password cho user hiện tại
-passwd
+đổi password cho user hiện tại
 
-# đổi pass cho root
+```bash
+passwd
+```
+
+đổi pass cho root
+
+```bash
 sudo passwd
 ```
 
 # pwd
 
+print name of current working directory
+
 ```bash
-# print name of current/working directory
 pwd
-# VD: you are in /home/ubuntu
-pwd
-# output will be /home/tuana9a/
 ```
 
 # rm
 
-```bash
-# xóa file
-rm NAME
+xóa file
 
-# xóa thư mục giống "rmdir"
+```bash
+rm NAME
+```
+
+xóa thư mục giống "rmdir"
+
+```bash
 rm -r NAME
 ```
 
 # rmdir
 
+xóa thư mục bạn muốn, -r để xóa đệ quy (các thư mục con)
+
 ```bash
-# xóa thư mục bạn muốn, -r để xóa đệ quy (các thư mục con)
 rmdir -r NAME
 ```
 
 # su
 
-```bash
-# Switch User
-# change user ID or become another user
-su
+Switch User
+change user ID or become another user
 
-# chuyển sang user mớI
+```bash
+su
+```
+
+chuyển sang user mớI
+
+```bash
 su USERNAME
+```
 
 # mặc định sẽ chọn root
+
+```bash
 su
 ```
 
 # sudo
 
-```bash
-# làm một lệnh gì đó với quyền root
-sudo COMMAND
+làm một lệnh gì đó với quyền root
 
-# vào root mode
+```bash
+sudo COMMAND
+```
+
+vào root mode
+
+```bash
 sudo bash
+```
+
+```bash
+sudo su
 ```
 
 # touch
 
-```bash
-# tạo một file text trắng
-touch FILE_NAME
+tạo một file text trắng
 
-# VD:
-# tạo file text gemdino.txt trắng
+```bash
+touch FILE_NAME
+```
+
+VD: tạo file text gemdino.txt trắng
+
+```bash
 touch gemdino.txt
 ```
 
 # users
 
+print the user names of users currently logged in
+
 ```bash
-# print the user names of users currently logged in
 users
 ```
 
 # id
 
+print real and effective user and group IDs
+
 ```bash
-# print real and effective user and group IDs
 id
-```
-
-# passwd
-
-```bash
-# đổi password cho user hiện tại
-passwd
-
-# đổi pass cho root
-sudo passwd
-```
-
-# su
-
-```bash
-# Switch User
-# change user ID or become another user
-su
-
-# chuyển sang user mớI
-su USERNAME
-
-# mặc định sẽ chọn root
-su
-```
-
-# sudo
-
-```bash
-# làm một lệnh gì đó với quyền root
-sudo COMMAND
-
-# vào root mode
-sudo bash
 ```
 
 # sudo visudo
 
-```bash
-# chỉnh sửa các thứ liên quan tới quền
-sudo visudo
+chỉnh sửa các thứ liên quan tới quền
 
-# cấu hình
+```bash
+sudo visudo
+```
+
+content
+
+```conf
 %sudo ALL=(ALL:ALL) ALL   # mặc định của ubuntu
 %sudo ALL=(ALL:ALL) ALL   # không cần nhập password
 
@@ -337,8 +397,9 @@ tuana9a ALL=(ALL) NOPASSWD:ALL
 
 # adduser
 
+quản lý người dùng
+
 ```bash
-# quản lý người dùng
 sudo adduser USERNAME
 ```
 
@@ -350,74 +411,90 @@ sudo userdel USERNAME
 
 # gpasswd
 
+xoá người dùng khỏi group
+
 ```bash
-# xoá người dùng khỏi group
 gpasswd -d USERNAME GROUPNAME
 ```
 
 # groupadd
 
+tao group moi
+
 ```bash
-# tao group moi
 sudo groupadd GROUPNAME
 ```
 
 # groupdel
 
+xoa group
+
 ```bash
-# xoa group
 sudo groupdel GROUPNAME
 ```
 
 # usermod
 
+them user vao group
+
 ```bash
-# them user vao group
 sudo usermod -aG GROUPNAME USERNAME
-```
-
-# netplan
-
-```bash
-# sửa config network lúc startup
-
-# thêm file yaml trong netplan
-# có thể đặt tên bất kì
-sudo vi /etc/netplan/install.yaml
-
-# sau đó apply các config như trên
-sudo netplan apply
 ```
 
 # ifconfig
 
-```bash
-# config interface card mạng cho nó chạy nè
-ifconfig eth0 172.16.25.125 netmask 255.255.255.224 broadcast 172.16.25.63
+config interface card mạng cho nó chạy nè
 
-# VD:
+```bash
+ifconfig eth0 172.16.25.125 netmask 255.255.255.224 broadcast 172.16.25.63
+```
+
+VD:
+
+```bash
 sudo ifconfig enp0s8 \ #  card mạng enp0s8
 192.168.200.3 \ #  địa chỉ cho card này 192.168.200.3
 netmask 255.255.255.0 \ #  netmask là 255.255.255.0
 up # up là bật card này lên
 ```
 
-# head
+print current ip address
 
 ```bash
-# show head portion of the file
+ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'
+```
+
+```bash
+ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'
+```
+
+```bash
+ifconfig wlan0 | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'
+```
+
+# head
+
+show head portion of the file
+
+```bash
 head text.txt
 ```
 
 # tail
 
-```bash
-# show tail portion of the file with 100 lines
-tail /var/log/mongo/mongod.log -n 100
+show tail portion of the file with 100 lines
 
-# watch the change with -f flag
-# this will update the terminal in realtime
+```bash
+tail /var/log/mongo/mongod.log -n 100
+```
+
+watch the change with -f flag
+
+this will update the terminal in realtime
+
+```bash
 tail -f /var/log/mongo/mongod.log
+
 ```
 
 # less
@@ -439,15 +516,21 @@ less LICENSE
 
 **chú ý**: lệnh đầu cần add dev (card mạng) các lệnh sau chỉ cần update lại đống này
 
-## delay
+delay
 
 ```bash
 sudo tc qdisc add dev ens38 root netem delay 100ms
+```
 
+```bash
 sudo tc qdisc change dev ens38 root netem delay 100ms
+```
 
+```bash
 sudo tc qdisc change dev ens38 root netem delay 100ms 10ms
+```
 
+```bash
 sudo tc qdisc change dev ens38 root netem delay 100ms 10ms 25%
 ```
 
@@ -455,9 +538,13 @@ sudo tc qdisc change dev ens38 root netem delay 100ms 10ms 25%
 
 ```bash
 sudo tc qdisc change dev ens38 root netem loss 0.1%
+```
 
+```bash
 sudo tc qdisc change dev ens38 root netem loss 0.3% 25%
+```
 
+```bash
 sudo tc qdisc change dev ens38 root netem loss 20% 25%
 ```
 
@@ -481,41 +568,31 @@ sudo tc qdisc change dev ens38 root netem reorder 5% gap 5 delay 10ms
 
 ## reset
 
+khi xong rồi để hủy các giả lập trước đó chỉ cần remove chúng khỏi emulator
+
 ```bash
-# khi xong rồi để hủy các giả lập trước đó chỉ cần remove chúng khỏi emulator
 sudo tc qdisc del dev ens38 root
 ```
 
 # cronjob
 
+mở editor để edit file này :V
+
 ```bash
-# mở editor để edit file này :V
 crontab -e
-
-# sau đó sửa theo format sau ref: https://crontab.guru/
-# m h dom mon dow command
-# VD:
-*/15 * * * * /bin/bash /home/tuana9a/somebashscript.sh
-
-# save file lại và restart cronjob
-
-# ubuntu
-systemctl restart cron
-
-# fedora
-systemctl restart crond
 ```
 
-# how to generate password
+sau đó sửa theo format sau ref: https://crontab.guru/
+
+```conf
+# m h dom mon dow command
+*/15 * * * * /bin/bash /home/tuana9a/somebashscript.sh
+```
+
+save file lại và restart cronjob
 
 ```bash
-# $1 is param for length of password
-date +%s | sha256sum | base64 | head -c $1 ; echo
-
-# === or ===
-
-# $1 is param for length of password
-date +%s | sha256sum | base64 | head -c $1 ; echo
+systemctl restart cron # or "systemctl restart crond"
 ```
 
 # set timezone
@@ -526,29 +603,41 @@ sudo timedatectl set-timezone Asia/Ho_Chi_Minh
 
 # journalctl
 
+xem thông tin một service
+
 ```bash
-# xem thông tin một service
 journalctl -u service-name.service
 ```
 
 # apt
 
-```bash
-# tự động xóa các apt không cần thiết
-sudo apt-get autoremove
-sudo apt autoremove
+tự động xóa các apt không cần thiết
 
-# xem địa của của một package
+```bash
+sudo apt-get autoremove
+```
+
+```bash
+sudo apt autoremovebbv
+```
+
+xem location của của một package
+
+```bash
 whereis pkg_name
 ```
 
 # tar
 
-```bash
-# zip toàn bộ thư mục, files từ thư mục .
-tar czf resource.tar.gz *
+zip toàn bộ thư mục, files từ thư mục .
 
-# unzip toàn bộ file vào thư mục hiện tại
+```bash
+tar czf resource.tar.gz *
+```
+
+unzip toàn bộ file vào thư mục hiện tại
+
+```bash
 tar -xvf archive.tar.gz
 ```
 
@@ -568,15 +657,4 @@ install .deb package
 
 ```bash
 dpkg -i docker-debs/docker-ce-cli_20.10.14~3-0~ubuntu-bionic_amd64.deb
-dpkg -i docker-debs/containerd.io_1.5.10-1_amd64.deb
-dpkg -i docker-debs/docker-ce_20.10.13~3-0~ubuntu-bionic_amd64.deb
 ```
-
-# ifconfig
-
-```bash
-ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'
-ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'
-ifconfig wlan0 | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'
-```
-

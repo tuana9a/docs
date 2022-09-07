@@ -12,13 +12,13 @@ tương tác với hệ điều hành để trả ra output cho bạn
 một hệ điều hành có thể có nhiều shell<br>
 VD:
 
--   `bash`
-    -   hoặc `sh`
-    -   một shell phổ biến nhất hiện tại, là mặc định trên nhiều hệ điều hành
--   `zsh`
-    -   một phiên bản tốt hơn của sh ?
--   `fish`
-    -   autocompletion, syntax hightlight
+- `bash`
+  - hoặc `sh`
+  - một shell phổ biến nhất hiện tại, là mặc định trên nhiều hệ điều hành
+- `zsh`
+  - một phiên bản tốt hơn của sh ?
+- `fish`
+  - autocompletion, syntax hightlight
 
 mỗi shell sẽ có syntax và các chức năng khá nhau
 
@@ -45,8 +45,8 @@ link to /usr/bin
 
 contains file that are used to boot the system, includes
 
--   ram
--   boot loader
+- ram
+- boot loader
 
 ### `/dev`
 
@@ -54,8 +54,8 @@ contains device **file** that plug in our system
 
 It could be:
 
--   virtual device
--   physical device
+- virtual device
+- physical device
 
 ### `/home`
 
@@ -101,8 +101,8 @@ contains root user home directory,
 
 contains infomation at boot time
 
--   who logged in
--   what system deamons might be running
+- who logged in
+- what system deamons might be running
 
 ### `/sbin`
 
@@ -131,7 +131,30 @@ contains file that's useful for users accross the system
 
 contains system specific variables file like:
 
--   logs
--   temporary message files
--   config files if **not** in `/etc`
--   `/var/www` for apache web server
+- logs
+- temporary message files
+- config files if **not** in `/etc`
+- `/var/www` for apache web server
+
+# Shortcuts
+
+![](./img/terminal-shortcut.jpeg)
+
+| key binds  | action                                  |
+| ---------- | --------------------------------------- |
+| Ctrl + D   | signal bash that there is no more input |
+| Ctrl + L   | redraw the screen                       |
+| Ctrl + `+` | make text bigger in terminal emulator   |
+| Ctrl + `-` | make text smaller in terminal emulator  |
+
+```bash
+# error permission denied
+apt update
+
+# take previous command with !!
+sudo !!
+# this time success
+
+# run the 102 th command in the history
+!102
+```
