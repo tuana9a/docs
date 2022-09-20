@@ -39,7 +39,9 @@ openssl req -new -sha256 \
 
 ```bash
 echo "subjectAltName=DNS.1:techpro-ai.local,DNS.2:*.techpro-ai.local" > extfile.cnf
+```
 
+```bash
 openssl x509 -req -sha256 \
 -days 365 \
 -in server.csr \
@@ -47,9 +49,11 @@ openssl x509 -req -sha256 \
 -CAkey rootCA.key \
 -out server.crt \
 -extfile extfile.cnf -CAcreateserial
+```
 
-# or
+or
 
+```bash
 openssl x509 -req -sha256 \
 -days 365 \
 -in server.csr \
@@ -67,12 +71,16 @@ cat server.crt rootCA.crt > fullchain.crt
 
 ## 7. (optional) import CA to your operating system
 
+remove old CA (if has)
+
 ```bash
-# remove old CA (if has)
 sudo rm /usr/local/share/ca-certificates/ca.crt
 sudo update-ca-certificates -f
+```
 
-# copy new ca to destination
+copy new ca to destination
+
+```bash
 sudo cp rootCA.crt /usr/local/share/ca-certificates/ca.crt
 sudo update-ca-certificates
 ```
