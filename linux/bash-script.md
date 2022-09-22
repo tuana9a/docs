@@ -30,7 +30,6 @@ fi
 
 ```bash
 #! /bin/bash
-# for loop
 for VARIABLE in file1 file2 file3
 do
     command1 on $VARIABLE
@@ -41,17 +40,27 @@ done
 
 # builtin env variables
 
+print random value between 0 - 32767
+
 ```bash
-# print random value between 0 - 32767
 echo $RANDOM
+```
 
-# print current shell
+print current shell
+
+```bash
 echo $SHELL
+```
 
+```bash
 echo $USER
+```
 
+```bash
 echo $PWD
+```
 
+```bash
 echo $HOSTNAME
 ```
 
@@ -78,8 +87,8 @@ echo $(( $RANDOM % 100 ))
 # output: random number between 0 - 99
 ```
 
--   This only apply to arithmetic operation
-    not like command in normal $(comand...)
+- This only apply to arithmetic operation
+  not like command in normal $(comand...)
 
 # Examples
 
