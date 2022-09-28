@@ -26,7 +26,23 @@ docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' name
 
 ## 2. with docker-compose
 
-see [`docker-compose.yaml`](./docker-compose.yaml)
+```yaml
+version: "2"
+
+services:
+  webserver:
+    image: nginx
+    networks:
+      customnetwork:
+        ipv4_address: 172.20.0.10
+
+networks:
+  customnetwork:
+    # name of docker network
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+```
 
 # Refs
 
