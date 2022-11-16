@@ -1,6 +1,6 @@
-# Setup SSH
+# setup ssh
 
-## prepare SSH on client
+## prepare ssh on client
 
 create new client ssh key pair
 
@@ -38,7 +38,7 @@ chmod 600 .ssh/id_rsa
 chmod 644 .ssh/id_rsa.pub
 ```
 
-## prepare SSH on remote server
+## prepare ssh on remote server
 
 install ssh server
 
@@ -74,7 +74,7 @@ chmod 700 .ssh
 chmod 600 .ssh/authorized_keys
 ```
 
-# Setup swap on linux
+# setup swap on linux
 
 ## create new swap
 
@@ -130,7 +130,7 @@ dpkg -L package-name
 
 refs [https://askubuntu.com/questions/843294/where-does-a-deb-file-go-after-installation](https://askubuntu.com/questions/843294/where-does-a-deb-file-go-after-installationhttps://askubuntu.com/questions/843294/where-does-a-deb-file-go-after-installation)
 
-# get current if of ubuntu
+# get current ip of ubuntu
 
 ifconfig
 
@@ -158,10 +158,12 @@ $1 is param for length of password
 date +%s | sha256sum | base64 | head -c $1 ; echo
 ```
 
-$1 is param for length of password
-
 ```bash
 date +%s | sha256sum | base64 | head -c $1 ; echo
+```
+
+```bash
+openssl rand -base64 $1
 ```
 
 # mysql allow remote login root
@@ -257,7 +259,7 @@ net:
 
 như vậy đã thành công add ssl cho mongodb
 
-# How to compy docker image from computer to computer
+# how to compy docker image from computer to computer
 
 see **[here](https://github.com/tuana9a/infrastructure-as-code/tree/main/local/gitlab-server#how-to-transfer-docker-images-from-computers-to-computers)**
 
