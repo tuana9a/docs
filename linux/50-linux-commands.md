@@ -403,6 +403,12 @@ quản lý người dùng
 sudo adduser USERNAME
 ```
 
+# useradd
+
+```bash
+useradd -m -s /bin/bash tuana9a
+```
+
 # userdel
 
 ```bash
@@ -582,7 +588,7 @@ mở editor để edit file này :V
 crontab -e
 ```
 
-sau đó sửa theo format sau ref: https://crontab.guru/
+sau đó sửa theo format sau ref: <https://crontab.guru/>
 
 ```conf
 # m h dom mon dow command
