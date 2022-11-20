@@ -5,16 +5,7 @@ server {
     ssl_certificate_key    /etc/letsencrypt/live/tuana9a.com/privkey.pem;
     location / {
         proxy_pass  http://172.77.0.29:8080;
-    }
-}
-
-server {
-    listen          443 ssl;
-    server_name     calendar.tuana9a.com;
-    ssl_certificate        /etc/letsencrypt/live/calendar.tuana9a.com/fullchain.pem;
-    ssl_certificate_key    /etc/letsencrypt/live/calendar.tuana9a.com/privkey.pem;
-    location / {
-        proxy_pass  http://172.77.0.45:8080;
+        proxy_set_header Host $host;
     }
 }
 
@@ -23,5 +14,6 @@ server {
     server_name     captcha2text.tuana9a.com;
     location / {
         proxy_pass  http://172.77.0.60:8080;
+        proxy_set_header Host $host;
     }
 }
