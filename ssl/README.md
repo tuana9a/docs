@@ -37,6 +37,8 @@ openssl req -new -sha256 \
 
 ## 5. create cert
 
+### (option 1) with extfile.cnf
+
 ```bash
 echo "subjectAltName=DNS.1:techpro-ai.local,DNS.2:*.techpro-ai.local" > extfile.cnf
 ```
@@ -51,7 +53,7 @@ openssl x509 -req -sha256 \
 -extfile extfile.cnf -CAcreateserial
 ```
 
-or
+### (option 2) inline
 
 ```bash
 openssl x509 -req -sha256 \
@@ -63,15 +65,41 @@ openssl x509 -req -sha256 \
 -extfile <(printf "subjectAltName=IP.1:172.19.0.11,IP.2:172.19.0.12,IP.3:172.19.0.13") -CAcreateserial
 ```
 
-## 6. (optional) create full chain cert
+**subjectAltName examples**
+
+one domain name
+
+```cnf
+subjectAltName=DNS:techpro-ai.local
+```
+
+one ip
+
+```cnf
+subjectAltName=IP:172.19.0.11
+```
+
+multiple domain name (include wildcard)
+
+```cnf
+subjectAltName=DNS.1:techpro-ai.local,DNS.2:*.techpro-ai.local
+```
+
+multiple ips
+
+```cnf
+subjectAltName=IP.1:172.19.0.11,IP.2:172.19.0.12,IP.3:172.19.0.13
+```
+
+## (optional) 6. create full chain cert
 
 ```bash
 cat server.crt rootCA.crt > fullchain.crt
 ```
 
-## 7. (optional) import CA to your operating system
+## (optional) 7. import CA to your operating system
 
-remove old CA (if has)
+remove old CA (if existed)
 
 ```bash
 sudo rm /usr/local/share/ca-certificates/ca.crt
