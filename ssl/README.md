@@ -1,6 +1,6 @@
 # Info
 
-Thanks **[Bui Manh Truong](https://github.com/mtb-hust)** and **[TechPro.vn](https://techpro.vn)** for give me chance to work as a DevOps when I'm still a college student of HUST
+Thanks **[Bui Manh Truong](https://github.com/mtb-hust)** and **[Techpro.vn](https://techpro.vn)** for give me chance to work as a DevOps when I'm still a college student of HUST
 
 # Steps to create your SSL with your own CA (Self Sign Certificate)
 
@@ -14,7 +14,7 @@ openssl genrsa -out rootCA.key 4096
 
 ```bash
 openssl req -new \
--subj "/C=VN/ST=HN/O=TechPro/CN=TechPro" -x509 -sha256 \
+-subj "/C=VN/ST=HN/O=Techpro/CN=Techpro" -x509 -sha256 \
 -days 365 \
 -key rootCA.key \
 -out rootCA.crt
@@ -30,7 +30,7 @@ openssl genrsa -out server.key 4096
 
 ```bash
 openssl req -new -sha256 \
--subj "/CN=TechPro AI" \
+-subj "/CN=Techpro AI" \
 -key server.key \
 -out server.csr
 ```
