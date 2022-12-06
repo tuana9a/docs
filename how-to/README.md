@@ -122,6 +122,12 @@ delete entry in /etc/fstab if you added it
 sudo nano /etc/fstab
 ```
 
+## change swap size
+
+```bash
+sudo dd if=/dev/zero of=/swapfile bs=1M count=2048
+```
+
 # how to locate installed deb package
 
 ```bash
@@ -238,28 +244,27 @@ ví dụ `mongodb.pem`
 
 ```
 -----BEGIN CERTIFICATE-----
-cert content
+(content)
 -----END CERTIFICATE-----
 -----BEGIN PRIVATE KEY-----
-key content
+(content)
 -----END PRIVATE KEY-----
 ```
 
 sau khi có key như trên thì add file đó vào trong config
 
 ```
-# network interfaces
 net:
   port: 27017
   bindIp: 0.0.0.0
   tls:
     mode: requireTLS
-    certificateKeyFile: /home/ubuntu/ssl/mongodb.pem
+    certificateKeyFile: /opt/ssl/tuana9a.com/fullchain-privkey.pem
 ```
 
 như vậy đã thành công add ssl cho mongodb
 
-# how to compy docker image from computer to computer
+# how to copy docker image from computer to computer
 
 see **[here](https://github.com/tuana9a/infrastructure-as-code/tree/main/local/gitlab-server#how-to-transfer-docker-images-from-computers-to-computers)**
 
