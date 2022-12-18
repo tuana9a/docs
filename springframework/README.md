@@ -134,3 +134,68 @@ quản lí bean
 ```java
 	.getBeanFactory.registerSingleton("bike",new Bike())
 ```
+
+# @SpringBootApplication
+
+@SpringBootApplication = @ComponentScan + @EnableAutoConfiguration
+
+```java
+package com.tuana9a.learn.springboot;
+
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
+/**
+ * tự động quest component không cần @ComponentScan
+ * phạm vi quét, mọi class, mọi package cùng cấp đổ xuống (quét mọi nút con)
+ */
+@ComponentScan("com.tuana9a")
+@EnableAutoConfiguration
+public class AutoConfigApplication {
+
+}
+
+```
+
+equals
+
+```java
+package com.tuana9a.learn.springboot;
+
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpingBootApplication
+public class Application {
+    
+}
+```
+
+# `application.properties`
+
+2.3.x
+
+[Common Application properties](https://docs.spring.io/spring-boot/docs/2.3.x/reference/html/appendix-application-properties.html#common-application-properties)
+
+# @Transactional
+
+```java
+package com.tuana9a.learn.springboot;
+
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * như cái tên đã nêu lên tất cả, là một transaction với db
+ * đặt ở class thì toàn bộ các method của chúng sẽ được kế thừa
+ * đặt ở phương thức (method) thì chỉ phương thức đó được wrap
+ * trong transaction
+ */
+
+@Transactional
+public class TransactionalService {
+
+    @Transactional(rollbackFor = { NullPointerException.class }, timeout = 15000)
+    public void update(Object user) {
+        // do some update here
+    }
+
+}
+```
