@@ -2,9 +2,8 @@
 
 ![](./terminal-shortcut.jpeg)
 
-error permission denied
 ```bash
-apt update
+apt update #error permission denied
 ```
 
 take previous command with !!
@@ -202,7 +201,7 @@ exit
 ```
 
 
-# params
+# variables
 
 ```bash
 #! /bin/bash
@@ -271,27 +270,30 @@ echo $HOSTNAME
 # Calculation
 
 ```bash
-echo $(( 2 + 2 ))
-# output: 4
-
-echo $(( 2 * 3 ))
-# output: 6
-
-echo $(( 2 /3 ))
-# output: 0
-
-echo $(( 10 / 3 ))
-# output: 3
-
-echo $(( 10 % 3 ))
-# output: 1
-
-# Tips
-echo $(( $RANDOM % 100 ))
-# output: random number between 0 - 99
+echo $(( 2 + 2 )) # output: 4
 ```
 
-- This only apply to arithmetic operation
+```bash
+echo $(( 2 * 3 )) # output: 6
+```
+
+```bash
+echo $(( 2 / 3 )) # output: 0
+```
+
+```bash
+echo $(( 10 / 3 )) # output: 3
+```
+
+```bash
+echo $(( 10 % 3 )) # output: 1
+```
+
+```bash
+echo $(( $RANDOM % 100 )) # output: random number between 0 - 99
+```
+
+This only apply to arithmetic operation
   not like command in normal $(comand...)
 
 # Examples
