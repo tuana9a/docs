@@ -1,4 +1,6 @@
-# openvpn client + systemd
+# OpenVPN
+
+## openvpn + systemd
 
 ```bash
 sudo apt install openvpn
@@ -26,7 +28,7 @@ WorkingDirectory=/etc/openvpn/
 WantedBy=multi-user.target
 ```
 
-# vpn only
+## vpn only
 
 Refs: [https://askubuntu.com/questions/788803/how-to-change-the-metric-of-an-openvpn-client-default-route](https://askubuntu.com/questions/788803/how-to-change-the-metric-of-an-openvpn-client-default-route)
 

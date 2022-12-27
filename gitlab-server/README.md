@@ -1,0 +1,60 @@
+# Set up gitlab server
+
+## Requirements
+
+[https://docs.gitlab.com/ee/install/requirements.html](https://docs.gitlab.com/ee/install/requirements.html)
+
+**minimum 4GB RAM** or your gitlab will crashes
+
+## Install with docker
+
+the docker-compose.yaml like below
+
+```yaml
+version: "3.6"
+services:
+  web:
+    image: "gitlab/gitlab-ee:14.9.5-ee.0"
+    hostname: "gitlab.local"
+    container_name: "gitlab"
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'https://gitlab.local'
+    ports:
+      - "80:80"
+      - "443:443"
+      - "22:22"
+    volumes:
+      - "/srv/gitlab/config:/etc/gitlab"
+      - "/srv/gitlab/logs:/var/log/gitlab"
+      - "/srv/gitlab/data:/var/opt/gitlab"
+    shm_size: "256m"
+```
+
+## Post installation
+
+add sudo if necessary
+
+```bash
+docker exec -it gitlab grep 'Password:' /etc/gitlab/initial_root_password
+```
+
+## Issues
+
+**remember** to add hostname to /etc/hosts or dns that point to server that host gitlab
+
+"**gitlab.local**" is not a valid domain by letsencrypt
+
+output
+
+```bash
+letsencrypt_certificate[gitlab.vacs.local] (letsencrypt::http_authorization line 5) had an error: Acme::Client::Error::RejectedIdentifier: acme_certificate[staging] (/opt/gitlab/embedded/cookbooks/cache/cookbooks/letsencrypt/resources/certificate.rb line 25) had an error: Acme::Client::Error::RejectedIdentifier: Error creating new order :: Cannot issue for “gitlab.vacs.local”: Domain name does not end with a valid public suffix (TLD)
+```
+
+solution [https://forum.gitlab.com/t/domain-name-does-not-end-with-a-valid-public-suffix-tld/35902?u=tuana9a](https://forum.gitlab.com/t/domain-name-does-not-end-with-a-valid-public-suffix-tld/35902?u=tuana9a)
+
+add below code to git lab config file `/etc/gitlab/gitlab.rb`
+
+```ruby
+letsencrypt['enable'] = false
+```
