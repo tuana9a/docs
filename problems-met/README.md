@@ -11,7 +11,6 @@ bash install.sh
 `install.sh` chứa một loạt pip install nhưng pip vẫn install ở ngoài `(venv)`
 
 ```bash
-# content of install.sh
 pip install -r requirements.txt
 ```
 
@@ -19,6 +18,9 @@ pip install -r requirements.txt
 
 ```bash
 source .venv/bin/activate
+```
+
+```bash
 pip install -r requirements.txt
 ```
 

@@ -25,3 +25,16 @@ WorkingDirectory=/etc/openvpn/
 [Install]
 WantedBy=multi-user.target
 ```
+
+# vpn only
+
+Refs: [https://askubuntu.com/questions/788803/how-to-change-the-metric-of-an-openvpn-client-default-route](https://askubuntu.com/questions/788803/how-to-change-the-metric-of-an-openvpn-client-default-route)
+
+add `route-nopull` to the end of `.ovpn` config file
+
+like this
+
+```ini
+...
+route-nopull
+```
