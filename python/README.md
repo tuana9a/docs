@@ -1,6 +1,12 @@
-# install python from source missing ssl as fuck
+# install python 3.6.13
 
-install python from source, then after install then
+installation process is same in other python versions
+
+install necessary packages for building python
+
+```bash
+sudo apt-get install make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+```
 
 ```bash
 wget https://www.python.org/ftp/python/3.6.13/Python-3.6.13.tgz
@@ -11,7 +17,7 @@ tar xzf Python-3.6.13.tgz
 ```
 
 ```bash
-cd python/Python-3.6.13/
+cd Python-3.6.13/
 ```
 
 ```bash
@@ -19,30 +25,9 @@ cd python/Python-3.6.13/
 ```
 
 ```bash
-make
+sudo make
 ```
 
 ```bash
-make install
-```
-
-then this happen
-
-```text
-Python build finished, but the necessary bits to build these modules were not found:
-_bsddb             _sqlite3           _tkinter
-bsddb185           dbm                dl
-gdbm               imageop            sunaudiodev
-
-To find the necessary bits, look in setup.py in detect_modules() for the module's name.
-```
-
-these problems happens because of missing system library for building python
-
-so just need to install these dependencies
-
-`libssl-dev`
-
-```bash
-sudo apt install libssl-dev
+sudo make install
 ```

@@ -112,3 +112,28 @@ so when you go to http://localhost:8080 or http://0.0.0.0:8080 then **This site 
 Refs: [https://askubuntu.com/questions/788803/how-to-change-the-metric-of-an-openvpn-client-default-route](https://askubuntu.com/questions/788803/how-to-change-the-metric-of-an-openvpn-client-default-route)
 
 add `route-nopull` to the end of `.ovpn` config file
+
+# Fn key rows not work in ubuntu (linux in general)
+
+Thanks
+
+[https://github.com/Kurgol/keychron/blob/master/k2.md#f-keys-on-ubuntu](https://github.com/Kurgol/keychron/blob/master/k2.md#f-keys-on-ubuntu)
+[https://www.reddit.com/r/Keychron/comments/lgotvh/keychron_k3_ubuntu_fn_keys/](https://www.reddit.com/r/Keychron/comments/lgotvh/keychron_k3_ubuntu_fn_keys/)
+
+```bash
+vim /etc/modprobe.d/hid_apple.conf
+```
+
+add
+
+```conf
+options hid_apple fnmode=2
+```
+
+```bash
+sudo update-initramfs -u
+```
+
+```bash
+reboot
+```
