@@ -40,27 +40,32 @@ cat gemdino.txt
 
 # cd
 
-```
-# chuyển thư mục trong thư mục hiện tại
-#   - nếu tên có khoảng trống phải có hai nháy đơn
-#   - hoặc giữa 2 từ cần thêm "\ " với mỗi một dấu cách tương ứng
-#   VD: " 'tuan thich  gemdino' " hay "tuan\ thich\ \ gemdino"
-```
+chuyển thư mục trong thư mục hiện tại
+  - nếu tên có khoảng trống phải có hai nháy đơn
+  - hoặc giữa 2 từ cần thêm "\ " với mỗi một dấu cách tương ứng
+
+VD: " 'tuan thich  gemdino' " hay "tuan\ thich\ \ gemdino"
 
 ```bash
 cd dirname
 ```
 
-```bash
-cd  # đưa về thư mục home của người dùng hiện tại# ~ /home/tuana9a
-```
+đưa về thư mục home của người dùng hiện tại# ~ /home/tuana9a
 
 ```bash
-cd .. # trở về thư mục cha thư mục hiện tại
+cd
 ```
 
+trở về thư mục cha thư mục hiện tại
+
 ```bash
-cd - # return to previous directory NOT parent directory
+cd ..
+```
+
+return to previous directory NOT parent directory
+
+```bash
+cd -
 ```
 
 # pushd
@@ -80,8 +85,6 @@ popd
 ```
 
 # chmod
-
-![](./img/chmod.png)
 
 change permissions of a file
 
@@ -142,11 +145,11 @@ du -sh ~
 example
 
 ```bash
-ln -s /etc/letsencrypt/live/tuana9a.com/fullchain.pem /home/ubuntu/ssl/cert.pem
+ln -s /etc/letsencrypt/live/tuana9a.com/fullchain.pem /opt/ssl/cert.pem
 ```
 
 ```bash
-ln -s /etc/letsencrypt/live/tuana9a.com/privkey.pem /home/ubuntu/ssl/key.pem
+ln -s /etc/letsencrypt/live/tuana9a.com/privkey.pem /opt/ssl/key.pem
 ```
 
 # locate
@@ -474,7 +477,7 @@ netmask 255.255.255.0 \ #  netmask là 255.255.255.0
 up # up là bật card này lên
 ```
 
-print current ip address
+get current ip address
 
 ```bash
 ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'
@@ -504,9 +507,7 @@ show tail portion of the file with 100 lines
 tail /var/log/mongo/mongod.log -n 100
 ```
 
-watch the change with -f flag
-
-this will update the terminal in realtime
+watch the change with -f flag this will update the terminal in realtime
 
 ```bash
 tail -f /var/log/mongo/mongod.log
@@ -608,7 +609,13 @@ sau đó sửa theo format sau ref: <https://crontab.guru/>
 save file lại và restart cronjob
 
 ```bash
-systemctl restart cron # or "systemctl restart crond"
+systemctl restart cron
+```
+
+or in other linux
+
+```bash
+systemctl restart crond
 ```
 
 # set timezone
@@ -672,5 +679,5 @@ dpkg -L package-name
 install .deb package
 
 ```bash
-dpkg -i docker-debs/docker-ce-cli_20.10.14~3-0~ubuntu-bionic_amd64.deb
+dpkg -i docker-ce-cli_20.10.14~3-0~ubuntu-bionic_amd64.deb
 ```
