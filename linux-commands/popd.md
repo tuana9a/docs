@@ -6,6 +6,6 @@ pop directory from stack
 popd
 ```
 
-## Relate
+## Related
 
 [pushd](./pushd.md)

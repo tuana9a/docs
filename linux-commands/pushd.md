@@ -6,6 +6,6 @@ push current directory to stack
 pushd dir_name
 ```
 
-## Relate
+## Related
 
 [popd](./popd.md)

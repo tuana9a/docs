@@ -6,6 +6,6 @@ xoá người dùng khỏi group
 gpasswd -d USERNAME GROUPNAME
 ```
 
-## Relate
+## Related
 
 [passwd](./passwd.md) [useradd](./useradd.md) [userdel](./userdel.md)

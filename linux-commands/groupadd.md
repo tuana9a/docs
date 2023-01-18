@@ -6,6 +6,6 @@ tạo group mới
 sudo groupadd GROUPNAME
 ```
 
-## Relate
+## Related
 
 [gpasswd](./gpasswd.md)
