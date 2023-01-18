@@ -1,11 +1,10 @@
-# git
+# .gitignore
 
-`.gitignore`
+.gitignore chứa các tên file bạn không muốn add hoặc commit
+
+VD:
 
 ```gitignore
-# .gitignore chứa các tên file bạn không muốn add hoặc commit
-
-# VD:
 # bỏ qua tất cả file .txt ở mọi thư mục kể cả thư mục con
 *.txt
 

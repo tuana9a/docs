@@ -1,6 +1,9 @@
-# khởi động
+# Architecture
 
-khởi chạy một container nhỏ <br>
+## khởi động
+
+khởi chạy một container nhỏ
+
 sau đó bạn mở trình duyệt vào địa chỉ localhost:PORT
 
 ```bash
@@ -10,14 +13,16 @@ docker run -d -p 80:80 docker/getting-started
 # một câu lệnh khác
 docker run -dp 8080:80 getting-started
 ```
-    
-# công nghệ container
 
-bản chất container là một process chạy trên linux và <br>
-**đặc biệt được "isolate"** khỏi các process khác <br>
+## công nghệ container
+
+bản chất container là một process chạy trên linux và
+
+**đặc biệt được "isolate"** khỏi các process khác
+
 cái này đã có trên linux từ rất lâu
 
-# container image là gì
+## container image là gì
 
 do container muốn hoạt động được như một "máy ảo" thì cần phải có filesystem
 

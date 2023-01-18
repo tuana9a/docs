@@ -2,7 +2,7 @@
 
 cái này mình học được khi đọc thêm về redis,
 
-trong đó redis có nói thêm về cách implement red lock, distributed lock với các ứng dụng có sử dụng redis [link](https://redis.io/topics/distlock)
+trong đó redis có nói thêm về cách implement red lock, distributed lock với các ứng dụng có sử dụng redis [https://redis.io/topics/distlock](https://redis.io/topics/distlock)
 
 ## Safety and Liveness guarantees
 

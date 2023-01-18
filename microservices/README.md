@@ -1,88 +1,88 @@
 # Microservice
 
-[google drive](https://drive.google.com/file/d/1EiCn4PK4_GIXYVbBfHeIeyJfKs3NwYtR/view?usp=sharing)
+[Google Drive](https://drive.google.com/file/d/1EiCn4PK4_GIXYVbBfHeIeyJfKs3NwYtR/view?usp=sharing)
 
-# Approaches
+## Approaches
 
--   Have n microservices share a single database
--   Give each microservice its own database with no shared data
--   Split the database into multiple read and a single write database
--   Shard the data onto multiple databases each one having only part of the data
+- Have n microservices share a single database
+- Give each microservice its own database with no shared data
+- Split the database into multiple read and a single write database
+- Shard the data onto multiple databases each one having only part of the data
 
-# When having spike connections, requests or to avoid **cascading failures**
+## When having spike connections, requests or to avoid **cascading failures**
 
-## circuit breaker
+### circuit breaker
 
-![](./img/circuit-breaker.PNG)
+![circuit-breaker.PNG](./img/circuit-breaker.PNG)
 
-# Debug
+### Debug
 
-## correlation-id
+#### correlation-id
 
-![](./img/correlation-id.PNG)
+![correlation-id.PNG](./img/correlation-id.PNG)
 
-# Consistency
+## Consistency
 
-## week consistency
+### week consistency
 
-![](./img/week-consistency.png)
+![week-consistency.png](./img/week-consistency.png)
 
-**eventually consistency**
+### **eventually consistency**
 
--   là một dạng của weak consistency
+- là một dạng của weak consistency
 
--   không đảm bảo tại 1 thời điểm mọi node trả về kết quả mới nhất, tuy nhiên sau đó một vài thời gian kết quả trả về sẽ là mới nhất
+- không đảm bảo tại 1 thời điểm mọi node trả về kết quả mới nhất, tuy nhiên sau đó một vài thời gian kết quả trả về sẽ là mới nhất
 
-## strong consistency
+### strong consistency
 
 đảm bảo đọc, ghi dữ liệu trên mọi node luôn là mới nhất
 
-![](./img/strong-consistency.png)
+![strong-consistency.png](./img/strong-consistency.png)
 
-## distributed lock
+### distributed lock
 
-[distributed-lock.md](../algorithms/distributed-lock.md)
+[README.md](../distributed-lock/README.md)
 
-## two phase commit
+### two phase commit
 
 steps:
 
--   ask every one to prepare transation
+- ask every one to prepare transation
 
-    -   wait until every one is ready
-    -   even if there is only one left
+  - wait until every one is ready
+  - even if there is only one left
 
--   if every one is read then execute transaction
+- if every one is read then execute transaction
 
-    -   wait until every one is complete
-    -   if one fail every one wait
-        -   this one if then reconnect to cordinator
+  - wait until every one is complete
+  - if one fail every one wait
+    - this one if then reconnect to cordinator
             then it must do the uncommit jobs
             then send to the cordinator
-    -   if one send failed
-        -   every one else rollback
+  - if one send failed
+    - every one else rollback
 
 nhận xét
 
--   blocking là điểm trừ đầu tiên, cần prevent dead lock
--   cordinator service is the bottle neck
-    -   ngoài ra còn là single point of failure
--   và một service phải làm nhiều việc hơn các service khác <br />
-    không đúng lắm với tính chất của microservice khi <br />
-    một service chỉ là một nhiệm vụ và làm tốt nhiệm vụ đó <br />
+- blocking là điểm trừ đầu tiên, cần prevent dead lock
+- cordinator service is the bottle neck
+  - ngoài ra còn là single point of failure
+- và một service phải làm nhiều việc hơn các service khác
+  - không đúng lắm với tính chất của microservice khi
+  - một service chỉ là một nhiệm vụ và làm tốt nhiệm vụ đó
 
--   nhìn chung cái này cảm giác phù hợp cho ngân hàng <br>
+- nhìn chung cái này cảm giác phù hợp cho ngân hàng
     khi tốc độ không phải ưu tiên mà tính toàn vẹn dữ liệu được đặt lên hàng đầu
 
-## saga
+### SAGA
 
 [https://www.baeldung.com/cs/saga-pattern-microservices](https://www.baeldung.com/cs/saga-pattern-microservices)
 
 các điều kiện cho saga:
 
--   một transaction phải thỏa mãn điều kiện
-    -   luôn tồn tại một revert transaction tương ứng
-    -   có khả năng retryable (tương tự cái trên)
+- một transaction phải thỏa mãn điều kiện
+  - luôn tồn tại một revert transaction tương ứng
+  - có khả năng retryable (tương tự cái trên)
 
 pattern này được sử dụng phù hợp với hệ thống dạng như sau
 
@@ -92,19 +92,19 @@ các service trong 1 transaction được gọi tuần tự và theo đúng flow
 
 implementation
 
--   coordinator
-    -   condinator khi có yêu cầu sẽ lấy kịch bản (flow) đã được định nghĩa trước
-    -   sau đó gọi lần lượt các service trong bảng và thực thi tuần tự
-        ![](./img/saga-execution.webp)
-    -   khi failed
-        ![](./img/saga-coreography-2-768x786.webp)
--   orchestation
-    -   mỗi service sẽ được quản lý bởi 1 coordinator riêng
-        ![](./img/saga-orchestration.webp)
+- coordinator
+  - condinator khi có yêu cầu sẽ lấy kịch bản (flow) đã được định nghĩa trước
+  - sau đó gọi lần lượt các service trong bảng và thực thi tuần tự
+        ![saga-execution.webp](./img/saga-execution.webp)
+  - khi failed
+        ![saga-coreography-2-768x786.webp](./img/saga-coreography-2-768x786.webp)
+- orchestation
+  - mỗi service sẽ được quản lý bởi 1 coordinator riêng
+        ![saga-orchestration.webp](./img/saga-orchestration.webp)
 
 cái này phải code chứ không đc auto trong database
 
-# CQS Command Query Separation
+## CQS Command Query Separation
 
 often metion with DDD and Event Sourcing
 
@@ -130,24 +130,24 @@ Therefore, it is recommended to use a third API, **the Events API**, which infor
 
 So instead of returning result immediately, it return result later by pushing those data to client
 
-**Interesting**
+It's **Interesting**
 
-# Refs
+## Refs
 
 [https://levelup.gitconnected.com/what-is-cqrs-8ddd74ca05bb](https://levelup.gitconnected.com/what-is-cqrs-8ddd74ca05bb)
 
-# Tips
+## Tips
 
 - rollback"able" devops
 
-# Keywords
+## Keywords
 
--   `SAGA`
--   `Two Phase Commit`
--   `Raft Consensus Algorithm`
--   `Distributed Lock`
--   `Distributed Transaction`
--   `Circuit Breaker`
--   `Correlation Id`
--   `Week Consistency`
--   `Strong Consistency`
+- `SAGA`
+- `Two Phase Commit`
+- `Raft Consensus Algorithm`
+- `Distributed Lock`
+- `Distributed Transaction`
+- `Circuit Breaker`
+- `Correlation Id`
+- `Week Consistency`
+- `Strong Consistency`

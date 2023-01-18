@@ -1,21 +1,29 @@
-# Luôn sử dụng offical image
+# Best Practice
 
-luôn sử dụng các image chính thống nếu có sẵn <br>
-và luôn luôn có thêm version tag <br>
+## Luôn sử dụng offical image
+
+luôn sử dụng các image chính thống nếu có sẵn
+
+và luôn luôn có thêm version tag
+
 vì có thể lần build tiếp theo phiên bản latest sẽ break thing
 
-# cố gắng giảm size image càng tốt
+## cố gắng giảm size image càng tốt
 
-việc này vừa tăng khả năng luân chuyển image, build time <br>
+việc này vừa tăng khả năng luân chuyển image, build time
+
 hơn thế gián tiếp giảm khả năng bị hack do số package giảm đi
 
-## multi-stage build
+### multi-stage build
 
-cực kì hữu dụng do có rất nhiều app sau khi build <br>
+cực kì hữu dụng do có rất nhiều app sau khi build
+
 thì không cần dùng các tool trước đó nữa
 
-ví dụ với java servlet <br>
-sau khi đóng gói với maven thì chỉ cần file war là chạy app <br>
+ví dụ với java servlet
+
+sau khi đóng gói với maven thì chỉ cần file war là chạy app
+
 cỏn maven thì vứt được
 
 ```dockerfile
@@ -48,21 +56,25 @@ FROM nginx:alpine
 COPY --from=build /app/build /usr/share/nginx/html
 ```
 
-# cố gắng sử dụng docker caching càng nhiều càng tốt
+## cố gắng sử dụng docker caching càng nhiều càng tốt
 
 [docker-layers-explain.md](./docker-layers-explain.md)
 
 khi build image sẽ có các layer không thay đổi như
+
 - install dependency
 - inject config file
 
-thì nên cho các layer này lên trước thì khi build sẽ đc cache lại<br>
+thì nên cho các layer này lên trước thì khi build sẽ đc cache lại
+
 còn nếu cho sau thì mỗi lần chỉnh sửa file lại build lại toàn bộ image
 
-# Giới hạn quyền truy cập của user trong container
+## Giới hạn quyền truy cập của user trong container
 
-nên giới hạn quyền truy cập user (do mặc định là user root) <br>
-nếu app có bị hack thì hacker không chiếm toàn quyền root <br>
+nên giới hạn quyền truy cập user (do mặc định là user root)
+
+nếu app có bị hack thì hacker không chiếm toàn quyền root
+
 để cài bot hay đào coin được
 
 ```dockerfile
@@ -82,7 +94,7 @@ USER tuana9a
 CMD node index.js
 ```
 
-# Sử dụng docker scan để scan các vấn đề về bảo mật
+## Sử dụng docker scan để scan các vấn đề về bảo mật
 
 ```bash
 docker scan
