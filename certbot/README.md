@@ -92,3 +92,9 @@ place your scripts in these folder
 ```text
 /etc/letsencrypt/renewal/
 ```
+
+## Test Renewal
+
+```bash
+sudo certbot renew --dry-run
+```

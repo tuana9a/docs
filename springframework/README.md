@@ -1,42 +1,42 @@
-# Spring Frame Work
+# Spring Framework
 
-# Dependency Injection - DI
+## Dependency Injection - DI
 
-giả sử class có sự tương đồng VD: Bike, Car, Bus, SuperBike<br>
-và khi sửa code, thêm, xóa, sửa thì phải sửa code tương ứng<br>
+giả sử class có sự tương đồng VD: Bike, Car, Bus, SuperBike
+
+và khi sửa code, thêm, xóa, sửa thì phải sửa code tương ứng
+
 mục tiêu của DI là giảm sự phụ thuộc chặt khiến code cần sửa ít hơn
 
-## GIẢI PHÁP:
+GIẢI PHÁP
 
--   có thể dùng interface Vehicle (nguyên lí trừu tượng)
+- có thể dùng interface Vehicle (nguyên lí trừu tượng)
+  - nếu đang dùng Car() mà muốn sang Bike(), nhưng phải sửa code và compile lại
 
-    -   nếu đang dùng Car() mà muốn sang Bike()<br>
-        nhưng phải sửa code và compile lại
+- dùng spring frame work
+  - không phải sửa code từ Car() sang Bike() chỉ cần sửa context.xml là được
+  - không cần sửa code, compile lại
 
--   dùng spring frame work
-    -   không phải sửa code từ Car() sang Bike() chỉ cần sửa context.xml là được
-    -   không cần sửa code, compile lại
-
-# Setter Injection
+## Setter Injection
 
 `<property>` trong `<bean>` trong `context.xml` dùng setter method
 **TODO**: cần check lại lâu không học quên bà nó r
 
-bất kể thuộc tính là public hay private thì spring vẫn dùng setter<br>
-nên nếu không có setter thì lỗi runtime <br>
+bất kể thuộc tính là public hay private thì spring vẫn dùng setter
+nên nếu không có setter thì lỗi runtime
 đương nhiên lếu không có thuộc tính mà set thì lỗi runtime
 
-# Constructor Injection (CI)
+## Constructor Injection (CI)
 
 bấy nhiêu thuộc tính thì bấy nhiêu constructor-arg (bắt buộc)
 
-nhiều hơn hoặc thiếu argument<br>
+nhiều hơn hoặc thiếu argument
 nói cách khác: không tìm đc contructor phù hợp thì lỗi runtime
 
 trong `<bean>` đồng thời có `<constructor>` và `<setter>`
 thì giá trị `<setter>` là giá trị lúc runtime
 
-# @Component
+## @Component
 
 đây là một bean
 
@@ -46,96 +46,96 @@ VD:
 
 ```java
 @Component("id")
-	// trong đó id là id cua bean
-	// mặc định id là tên Class viết thường
-	@Scope(value="prototype")
-		// dùng như này thì mỗi lần gọi bean
-		// là một lần khởi tạo
+ // trong đó id là id cua bean
+ // mặc định id là tên Class viết thường
+ @Scope(value="prototype")
+  // dùng như này thì mỗi lần gọi bean
+  // là một lần khởi tạo
 ```
 
-# @Autowired
+## @Autowired
 
-chỉ wired được nếu tìm thấy 1 và chỉ một bean tương ứng<br>
-không dùng setter nên setter không liên quan<br>
+chỉ wired được nếu tìm thấy 1 và chỉ một bean tương ứng
+không dùng setter nên setter không liên quan
 nếu có nhiều hơn 1 hoặc không có sẽ lỗi runtime
 
 dùng được ở
 
--   thuộc tính
--   phương thức
--   tham số hàm khởi tạo
-    -   tham số (required = false)
-        -   chỉ có tác dụng nếu khởi tạo các bean thành công
+- thuộc tính
+- phương thức
+- tham số hàm khởi tạo
+  - tham số (required = false)
+    - chỉ có tác dụng nếu khởi tạo các bean thành công
             và tiêm fail thì chương trình k sao
-        -   còn nếu khởi tạo fail thì toàn bộ chương trình fail luôn
+    - còn nếu khởi tạo fail thì toàn bộ chương trình fail luôn
 
-khi thay đổi dependency qua bean, application-context<br>
-thì giá trị của nó trong thằng chứa nó cũng thay đổi<br>
+khi thay đổi dependency qua bean, application-context
+thì giá trị của nó trong thằng chứa nó cũng thay đổi
 không khác gì một object bình thường
 
-# @Configuration
+## @Configuration
 
-dùng cho một thể loại context mà không dùng file xml, chỉ có code<br>
-là "@Component" nhưng với mục đích là bean config<br>
+dùng cho một thể loại context mà không dùng file xml, chỉ có code
+là "@Component" nhưng với mục đích là bean config
 nên sẽ được khởi tạo trước các @Component khác
 
-# @ComponentScan
+## @ComponentScan
 
-dùng cùng với @Configuration<br>
-đặt ở class<br>
+dùng cùng với @Configuration
+đặt ở class
 scan @Componant từ packages nào để tìm đc bean
 
-# @Bean
+## @Bean
 
-**IMPORTANT!** tạo bean cách này force @Autowired nếu có<br>
-và thuộc tính cuối cùng sau khi tạo sẽ do Spring<br>
-trong lúc khởi tạo có thể set giá trị nhưng khi dùng sẽ<br>
-là giá trị của Spring quyết định<br>
+**IMPORTANT!** tạo bean cách này force @Autowired nếu có
+và thuộc tính cuối cùng sau khi tạo sẽ do Spring
+trong lúc khởi tạo có thể set giá trị nhưng khi dùng sẽ
+là giá trị của Spring quyết định
 
--   dùng cùng với @Configuration
--   đặt ở hàm trả về Object trong class @Configuration
--   tạo bean không liên quan bean @Component
--   id của bean tạo từ @Bean sẽ trùng với tên hàm<br>
+- dùng cùng với @Configuration
+- đặt ở hàm trả về Object trong class @Configuration
+- tạo bean không liên quan bean @Component
+- id của bean tạo từ @Bean sẽ trùng với tên hàm
     hoặc có thể đặt tên bằng VD: @Bean("tuan")
 
 tức 1 class có thể tồn tại 2,3,... thể hiện: 1 từ @Bean, 1 từ Component,...
 
-# @Primary
+## @Primary
 
-trong trường hợp có nhiều hơn 1 bean<br>
-cùng là thể hiện của 1 class<br>
+trong trường hợp có nhiều hơn 1 bean
+cùng là thể hiện của 1 class
 thì class @Primary sẽ được ưu tiên dùng
 
-# @Qualifier
+## @Qualifier
 
 chỉ điểm cụ thể thằng bean nào
 dùng id để nhận diện
 VD: @Qualifier("bike")
 
-# ApplicationContext
+## ApplicationContext
 
 kế thừa BeanFactory
 
 quản lí bean
 
--   lấy bean
--   sửa bean
--   xóa bean
--   bản thân cũng là một bean
+- lấy bean
+- sửa bean
+- xóa bean
+- bản thân cũng là một bean
 
 ```java
 .getBeanOfType(Outfit.class).forEach(
-	(k, v) -> System.out.println("name: " + k + " - value: " + v)
+ (k, v) -> System.out.println("name: " + k + " - value: " + v)
 )
 ```
 
-# ConfigurableApplicationContext
+## ConfigurableApplicationContext
 
 ```java
-	.getBeanFactory.registerSingleton("bike",new Bike())
+ .getBeanFactory.registerSingleton("bike",new Bike())
 ```
 
-# @SpringBootApplication
+## @SpringBootApplication
 
 @SpringBootApplication = @ComponentScan + @EnableAutoConfiguration
 
@@ -169,13 +169,11 @@ public class Application {
 }
 ```
 
-# `application.properties`
+## `application.properties`
 
-2.3.x
+[Common Application properties 2.3.x](https://docs.spring.io/spring-boot/docs/2.3.x/reference/html/appendix-application-properties.html##common-application-properties)
 
-[Common Application properties](https://docs.spring.io/spring-boot/docs/2.3.x/reference/html/appendix-application-properties.html#common-application-properties)
-
-# @Transactional
+## @Transactional
 
 ```java
 package com.tuana9a.learn.springboot;
