@@ -28,6 +28,20 @@ WorkingDirectory=/etc/openvpn/
 WantedBy=multi-user.target
 ```
 
+## multiple openvpn client with systemd (from [stackoverflow](https://askubuntu.com/a/1086407))
+
+lastest openvpn support multiple config in same machine and can be load automatically to systemd
+
+copy your .ovpn files to this directory `/etc/openvpn/client/`
+
+replace .ovpn with .conf
+
+then you can start each client config with
+
+```bash
+systemctl start openvpn-client@your-config-file-name-without-extension
+```
+
 ## vpn only
 
 Refs: [https://askubuntu.com/questions/788803/how-to-change-the-metric-of-an-openvpn-client-default-route](https://askubuntu.com/questions/788803/how-to-change-the-metric-of-an-openvpn-client-default-route)
