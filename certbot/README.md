@@ -1,5 +1,27 @@
 # certbot
 
+## Install
+
+```bash
+sudo apt install snapd -y
+```
+
+```bash
+sudo snap install --classic certbot
+```
+
+```bash
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+```
+
+```bash
+sudo snap set certbot trust-plugin-with-root=ok
+```
+
+```bash
+sudo snap install certbot-dns-cloudflare
+```
+
 _add **sudo** if needed_
 
 ## Create certs
