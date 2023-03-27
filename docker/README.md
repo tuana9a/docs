@@ -1,33 +1,42 @@
 # Docker
 
-## Install docker-compose
-
-```bash
-curl -SL https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64 -o /usr/local/bin/docker-compose
-```
-
-```bash
-chmod +x /usr/local/bin/docker-compose
-```
-
 ## Networking
 
 [https://www.youtube.com/watch?v=bKFMS5C4CG0](https://www.youtube.com/watch?v=bKFMS5C4CG0)
 
 ## Architecture
 
-## Khởi động
+TODO
 
-khởi chạy một container nhỏ
+## Overlay filesystem
 
-sau đó bạn mở trình duyệt vào địa chỉ localhost:PORT
+các layer của docker hoạt động khá hay và hiệu quả
 
-```bash
-docker run -d -p 80:80 docker/getting-started
-```
+TODO: mình không nhớ nữa khá lâu rồi nếu cần thiết thì phải tìm hiểu lại, còn phía dưới chỉ là sơ lược
 
-```bash
-docker run -dp 8080:80 getting-started
+đại loại các layer là immutable
+
+muốn thay đổi thêm sửa xoá chỉ chỉnh sửa ở layer cao nhất
+
+việc immutable cho phép
+
+- tối ưu bộ nhớ cho các ứng dụng sử dụng chung phần layer thấp hơn
+- thậm chí cải thiện tốc độ build image kể cả với 2 image khác nhau Dockerfile
+  - chỉ cần chung một or một vài layer sẽ share phần layer này
+
+```Dockerfile
+# syntax=docker/dockerfile:1
+
+FROM python:slim-bullseye
+
+WORKDIR /app
+
+COPY requirements.txt requirements.txt
+RUN pip3 install -r requirements.txt
+
+COPY . .
+
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=80"]
 ```
 
 ## công nghệ container
@@ -124,11 +133,10 @@ nếu app có bị hack thì hacker không chiếm toàn quyền root
 để cài bot hay đào coin được
 
 ```dockerfile
-# create user
 FROM node:12-alpine
 
-# create group and user
-RUN groupadd -r tuana9a && useradd -g tuana9a tuana9a
+# create user
+RUN useradd -m tuana9a
 
 # set ownership and permission
 RUN chown -R tuana9a:tuana9a /app
@@ -145,38 +153,3 @@ CMD node index.js
 ```bash
 docker scan
 ```
-
-## Tìm hiểu về Overlay filesystem
-
-các layer của docker hoạt động khá hay và hiệu quả
-
-TODO: mình không nhớ nữa khá lâu rồi nếu cần thiết thì phải tìm hiểu lại, còn phía dưới chỉ là sơ lược
-
-đại loại các layer là immutable
-
-muốn thay đổi thêm sửa xoá chỉ chỉnh sửa ở layer cao nhất
-
-việc immutable cho phép
-
-- tối ưu bộ nhớ cho các ứng dụng sử dụng chung phần layer thấp hơn
-- thậm chí cải thiện tốc độ build image kể cả với 2 image khác nhau Dockerfile
-  - chỉ cần chung một or một vài layer sẽ share phần layer này
-
-```Dockerfile
-# syntax=docker/dockerfile:1
-
-FROM python:slim-bullseye
-
-WORKDIR /app
-
-COPY requirements.txt requirements.txt
-RUN pip3 install -r requirements.txt
-
-COPY . .
-
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=80"]
-```
-
-## output
-
-![docker-layers-log.PNG](./img/docker-layers-log.PNG)

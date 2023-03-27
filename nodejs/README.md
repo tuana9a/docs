@@ -1,10 +1,6 @@
 # nodejs
 
-`package-lock.json`, `package.json` sẽ là thứ giúp quản lí module
-
-nếu chuyển máy tính chỉ cần npm init là sẽ tự build các dependency cho mình
-
-# npm
+`package.json` và `package-lock.json` sẽ là thứ giúp quản lí module, nếu chuyển máy tính chỉ cần `npm init` là sẽ tự build các dependency cho mình
 
 các lệnh npm thường dùng
 
