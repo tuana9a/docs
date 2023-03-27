@@ -9,9 +9,7 @@ http {
 }
 ```
 
-conf location `/etc/nginx/conf.d/default.conf`
-
-the name `default.conf` can be any `.conf`
+custom conf location `/etc/nginx/conf.d/*.conf`
 
 ## reverse proxy
 
