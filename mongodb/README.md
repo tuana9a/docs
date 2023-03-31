@@ -1,4 +1,6 @@
-# add ssl mongodb
+# MongoDB
+
+## add ssl mongodb
 
 cert key file khi cấu hình ssl tls của mongodb có cấu trúc là
 
@@ -28,3 +30,31 @@ net:
 ```
 
 như vậy đã thành công add ssl cho mongodb
+
+## add user
+
+root user
+
+```js
+use admin
+db.createUser(
+  {
+    user: "admin",
+    pwd: "password",
+    roles: [ { role: "root", db: "admin" } ]
+  }
+)
+```
+
+common user for backend
+
+```js
+use tuana9a
+db.createUser(
+  {
+    user: "tuana9a",
+    pwd:  "password",
+    roles: [ { role: "readWrite", db: "tuana9a" } ]
+  }
+)
+```
