@@ -6,7 +6,17 @@
 curl -L https://install.pivpn.io | bash
 ```
 
-how to edit pivpn config
+or Non-interactive installation
+
+```bash
+curl -L https://install.pivpn.io > install.sh
+chmod +x install.sh
+./install.sh --unattended options.conf
+```
+
+example file [https://github.com/pivpn/pivpn/blob/master/examples/unattended_openvpn_example.conf](https://github.com/pivpn/pivpn/blob/master/examples/unattended_openvpn_example.conf)
+
+## how to edit pivpn config
 
 `/etc/pivpn/openvpn/setupVars.conf`
 
