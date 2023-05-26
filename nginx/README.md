@@ -11,6 +11,21 @@ http {
 
 custom conf location `/etc/nginx/conf.d/*.conf`
 
+## host static files
+
+bonus: with single page application (SPA)
+
+```conf
+server {
+  listen 80;
+  server_name hi.tuana9a.com;
+  location / {
+    root /var/www/html/hi/;
+    try_files $uri /index.html; # here is for SPA
+  }
+}
+```
+
 ## reverse proxy
 
 ```conf
