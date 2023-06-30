@@ -1,3 +1,3 @@
 # docs
 
-Everything I've learned
+Everything I've learned in en, vi

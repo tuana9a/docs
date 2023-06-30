@@ -4,100 +4,64 @@
 
 ```bash
 sudo apt install snapd -y
-```
-
-```bash
 sudo snap install --classic certbot
-```
-
-```bash
 sudo ln -s /snap/bin/certbot /usr/bin/certbot
-```
-
-```bash
 sudo snap set certbot trust-plugin-with-root=ok
 ```
+
+(optional if you use cloudflare dns)
 
 ```bash
 sudo snap install certbot-dns-cloudflare
 ```
 
-_add **sudo** if needed_
-
 ## Create certs
 
 ```bash
-certbot certonly -d tuana9a.com -d calendar.tuana9a.com
-```
-
-wildcard
-
-```bash
-certbot certonly --dns-cloudflare --dns-cloudflare-credentials cloudflare.ini -d tuana9a.com -d *.tuana9a.com
-```
-
-## Display certs
-
-```bash
-certbot certificates
-```
-
-## Revoke and delete certs
-
-```bash
-certbot revoke --cert-name tuana9a.com
-```
-
-## Install individual certs
-
-```bash
+sudo certbot certonly -d tuana9a.com -d calendar.tuana9a.com
+# or
 sudo certbot certonly -d tuana9a.com
+sudo certbot certonly -d dkhptd.tuana9a.com
 ```
 
-vị trí của cert `/etc/letsencrypt/live/`
-
-```bash
-sudo certbot certonly -d docs.tuana9a.com
-```
-
-```bash
-sudo certbot certonly -d calendar.tuana9a.com
-```
-
-```bash
-sudo certbot certonly -d captcha2text.tuana9a.com
-```
-
-```bash
-sudo certbot certonly -d assistant.tuana9a.com
-```
-
-## Install with wildcard
+## Create wildcard certs
 
 file `cloudflare.ini`
 
-global api
-
-using global token key is oke if you don't need serious security
+using global api key
 
 ```ini
 dns_cloudflare_email = example@example.com
-dns_cloudflare_api_key = GLOBAL_TOKEN_API_KEY
+dns_cloudflare_api_key = yourglobalapikey
 ```
 
-or api token (api token don't need email)
+using api token (don't need email)
 
 ```ini
 dns_cloudflare_api_token = yourapitoken
 ```
 
-## Using wildcards with cloudflare
-
 ```bash
+sudo certbot certonly --dns-cloudflare --dns-cloudflare-credentials cloudflare.ini -d tuana9a.com -d *.tuana9a.com
+# or
 sudo certbot certonly --dns-cloudflare --dns-cloudflare-credentials cloudflare.ini -d tuana9a.com,*.tuana9a.com
 ```
 
-## Remove cert
+Certs location: `/etc/letsencrypt/live/`
+
+## Display certs
+
+```bash
+sudo certbot certificates
+```
+
+## Revoke and delete certs
+
+```bash
+sudo certbot revoke --cert-name tuana9a.com
+```
+
+## Delete certs
 
 ```bash
 sudo certbot delete
@@ -115,7 +79,7 @@ place your scripts in these folder
 /etc/letsencrypt/renewal/
 ```
 
-## Test Renewal
+Test Renewal
 
 ```bash
 sudo certbot renew --dry-run
