@@ -32,14 +32,20 @@ WantedBy=multi-user.target
 
 lastest openvpn support multiple config in same machine and can be load automatically to systemd
 
-copy your .ovpn files to this directory `/etc/openvpn/client/`
+copy your .ovpn files to this directory `/etc/openvpn/client/` and replace `.ovpn with .conf`
 
-replace .ovpn with .conf
-
-then you can start each client config with
+then start each client config with
 
 ```bash
-systemctl start openvpn-client@your-config-file-name-without-extension
+systemctl start openvpn-client@config-file-name-without-.conf
+```
+
+example
+
+```bash
+sudo cp user1.ovpn /etc/openvpn/client/user1.conf
+sudo systemctl start openvpn-client@user1
+sudo systemctl enable openvpn-client@user1
 ```
 
 ## vpn only
