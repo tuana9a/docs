@@ -13,7 +13,7 @@ stream {
 
 custom conf location `/etc/nginx/conf.d/*.conf`
 
-## serve static files
+## static files
 
 bonus: with single page application (SPA)
 
@@ -22,7 +22,7 @@ server {
   listen 80;
   server_name hi.tuana9a.com;
   location / {
-    root /var/www/html/hi/;
+    root /var/www/hi/;
     try_files $uri /index.html;
   }
 }
@@ -30,10 +30,24 @@ server {
 
 ## http reverse proxy
 
+with `server_name`
+
 ```conf
 server {
   listen 80;
   server_name hcr.tuana9a.com;
+  location / {
+    proxy_pass http://172.77.0.60:8080;
+    proxy_set_header Host $host; # optional
+  }
+}
+```
+
+without `server_name`
+
+```conf
+server {
+  listen 8080;
   location / {
     proxy_pass http://172.77.0.60:8080;
     proxy_set_header Host $host; # optional
@@ -56,7 +70,7 @@ server {
 }
 ```
 
-## stream (TCP) reverse proxy
+## stream - tcp reverse proxy
 
 ```conf
 server {
@@ -64,3 +78,18 @@ server {
   proxy_pass 10.24.30.11:443;
 }
 ```
+
+## stub_status
+
+expose server metrics for [nginx-prometheus-exporter](https://github.com/nginxinc/nginx-prometheus-exporter)
+
+```conf
+server {
+  listen 8080;
+  location /stub_status {
+    stub_status;
+  }
+}
+```
+
+test with `curl http://localhost:8080/stub_status`
