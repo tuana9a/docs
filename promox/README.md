@@ -2,34 +2,41 @@
 
 ## increase default root storage for storing virtual machines
 
-first remove `local-lvm` that doesn't need anymore.
+first remove `local-lvm` via the web-ui.
 
-open the proxmox server shell.
+![./imgs/remove-local-lvm-via-web-ui.png](./imgs/remove-local-lvm-via-web-ui.png)
+
+open the proxmox server shell then type these commands to take 100% disk size.
 
 ```bash
 lvremove /dev/pve/data
 ```
-
-this will make the root fs take 100% space of the disk.
 
 ```bash
 lvresize -l +100%FREE /dev/pve/root
 ```
 
 ```bash
-resize2fs /dev/mappper/pve-root
+resize2fs /dev/mapper/pve-root
 ```
+
+then allow disk image for storage
+
+![./imgs/allow-disk-image-for-storage.png](./imgs/allow-disk-image-for-storage.png)
 
 ## proxmox resize disk for ubuntu server 18.04
 
-on proxmox
+on proxmox host
 
 ```bash
-# qm resize <vmid> <disk> <size>
+qm resize <vmid> <disk> <size>
+```
+
+```bash
 qm resize 102 scsi0 +80G
 ```
 
-on ubuntu virtual machines
+on virtual machines
 
 ```bash
 lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv
@@ -59,6 +66,8 @@ vim /etc/network/interfaces
 
 add these line, edit if necessary 😊.
 
+**IMPORTANT**: interface name must start with `vmbr`, ex: `vmbr1`, `vmbr2`
+
 ```bash
 auto vmbr2
 iface vmbr2 inet static
@@ -69,9 +78,12 @@ iface vmbr2 inet static
         bridge_fd 0
  
 post-up echo 1 > /proc/sys/net/ipv4/ip_forward
-post-up   iptables -t nat -A POSTROUTING -s '192.168.1.0/24' -o vmbr1 -j MASQUERADE
-post-down iptables -t nat -D POSTROUTING -s '192.168.1.0/24' -o vmbr1 -j MASQUERADE
+
+post-up   iptables -t nat -A POSTROUTING -s '192.168.1.0/24' -o vmbr0 -j MASQUERADE
+post-down iptables -t nat -D POSTROUTING -s '192.168.1.0/24' -o vmbr0 -j MASQUERADE
 ```
+
+vmbr0 is another interface that will be used to access outside network (NAT)
 
 ```bash
 ifup vmbr2
