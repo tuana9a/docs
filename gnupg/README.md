@@ -1,4 +1,6 @@
-# how to fix `gpg: signing failed: Inappropriate ioctl for device`
+# gnupg
+
+## maven how to fix `gpg: signing failed: Inappropriate ioctl for device`
 
 edit `~/.gnupg/gpg.conf`
 

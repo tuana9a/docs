@@ -43,9 +43,9 @@ systemctl start openvpn-client@config-file-name-without-.conf
 example
 
 ```bash
-sudo cp user1.ovpn /etc/openvpn/client/user1.conf
-sudo systemctl start openvpn-client@user1
-sudo systemctl enable openvpn-client@user1
+sudo cp client-name.ovpn /etc/openvpn/client/client-name.conf
+sudo systemctl start openvpn-client@client-name
+sudo systemctl enable openvpn-client@client-name
 ```
 
 ## vpn only
@@ -53,13 +53,6 @@ sudo systemctl enable openvpn-client@user1
 Refs: [https://askubuntu.com/questions/788803/how-to-change-the-metric-of-an-openvpn-client-default-route](https://askubuntu.com/questions/788803/how-to-change-the-metric-of-an-openvpn-client-default-route)
 
 add `route-nopull` to the end of `.ovpn` config file
-
-like this
-
-```ini
-...
-route-nopull
-```
 
 ## how to change private ip for vpn
 

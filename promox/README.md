@@ -28,6 +28,8 @@ then allow disk image for storage
 
 on proxmox host
 
+[https://pve.proxmox.com/wiki/Resize_disks](https://pve.proxmox.com/wiki/Resize_disks)
+
 ```bash
 qm resize <vmid> <disk> <size>
 ```
@@ -38,6 +40,10 @@ qm resize 102 scsi0 +80G
 
 on virtual machines
 
+[Ubuntu: Extend your default LVM space](https://packetpushers.net/ubuntu-extend-your-default-lvm-space/)
+
+[Ask Ubuntu - Ubuntu Server 18.04 LVM out of space with improper default partitioning](https://askubuntu.com/questions/1106795/ubuntu-server-18-04-lvm-out-of-space-with-improper-default-partitioning)
+
 ```bash
 lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv
 ```
@@ -46,13 +52,7 @@ lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv
 resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv
 ```
 
-### Refs
-
-[https://pve.proxmox.com/wiki/Resize_disks](https://pve.proxmox.com/wiki/Resize_disks)
-
-[https://packetpushers.net/ubuntu-extend-your-default-lvm-space/](https://packetpushers.net/ubuntu-extend-your-default-lvm-space/)
-
-[https://askubuntu.com/questions/1106795/ubuntu-server-18-04-lvm-out-of-space-with-improper-default-partitioning](https://askubuntu.com/questions/1106795/ubuntu-server-18-04-lvm-out-of-space-with-improper-default-partitioning)
+### refs
 
 ## how to add NAT network to proxmox
 
@@ -92,3 +92,27 @@ ifup vmbr2
 ```bash
 ifreload -a # just to make sure
 ```
+
+## how to import from virtual box
+
+[https://credibledev.com/import-virtualbox-and-virt-manager-vms-to-proxmox/#import-virtualbox-vm-to-proxmox](https://credibledev.com/import-virtualbox-and-virt-manager-vms-to-proxmox/#import-virtualbox-vm-to-proxmox)
+
+export virtualbox to `.ova` file
+
+```bash
+tar -xvf your-vm.ova
+```
+
+create a blank vm on promox (no disk)
+
+```bash
+qm importdisk <vmid> your-vm-disk001.vmdk <storage_name> -format qcow2
+```
+
+ex:
+
+```bash
+qm importdisk 121 k8s-instance-1-disk001.vmdk local -format qcow2
+```
+
+then just enable (Add) the disk in proxmox web ui.

@@ -1,4 +1,6 @@
-# Fn key rows not work in ubuntu (linux in general)
+# Keychron
+
+## Fn key rows not work in ubuntu (linux in general)
 
 Thanks
 

@@ -12,17 +12,16 @@ SYSTEM "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
         <property name="hibernate.connection.username">username</property>
         <property name="hibernate.connection.password">password</property>
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <!-- org.hibernate.dialect.MySQL5Dialect || org.hibernate.dialect.MySQL5InnoDBDialect -->
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+        <!-- <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property> -->
         <property name="hibernate.show_sql">true</property>
-        <!-- create || update || validate -->
+        <!-- <property name="hibernate.hbm2ddl.auto">create</property> -->
+        <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
         <property name="hibernate.hbm2ddl.auto">validate</property>
-        <!-- <mapping resource="Book.hbm.xml" /> -->
+        <mapping resource="Book.hbm.xml" />
     </session-factory>
 </hibernate-configuration>
 ```
-
-# Examples
 
 `Book.hbm.xml`
 

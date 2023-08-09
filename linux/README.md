@@ -2,15 +2,12 @@
 
 My knowledge about linux
 
-# Concepts
-
 ## Shell
 
-là thằng sẽ thực thi nhiệm vụ thông tin lệnh mà bạn nhấp vào<br>
+là thằng sẽ thực thi lệnh mà bạn nhập vào
 tương tác với hệ điều hành để trả ra output cho bạn
 
-một hệ điều hành có thể có nhiều shell<br>
-VD:
+một hệ điều hành có thể có nhiều shell, VD:
 
 - `bash`
   - hoặc `sh`
@@ -20,20 +17,15 @@ VD:
 - `fish`
   - autocompletion, syntax hightlight
 
-mỗi shell sẽ có syntax và các chức năng khá nhau
-
-thường shell cho phép lập trình với các đoạn script sẵn<br>
-mà có thể được thực thi sau đó
+mỗi shell sẽ có syntax và các chức năng khác nhau, bản thân shell cho phép lập trình bằng cách viết những đoạn mã đó vào một file, sau đó bạn có thể chạy đoạn mã đó như một chương trình
 
 ## POSIX
 
 là một chuẩn cho các shell của linux giống EMAScript cho Javascript vậy
 
-# File System
+## File System
 
 quote: **"Everything in linux is file"**
-
-## file system explaination
 
 ### `/bin`
 
@@ -83,12 +75,13 @@ tuana9a is my username
 
 legacy, backword compatibility but still quite popular these day
 
-contains opt (stand for **option** or **optional**) software packages that you<br>
+contains opt (stand for **option** or **optional**) software packages that you
 or your vendor place in here to use later
 
 ### `/proc`
 
-contains pesudo file system that is **appear when startup** and **disappear when shutdown**
+contains pesudo file system that is **appear when startup**
+and **disappear when shutdown**
 
 contains infomation about every process running in the system
 
@@ -135,3 +128,7 @@ contains system specific variables file like:
 - temporary message files
 - config files if **not** in `/etc`
 - `/var/www` for apache web server
+
+## `/dev` explained
+
+![./img/dev.jpeg](./img/dev.jpeg)
