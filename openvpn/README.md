@@ -1,43 +1,23 @@
 # OpenVPN
 
-## openvpn + systemd
-
 ```bash
 sudo apt install openvpn
 ```
 
-get your conf file `your-config.ovpn`
+## multiple openvpn client with systemd
 
-write below content to `/lib/systemd/system/openvpn.service`
+Thanks [https://askubuntu.com/a/1086407](https://askubuntu.com/a/1086407)
 
-```conf
-# This service is actually a systemd target,
-# but we are using a service since targets cannot be reloaded.
+lastest openvpn support multiple configs in same machine
 
-[Unit]
-Description=OpenVPN service
-After=network.target
+and it can be load automatically to systemd
 
-[Service]
-Type=oneshot
-RemainAfterExit=yes
-ExecStart=/usr/sbin/openvpn --daemon --cd /etc/openvpn/ --config your-config.ovpn
-WorkingDirectory=/etc/openvpn/
+copy your .ovpn files to this directory `/etc/openvpn/client/` and replace `.ovpn` with `.conf`
 
-[Install]
-WantedBy=multi-user.target
-```
-
-## multiple openvpn client with systemd (from [stackoverflow](https://askubuntu.com/a/1086407))
-
-lastest openvpn support multiple config in same machine and can be load automatically to systemd
-
-copy your .ovpn files to this directory `/etc/openvpn/client/` and replace `.ovpn with .conf`
-
-then start each client config with
+start each client config with
 
 ```bash
-systemctl start openvpn-client@config-file-name-without-.conf
+systemctl start openvpn-client@client-name
 ```
 
 example
@@ -74,6 +54,40 @@ edit client config (if has)
 
 ```conf
 ifconfig-push 10.0.0.2 255.255.255.0
+```
+
+## custom openvpn + systemd
+
+Setup openvpn-client with systemd service.
+
+Create new file `/lib/systemd/system/openvpn.service`
+
+```conf
+# This service is actually a systemd target,
+# but we are using a service since targets cannot be reloaded.
+
+[Unit]
+Description=OpenVPN service
+After=network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/sbin/openvpn --daemon --cd /etc/openvpn/ --config /path/to/config.ovpn
+WorkingDirectory=/etc/openvpn/
+
+[Install]
+WantedBy=multi-user.target
+```
+
+```bash
+sudo systemctl start openvpn
+```
+
+autostart on boot
+
+```bash
+sudo systemctl enable openvpn
 ```
 
 ## edit iptables
