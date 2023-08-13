@@ -44,12 +44,38 @@ on virtual machines
 
 [Ask Ubuntu - Ubuntu Server 18.04 LVM out of space with improper default partitioning](https://askubuntu.com/questions/1106795/ubuntu-server-18-04-lvm-out-of-space-with-improper-default-partitioning)
 
+**NOTE** `cfdisk` step is only needed when you see disk size doens't increase after your resize it on the web ui.
+
 ```bash
-lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv
+cfdisk
+```
+
+Select `/dev/sda3` (disk you want to resize)
+
+Select `Resize`, Hit `Enter`
+
+Hit `Write`, type `yes`, hit `Enter`
+
+Hit `q` to quit
+
+```bash
+pvdisplay
 ```
 
 ```bash
-resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv
+vgdisplay
+```
+
+```bash
+lvdisplay
+```
+
+```bash
+sudo lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv
+```
+
+```bash
+sudo resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv
 ```
 
 ### refs
