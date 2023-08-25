@@ -415,3 +415,100 @@ sysadmin@localhost:~$
 ```
 
 The `2>&1` part of the command means "send the stderr (channel 2) to the same place where stdout (channel 1) is going".
+
+## Computer Hardware
+
+### Processors
+
+```bash
+arch
+```
+
+```bash
+lscpu
+```
+
+```bash
+less /proc/cpuinfo
+```
+
+### RAM (Random Access Memory)
+
+```bash
+free -m # round to megabytes
+```
+
+```bash
+free -g # round to gigabytes
+```
+
+### Buses
+
+A bus is a high-speed connection that allows communication between computers or the components inside a computer.\
+The motherboard has buses that allow for multiple devices to connect to the system, including the Peripheral Component Interconnect (PCI) and Universal Serial Bus (USB).\
+The motherboard also has connectors for monitors, keyboards and mice.
+
+Devices connected internally are usually cold-plug, meaning the system must be shut down in order to connect or disconnect a device.\
+USB devices are hot-plug, meaning they can be connected or disconnected while the system is running.
+
+```bash
+lspci
+```
+
+list pci buses with theirs used kernel, modules
+
+```bash
+lspci -k
+```
+
+```bash
+lsusb
+```
+
+list loaded modules
+
+```bash
+lsmod
+```
+
+### Hard Drives
+
+Hard drives are divided into one or more partitions.\
+A partition is a logical division of a hard drive, designed to take a large amount of available storage space and break it up into smaller areas.\
+While it is common on Microsoft Windows to have a single partition for each hard drive, on Linux distributions, multiple partitions per hard drive is common.
+
+Some hard drives make use of a partitioning technology called Master Boot Record (MBR) while others make use of a partitioning type called GUID Partitioning Table (GPT).\
+The MBR type of partitioning has been used since the early days of the Personal Computer (PC), and the GPT type has been available since the year 2000.
+
+An old term used to describe an internal hard disk is fixed disk, as the disk is fixed (not removable).\
+This term gave rise to several command names: the `fdisk`, `cfdisk` and `sfdisk` commands, which are tools for working with the MBR partitioned disks.
+
+The GPT disks use a newer type of partitioning, which allows the user to divide the disk into more partitions than what MBR supports.\
+GPT also allows having partitions which can be larger than two terabytes (MBR does not).\
+The tools for managing GPT disks are named similarly to their fdisk counterparts: `gdisk`, `cgdisk`, and `sgdisk`.
+
+There is also a family of tools that attempt to support both MBR and GPT type disks. This set of tools includes the `parted` command and the graphical `gparted` tool.
+
+Hard drives are associated with file names (called device files) that are stored in the /dev directory. Each device file name is made up of multiple parts.
+
+- **File Type**\
+The file name is prefixed based on the different types of hard drives.\
+IDE (Intelligent Drive Electronics) hard drives begin with `hd`, while USB, SATA (Serial Advanced Technology Attachment) and SCSI (Small Computer System Interface) hard drives begin with `sd`.
+
+- **Device Order**\
+Each hard drive is then assigned a letter which follows the prefix. For example, the first IDE hard drive would be named `/dev/hda` and the second would be `/dev/hdb`, and so on.
+
+- **Partition**\
+Finally, each partition on a disk is given a unique numeric indicator. For example, if a USB hard drive has two partitions, they could be associated with the `/dev/sda1` and `/dev/sda2` device files.
+
+## Optical Drives
+
+Optical drives, often referred to as CD-ROMs, DVDs, or Blu-Ray, are removable storage media.\
+While some devices used with optical disks are read-only, others are capable of burning (writing to) disks, when using a writable type of disk.\
+There are various standards for writable and rewritable disks, such as CD-R, CD+R, DVD+RW, and DVD-RW.
+
+Where these removable disks are mounted in the file system is an important consideration for a Linux administrator.\
+Modern distributions often mount the disks under the /media folder, while older distributions typically mount them under the /mnt folder.\
+For example, a USB thumb drive might be mounted on the /media/usbthumb path.
+
+Upon mounting, most GUI interfaces prompt the user to take some action, such as open the contents of the disk in a file browser or start a media program. When the user is finished using the disk, it is necessary to unmount it using a menu or the umount command.
