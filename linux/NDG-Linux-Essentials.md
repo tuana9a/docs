@@ -512,3 +512,103 @@ Modern distributions often mount the disks under the /media folder, while older 
 For example, a USB thumb drive might be mounted on the /media/usbthumb path.
 
 Upon mounting, most GUI interfaces prompt the user to take some action, such as open the contents of the disk in a file browser or start a media program. When the user is finished using the disk, it is necessary to unmount it using a menu or the umount command.
+
+## Processes
+
+The kernel provides access to information about active processes through a `pseudo filesystem` that is visible under the `/proc` directory. Hardware devices are made available through special files under the `/dev` directory, while information about those devices can be found in another pseudo filesystem under the `/sys` directory.
+
+Pseudo filesystems appear to be real files on disk but exist only in memory. Most pseudo file systems such as `/proc` are designed to appear to be a hierarchical tree off the root of the system of directories, files and subdirectories, but in reality only exist in the system's memory, and only appear to be resident on the storage device that the root file system is on.
+
+The `/proc` directory not only contains information about running processes, as its name would suggest, but it also contains information about the system hardware and the current kernel configuration.
+
+The `/proc` directory is read, and its information utilized by many different commands on the system, including but not limited to top, free, mount, umount and many many others. It is rarely necessary for a user to mine the `/proc` directory directly—it’s easier to use the commands that utilize its information.
+
+## Process Hierarchy
+
+When the kernel finishes loading during the boot procedure, it starts the init process and assigns it a PID of **1**. This process then starts other system processes, and each process is assigned a PID in **sequential** order.
+
+>Consider This\
+>On a System V-based system, the init process would be the `/sbin/init` program.\
+>On a systemd-based system, the `/bin/systemd` file is typically executed but is almost always a link to the `/lib/system/systemd` executable.\
+>Regardless of which type of system init process that is being run, the information about the process can be found in the `/proc/1` directory.
+
+As either of the init processes starts up other processes, they, in turn, may start up processes, which may start up other processes, on and on.\
+When one process starts another process, the process that performs the starting is called the parent process and the process that is started is called the child process. When viewing processes, the parent PID is labeled **PPID**.
+
+When the system has been running for a long time, it may eventually reach the **maximum** PID value,\
+which can be viewed and configured through the `/proc/sys/kernel/pid_max` file.\
+Once the largest PID has been used, the system "**rolls over**" and continues seamlessly by assigning PID values that are **available** at the bottom of the range.
+
+```bash
+pstree
+# or
+ps --forest
+# list all processes
+ps aux
+# also list all processes
+ps -ef
+# filter with grep
+ps -ef | grep firefox
+ps -e | grep firefox
+# filter by username
+ps -u tuana9a
+```
+
+## Memory
+
+Memory on a modern Linux system is governed and managed by the kernel.\
+The hardware memory on the system is shared by all the processes on the system, through a method called `virtual addressing`.
+
+- Vritual addressing make the system look like having more RAM capacity than the actual physical RAM capacity.\
+It does this by allocating certain areas of a physical (or virtual) hard disk to be used in place of physical RAM.
+- Virtual addressing allows many processes to access the same memory without conflicts or crashes.
+- Memory is divided into blocks of equally sized units that can be addressed like any other resource on the system.
+- Not only can the system access memory from local system addresses, but it can also access memory that is located elsewhere, such as on a different computer, a virtual device, or even on a volume that is physically located on another continent!
+
+Kernel space is where code for the kernel is stored and executed. This is generally in a “protected” range of memory addresses and remains isolated from other processes with lower privileges.
+
+User space, on the other hand, is available to users and programs. They communicate with the Kernel through “system call” APIs that act as intermediaries between regular programs and the Kernel. This system of separating potentially unstable or malicious programs from the critical work of the Kernel is what gives Linux systems the stability and resilience that application developers rely on.
+
+## Filesystem Hierarchy Standard
+
+Among the standards supported by the Linux Foundation is the **Filesystem Hierarchy Standard (FHS)**, which is hosted at the URL [https://www.pathname.com/fhs/](https://www.pathname.com/fhs/).
+
+A standard is a set of rules or guidelines that it is recommended to follow. However, these guidelines certainly can be broken, either by entire distributions or by administrators on individual machines.
+
+## Software Application Directories
+
+Unlike the Windows operating system, where applications may have all of their files installed in a single subdirectory under the `C:\Program Files` directory, applications in Linux may have their files in multiple directories spread out throughout the Linux filesystem.\
+For Debian-derived distributions, you can execute the `dpkg -L packagename` command to get the list of file locations.\
+In Red Hat-derived distributions, you can run the `rpm -ql packagename` command for the list of the locations of the files that belong to that application.
+
+The executable program binary files may go in the `/usr/bin` directory if they are included with the operating system, or else they may go into the `/usr/local/bin` or `/opt/application/bin` directories if they came from a third party.
+
+The data for the application may be stored in one of the following subdirectories:
+
+- `/usr/share`
+- `/usr/lib`
+- `/opt/application`
+- `/var/lib`
+
+The file related to documentation may be stored in one of the following subdirectories:
+
+- `/usr/share/doc`
+- `/usr/share/man`
+- `/usr/share/info`
+
+The global configuration files for an application are most likely to be stored in a subdirectory under the `/etc` directory, while the personalized configuration files (specific for a user) for the application are probably in a hidden subdirectory of the user's home directory.
+
+## Library Directories
+
+Libraries are files which contain code that is shared between multiple programs.\
+Most library file names end in a file extension of `.so`, which means **shared object**.
+
+Multiple versions of a library may be present because the code may be different within each file even though it may perform similar functions as other versions of the library.\
+One of the reasons that the code may be different, even though it may do the same thing as another library file, is that it is compiled to run on a different kind of processor.\
+For example, it is typical for systems that use code designed for 64-bit Intel/AMD type processors to have both 32-bit libraries and 64-bit libraries.
+
+The libraries that support the essential binary programs found in the `/bin` and `/sbin` directories are typically located in either `/lib` or `/lib64`.
+
+To support the `/usr/bin` and `/usr/sbin` executables, the `/usr/lib` and `/usr/lib64` library directories are typically used.
+
+For supporting applications that are not distributed with the operating system, the `/usr/local/lib` and `/opt/application/lib` library directories are frequently used.
