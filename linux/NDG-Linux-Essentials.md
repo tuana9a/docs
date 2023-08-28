@@ -612,3 +612,51 @@ The libraries that support the essential binary programs found in the `/bin` and
 To support the `/usr/bin` and `/usr/sbin` executables, the `/usr/lib` and `/usr/lib64` library directories are typically used.
 
 For supporting applications that are not distributed with the operating system, the `/usr/local/lib` and `/opt/application/lib` library directories are frequently used.
+
+## Network Configuration Files
+
+Name resolution on a Linux host is accomplished by 3 critical files: the `/etc/hosts`, `/etc/resolv.conf` and `/etc/nsswitch.conf` files.\
+Together, they describe the location of name service information, the order in which to check resources, and where to go for that information.
+
+`/etc/hosts` contains table of hostnames to IP addresses
+
+`/etc/resolv.conf` contains IP addresses of nameservers.
+
+```conf
+nameserver 10.0.2.3
+nameserver 10.0.2.4
+```
+
+The DNS resolution system will use the first name server for an attempted lookup of the name.\
+If that is unavailable, or a timeout period is reached, the second server will then be queried for the name resolution.\
+If a match is found, it is returned to the system and used for initiating a connection and is also placed in the DNS cache for a configurable time period.
+
+`/etc/nsswitch.conf` This file can be used to modify where hostname lookups occur. It contains a particular entry that describes in what order name resolution sources are consulted.
+
+```conf
+hosts:          files dns
+```
+
+1. look up an entry in `/etc/hosts`
+2. query dns from servers listed in `/etc/resolv.conf`
+
+```conf
+hosts:          dns files # search dns first then lookup in file
+```
+
+1. query dns from servers listed in `/etc/resolv.conf`
+2. look up an entry in `/etc/hosts`
+
+## Network Commands
+
+```bash
+ifconfig # old, deprecated
+ip addr show # new, replacement
+```
+
+```bash
+route # old
+route -n # old
+ip route # new
+ip route show # new
+```
