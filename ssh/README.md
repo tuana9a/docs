@@ -2,17 +2,30 @@
 
 ## prepare ssh on client
 
+prepare directory
+
+```bash
+cd ~
+mkdir .ssh
+chmod 700 .ssh
+```
+
 create new client ssh key pair
 
 ```bash
 ssh-keygen -t rsa
-cd ~
-mkdir .ssh
-# copy existing ssh files (if has)
+```
+
+or copy existing ones
+
+```bash
 cp KEYFILE .ssh/id_rsa
 cp PUBKEYFILE .ssh/id_rsa.pub
-# change to correct permissions
-chmod 700 .ssh
+```
+
+update permissions
+
+```bash
 chmod 600 .ssh/id_rsa
 chmod 644 .ssh/id_rsa.pub
 ```
@@ -22,16 +35,27 @@ chmod 644 .ssh/id_rsa.pub
 install ssh server
 
 ```bash
-# install if not
-sudo apt install openssh-server
-# inject ssh keys
+sudo apt install -y openssh-server
+```
+
+prepare directory
+
+```bash
 cd ~
 mkdir .ssh
-# copy client public key
+chmod 700 .ssh
+```
+
+inject ssh keys
+
+```bash
 echo PUBLICKEY >> .ssh/authorized_keys
 # or
-cat PUBLICKEY >> .ssh/authorized_keys
-# change to correct permissions
-chmod 700 .ssh
+cat PUBLICKEY_FILE >> .ssh/authorized_keys
+```
+
+update permissions
+
+```bash
 chmod 600 .ssh/authorized_keys
 ```
