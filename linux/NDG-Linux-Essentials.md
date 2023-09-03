@@ -96,16 +96,16 @@ Double quotes stop the shell from interpreting some metacharacters (special char
 
 Glob characters, also called wild cards, are symbols that have special meaning to the shell; they are interpreted by the shell itself before it attempts to run any command. Glob characters include the asterisk * character, the question ? mark character, and the brackets [ ], among others.
 
-```bash
-echo "The glob characters are *, ? and [ ]"
-# The glob characters are *, ? and [ ]
+```shell
+sysadmin@localhost:~$ echo "The glob characters are *, ? and [ ]"
+The glob characters are *, ? and [ ]
 ```
 
 Double quotes still allow for command substitution, variable substitution, and permit some other shell metacharacters. The following demonstration shows that the value of the PATH variable is still displayed:
 
-```bash
-echo "The path is $PATH"
-# The path is /usr/bin/custom:/home/sysadmin/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+```shell
+sysadmin@localhost:~$ echo "The path is $PATH"
+The path is /usr/bin/custom:/home/sysadmin/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
 ```
 
 ### Single Quotes
@@ -114,11 +114,11 @@ Single quotes prevent the shell from doing any interpreting of special character
 
 For example, to make the $ character simply mean a $, rather than it acting as an indicator to the shell to look for the value of a variable, execute the second command displayed below:
 
-```bash
-echo The car costs $100
-# The car costs 00
-echo 'The car costs $100'
-# The car costs $100
+```shell
+sysadmin@localhost:~$ echo The car costs $100
+The car costs 00
+sysadmin@localhost:~$ 'The car costs $100'
+The car costs $100
 ```
 
 ### Backslash Character
@@ -128,25 +128,25 @@ There is also an alternative technique to essentially single quote a single char
 The service costs $1 and the path is $PATH
 If this sentence is placed in double quotes, $1 and $PATH are considered variables.
 
-```bash
-echo "The service costs $1 and the path is $PATH"
-# ‌⁠​​⁠​The service costsand the path is /usr/bin/custom:/home/sysadmin/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games 
+```shell
+sysadmin@localhost:~$ echo "The service costs $1 and the path is $PATH"
+⁠​​⁠​The service costsand the path is /usr/bin/custom:/home/sysadmin/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
 ```
 
 If it is placed in single quotes, $1 and $PATH are not considered variables.
 
-```bash
-echo 'The service costs $1 and the path is $PATH'
-# The service costs $1 and the path is $PATH
+```shell
+sysadmin@localhost:~$ 'The service costs $1 and the path is $PATH'
+The service costs $1 and the path is $PATH
 ```
 
 But what if you want to have $PATH treated as a variable and $1 not?
 
 In this case, use a backslash \ character in front of the dollar sign $ character to prevent the shell from interpreting it. The command below demonstrates using the \ character:
 
-```bash
-echo The service costs \$1 and the path is $PATH
-# The service costs $1 and the path is /usr/bin/custom:/home/sysadmin/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+```shell
+sysadmin@localhost:~$ echo The service costs \$1 and the path is $PATH
+The service costs $1 and the path is /usr/bin/custom:/home/sysadmin/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
 ```
 
 ### Backquotes
@@ -155,30 +155,30 @@ Backquotes, or backticks, are used to specify a command within a command, a proc
 
 While it may sound confusing, an example should make things more clear. To begin, note the output of the date command:
 
-```bash
-date
-# Mon Nov4 03:35:50 UTC 2018
+```shell
+sysadmin@localhost:~$ date
+Mon Nov4 03:35:50 UTC 2018
 ```
 
 Now, note the output of the echo command:
 
-```bash
-echo Today is date
-# Today is date
+```shell
+sysadmin@localhost:~$ echo Today is date
+Today is date
 ```
 
 In the previous command, the word date is treated as regular text, and the shell passes date to the echo command. To execute the date command and have the output of that command sent to the echo command, put the date command in between two backquote characters:
 
-```bash
-echo Today is `date` 
-# Today is Mon Nov 4 03:40:04 UTC 2018
+```shell
+sysadmin@localhost:~$ echo Today is `date`
+Today is Mon Nov 4 03:40:04 UTC 2018
 ```
 
 seems to equals with
 
-```bash
-echo Today is $(date)
-# Today is Mon Nov 4 03:40:04 UTC 2018
+```shell
+sysadmin@localhost:~$ echo Today is $(date)
+Today is Mon Nov 4 03:40:04 UTC 2018
 ```
 
 ## Semicolon
@@ -187,8 +187,8 @@ echo Today is $(date)
 
 The semicolon ; character can be used to run multiple commands, one after the other. Each command runs independently and consecutively (sequentially); regardless of the result of the first command, the second command runs once the first has completed, then the third and so on.
 
-```bash
-helloworld; cal 2 2030; cal 3 2030 
+```shell
+sysadmin@localhost:~$ helloworld; cal 2 2030; cal 3 2030
 
 Command 'helloworld' not found, did you mean:
 
@@ -224,26 +224,26 @@ To better understand how this works, consider first the concept of failure and s
 
 In the following example, the first command succeeds because the /etc/ppp directory exists and is accessible while the second command fails because there is no /junk directory:
 
-```bash
-ls /etc/ppp
-# ip-down.d  ip-up.d 
-ls /etc/junk 
-# ls: cannot access /etc/junk: No such file or directory
+```shell
+sysadmin@localhost:~$ ls /etc/ppp
+ip-down.d  ip-up.d
+sysadmin@localhost:~$ ls /etc/junk
+ls: cannot access /etc/junk: No such file or directory
 ```
 
 To use the success or failure of the ls command in conjunction with && execute commands like the following. In the first example, the echo command is executed because the ls command succeeds:
 
-```bash
-ls /etc/ppp && echo success
-# ip-down.d  ip-up.d
-# success
+```shell
+sysadmin@localhost:~$ ls /etc/ppp && echo success
+ip-down.d  ip-up.d
+success
 ```
 
 In the second example, the echo command isn't executed because the ls command fails:
 
-```bash
-ls /etc/junk && echo success
-# ls: cannot access /etc/junk: No such file or directory
+```shell
+sysadmin@localhost:~$ ls /etc/junk && echo success
+ls: cannot access /etc/junk: No such file or directory
 ```
 
 ## Double Pipe
@@ -257,15 +257,15 @@ With the double pipe, if the first command runs successfully, the second command
 In the following example, the echo command only executes if the ls command fails:
 
 ```bash
-ls /etc/ppp || echo failed 
-# ip-down.d  ip-up.d
-ls /etc/junk || echo failed
-# ls: cannot access /etc/junk: No such file or directory 
-# failed
+sysadmin@localhost:~$ ls /etc/ppp || echo failed
+ip-down.d  ip-up.d
+sysadmin@localhost:~$ ls /etc/junk || echo failed
+ls: cannot access /etc/junk: No such file or directory
+failed
 ```
 
 ```bash
-sysadmin@localhost:~$ false || echo Fail Or 
+sysadmin@localhost:~$ false || echo Fail Or
 Fail Or
 sysadmin@localhost:~$ true || echo Nothing to see here
 sysadmin@localhost:~$
@@ -297,7 +297,7 @@ echo /etc/t* # starts with t
 
 ```shell
 sysadmin@localhost:~$ echo D*n*s
-Documents Downloads 
+Documents Downloads
 ```
 
 ```shell
@@ -321,13 +321,13 @@ gss /etc/ucf.conf /etc/udev /etc/ufw /etc/update-motd.d /etc/updatedb.conf
 
 ```shell
 sysadmin@localhost:~$ echo /etc/*[0-9]* # contains one number
-/etc/X11 /etc/dbus-1 /etc/iproute2 /etc/mke2fs.conf /etc/python3 /etc/python3.6 
+/etc/X11 /etc/dbus-1 /etc/iproute2 /etc/mke2fs.conf /etc/python3 /etc/python3.6
 /etc/rc0.d /etc/rc1.d /etc/rc2.d /etc/rc3.d /etc/rc4.d /etc/rc5.d /etc/rc6.d
 ```
 
 ```shell
 sysadmin@localhost:~$ echo /etc/[!a-t]* # not start withs a to t
-/etc/X11 /etc/ucf.conf /etc/udev /etc/ufw /etc/update-motd.d /etc/updatedb.conf 
+/etc/X11 /etc/ucf.conf /etc/udev /etc/ufw /etc/update-motd.d /etc/updatedb.conf
 /etc/vim /etc/vtrgb /etc/wgetrc /etc/xdg
 ```
 
@@ -349,7 +349,7 @@ By default, **STDOUT** is displayed in the terminal window where the command is 
 
 ```shell
 sysadmin@localhost:~$ echo "Line 1" > example.txt
-sysadmin@localhost:~$ cat example.txt                                  
+sysadmin@localhost:~$ cat example.txt
 Line 1
 sysadmin@localhost:~$ echo "New line 1" > example.txt # will overwrite existing content
 sysadmin@localhost:~$ cat example.txt
@@ -660,3 +660,50 @@ route -n # old
 ip route # new
 ip route show # new
 ```
+
+## Users and Groups
+
+On some distributions, creating a new user account also **automatically** creates a group account for the user, called a **User Private Group (UPG)**.\
+On these systems, the group and username would be the **same**, and the only member of this new group would be the new user.
+
+For distributions that do not create a **UPG**, new users are typically given the `users` group as their primary group.\
+Users **must** belong to at least **one** group for use as their primary group.
+
+## Groups
+
+The most common reason to create a group is to provide a way for users to share files.
+
+`/etc/group/`
+
+## Users
+
+User account information is stored in the `/etc/passwd` file and user authentication information (password data) is stored in the `/etc/shadow` file.\
+Creating a new user can be accomplished by manually adding a new line to each of these files, but that is generally not the recommended technique.
+
+`/etc/passwd`
+
+`/etc/shadow`
+
+`/etc/default/useradd`
+
+`/etc/login.defs`
+
+```shell
+root@localhost:~#  grep -Ev '^#|^$' /etc/login.defs
+MAIL_DIR /var/mail/spool
+PASS_MAX_DAYS 99999
+PASS_MIN_DAYS 0
+PASS_MIN_LEN 5
+PASS_WARN_AGE 7
+UID_MIN     500
+UID_MAX   60000
+GID_MIN     500
+GID_MAX   60000
+CREATE_HOME yes
+UMASK           077
+USERGROUPS_ENAB yes
+ENCRYPT_METHOD SHA512
+MD5_CRYPT_ENAB no
+```
+
+The root user has a **UID of 0**, which allows that account to have special privileges. **Any** account with a **UID of 0** would effectively be able to act as the administrator.
