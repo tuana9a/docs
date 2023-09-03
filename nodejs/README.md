@@ -9,17 +9,17 @@ các lệnh npm thường dùng
 npm install PACKAGE
 
 # cái này sẽ cài global ở AppData của user (window)
-npm install PACKAGE -g 
+npm install PACKAGE -g
 
 # để instal với package-lock.json
-npm ci 
+npm ci
 
 # xóa một pkg của project
-npm uninstall PACKAGE 
+npm uninstall PACKAGE
 
 # liệt kê các pkg đã install trong project
-npm ls 
+npm ls
 
 # tìm kiếm pkg online
-npm search PACKAGE 
+npm search PACKAGE
 ```

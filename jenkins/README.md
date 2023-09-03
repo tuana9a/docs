@@ -12,7 +12,7 @@ just some stuff needed for my jenkins
 
 ```groovy
 withCredentials([file(credentialsId: 'youCredId', variable: 'secretFile')]) {
-    // do something with the file, for instance 
+    // do something with the file, for instance
     sh 'cat $secretFile'
 }
 ```

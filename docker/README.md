@@ -93,7 +93,7 @@ RUN mvn package
 # bước 2 copy file war ở bước 1 và cho vào tomcat image
 # để ý --from là build ứng với alias maven ở trên
 FROM tomcat:10.0-jdk8-openjdk-slim
-COPY --from=build /app/target/file.war /usr/local/tomcat/webapps 
+COPY --from=build /app/target/file.war /usr/local/tomcat/webapps
 ```
 
 react thi cung tuong tu

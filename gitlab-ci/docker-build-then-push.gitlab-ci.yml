@@ -2,8 +2,7 @@ build_image:
   stage: build
   image: docker:19.03
   # this way we don't use docker host
-  # instead we create a separate container with docker deamon
-  # if you don't mount 
+  # instead we create a separate container running docker deamon
   services:
     - name: docker:19.03-dind
       alias: docker

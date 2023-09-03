@@ -102,7 +102,7 @@ iface vmbr2 inet static
         bridge_ports none
         bridge_stp off
         bridge_fd 0
- 
+
 post-up echo 1 > /proc/sys/net/ipv4/ip_forward
 
 post-up   iptables -t nat -A POSTROUTING -s '192.168.1.0/24' -o vmbr0 -j MASQUERADE

@@ -165,7 +165,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpingBootApplication
 public class Application {
-    
+
 }
 ```
 
