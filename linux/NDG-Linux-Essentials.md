@@ -275,13 +275,13 @@ sysadmin@localhost:~$
 
 | Symbol | File Type      | Description                                                                |
 | ------ | -------------- | -------------------------------------------------------------------------- |
-| d      | directory      | A file used to store other files.                                          |
 | -      | regular file   | Includes readable files, images files, binary files, and compressed files. |
+| d      | directory file | A file used to store other files.                                          |
 | l      | symbolic link  | Points to another file.                                                    |
-| s      | socket         | Allows for communication between processes.                                |
+| b      | block file     | Used to communicate with hardware. Where data is read in blocks of data.   |
+| c      | character file | Used to communicate with hardware. Where data is read one byte at a time.  |
 | p      | pipe           | Allows for communication between processes.                                |
-| b      | block file     | Used to communicate with hardware.                                         |
-| c      | character file | Used to communicate with hardware.                                         |
+| s      | socket         | Allows for communication between processes.                                |
 
 ## Globbing
 
@@ -707,3 +707,101 @@ MD5_CRYPT_ENAB no
 ```
 
 The root user has a **UID of 0**, which allows that account to have special privileges. **Any** account with a **UID of 0** would effectively be able to act as the administrator.
+
+## Permissions
+
+>`-rw-r--r-- 1 root root 4135 May 27 21:08 /etc/passwd`
+
+[File Type](#file-type)
+
+- **Read**: The first character of each group represents the read permission. There is an `r` character if the group has the read permission, or a `-` character if the group does not.
+  - On a file, this allows processes to read the contents of the file, meaning the contents can be viewed and copied.
+  - On a directory, file names in the directory can be listed, but other details are not available (trying to read, write a file inside).
+- **Write**: The second character of each group represents the write permission. There is a `w` character if the group has the write permission, or a `-` character if the group does not.
+  - A file can be written to by the process, so changes to a file can be saved.\
+Note that `w` permission really requires `r` permission on the file to work correctly.
+  - On a directory, files can be added to or removed from the directory.\
+Note that `w` permission requires `x` permission on the directory to work correctly.
+- **Execute**: The third character of each group represents the execute permission. There is an x character if the group has the execute permission, or a - character if the group does not.
+  - A file can be executed or run as a process.
+  - On a directory, the user can use the cd command to "get into" the directory and use the directory in a pathname to access files and, potentially, subdirectories under this directory.
+
+```shell
+tuana9a@my-first-lxc:/tmp$ ls -l
+total 24
+-rw-rw-r-- 1 tuana91a tuana91a    1 Sep  4 01:29 tuana91a.txt
+drwxrwxr-- 2 tuana9a  tuana9a  4096 Sep  4 01:43 tuana9a
+-rw-rw--w- 1 tuana9a  tuana9a    63 Sep  3 03:31 tuana9a.txt
+```
+
+```shell
+tuana91a@my-first-lxc:/tmp$ ls -l tuana9a
+ls: cannot access 'tuana9a/test': Permission denied
+total 0
+-????????? ? ? ? ?            ? test
+tuana91a@my-first-lxc:/tmp$
+```
+
+## Default Permissions
+
+|             |           |
+| ----------- | --------- |
+| file        | rw-rw-rw- |
+| directories | rwxrwxrwx |
+
+```shell
+sysadmin@localhost:~$ umask
+0002
+```
+
+A breakdown of the output:
+
+- The first 0 indicates that the umask is given as an octal number.
+- The second 0 indicates which permissions to subtract from the default user owner's permissions.
+- The third 0 indicates which permissions to subtract from the default group owner's permissions.
+- The last number 2 indicates which permissions to subtract from the default other's permissions.
+
+Note that different users may have different umasks. Typically the **root** user has a more restrictive umask than normal user accounts:
+
+```shell
+root@localhost:~# umask
+0022
+```
+
+To understand how umask works, assume that the umask of a file is set to 027 and consider the following:
+
+|              |           |
+| ------------ | --------- |
+| File Default | &nbsp;666 |
+| Umask        | -027      |
+| Result       | &nbsp;640 |
+
+The 027 umask means that new files would receive 640 or `rw-r-----` permissions by default, as demonstrated below:
+
+```shell
+sysadmin@localhost:~$ umask 027
+sysadmin@localhost:~$ touch sample
+sysadmin@localhost:~$ ls -l sample
+-rw-r-----. 1 sysadmin sysadmin 0 Oct 28 20:14 sample
+```
+
+Because the default permissions for directories are different than for files, a umask of 027 would result in different initial permissions on new directories:
+
+|                   |           |
+| ----------------- | --------- |
+| Directory Default | &nbsp;777 |
+| Umask             | -027      |
+| Result            | &nbsp;750 |
+
+The 027 umask means that directories files would receive 750 or `rwxr-x---` permissions by default, as demonstrated below:
+
+```shell
+sysadmin@localhost:~$ umask 027
+sysadmin@localhost:~$ mkdir test-dir
+sysadmin@localhost:~$ ls -ld test-dir
+drwxr-x---. 1 sysadmin sysadmin 4096 Oct 28 20:25 test-dir
+```
+
+The new umask is only applied to file and directories created during that session. When a new shell is started, the default umask will again be in effect.
+
+Permanently changing a user's umask requires modifying the `.bashrc` file located in that user's home directory.
