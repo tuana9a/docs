@@ -805,3 +805,99 @@ drwxr-x---. 1 sysadmin sysadmin 4096 Oct 28 20:25 test-dir
 The new umask is only applied to file and directories created during that session. When a new shell is started, the default umask will again be in effect.
 
 Permanently changing a user's umask requires modifying the `.bashrc` file located in that user's home directory.
+
+## Special Directories and File
+
+### setuid
+
+When the setuid permission is set on an executable binary file (a program) the binary file is run as the owner of the file, not as the user who executed it.
+
+To add the setuid permission symbolically, run:
+
+```bash
+chmod u+s file
+```
+
+To add the setuid permission numerically, add 4000 to the file's existing permissions (assume the file originally had 775 for its permission in the following example):
+
+```bash
+chmod 4775 file
+```
+
+To remove the setuid permission symbolically, run:
+
+```bash
+chmod u-s file
+```
+
+To remove the setuid permission numerically, subtract 4000 from the file's existing permissions:
+
+```bash
+chmod 0775 file
+```
+
+### setgid
+
+- The setgid permission on a file is very similar to [setuid](#setuid); it allows a user to run an executable binary file in a manner that provides them additional (temporary) group access.
+
+- When set on a directory, the setgid permission causes files created in the directory to be owned by the group that owns the directory automatically.
+
+Use the following syntax to add the setgid permission symbolically:
+
+```bash
+chmod g+s <file|directory>
+```
+
+To add the setgid permission numerically, add 2000 to the file's existing permissions (assume in the following example that the directory originally had 775 for its permissions):
+
+```bash
+chmod 2775 <file|directory>
+```
+
+To remove the setgid permission symbolically, run:
+
+```bash
+chmod g-s <file|directory>
+```
+
+To remove the setgid permission numerically, subtract 2000 from the file's existing permissions:
+
+```bash
+chmod 0775 <file|directory>
+```
+
+### sticky bit
+
+The sticky bit permission is used to prevent other users from deleting files that they do not own in a shared directory.
+
+```shell
+sysadmin@localhost:~$ ls -ld /tmp
+drwxrwxrwt 1 root root 4096 Mar 14  2016 /tmp
+```
+
+>A lowercase t means that both the sticky bit and execute permissions are set for others. An uppercase T means that only the sticky bit permission is set.
+>While the capital S indicated a problem with the setuid or setgid permissions, a capital T does not necessarily indicate a problem, as long as the group owner still has the execute permission.
+
+To set the sticky bit permission symbolically, execute a command like the following:
+
+```bash
+chmod o+t <directory>
+```
+
+To set the sticky bit permission numerically, add 1000 to the directory's existing permissions (assume the directory in the following example originally had 775 for its permissions):
+
+```bash
+chmod 1775 <file|directory>
+```
+
+To remove the sticky permission symbolically, run:
+
+```bash
+chmod o-t <directory>
+```
+
+‌⁠​​⁠​To remove the sticky bit permission numerically, subtract 1000 from the directory's existing permissions:
+
+```bash
+chmod 0775 <directory>
+```
