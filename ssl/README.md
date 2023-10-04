@@ -13,11 +13,7 @@ openssl genrsa -out rootCA.key 4096
 ### create ca cert
 
 ```bash
-openssl req -new \
--subj "/C=VN/ST=HN/O=Techpro/CN=Techpro" -x509 -sha256 \
--days 365 \
--key rootCA.key \
--out rootCA.crt
+openssl req -new -subj "/C=VN/ST=HN/O=Techpro AI/CN=Techpro AI" -x509 -sha256 -days 3650 -key rootCA.key -out rootCA.crt
 ```
 
 ### create server key
@@ -29,10 +25,7 @@ openssl genrsa -out server.key 4096
 ### create cert request
 
 ```bash
-openssl req -new -sha256 \
--subj "/CN=Techpro AI" \
--key server.key \
--out server.csr
+openssl req -new -sha256 -subj "/CN=Techpro AI" -key server.key -out server.csr
 ```
 
 ### create cert
@@ -41,28 +34,13 @@ openssl req -new -sha256 \
 
 ```bash
 echo "subjectAltName=DNS.1:techpro-ai.local,DNS.2:*.techpro-ai.local" > extfile.cnf
-```
-
-```bash
-openssl x509 -req -sha256 \
--days 365 \
--in server.csr \
--CA rootCA.crt \
--CAkey rootCA.key \
--out server.crt \
--extfile extfile.cnf -CAcreateserial
+openssl x509 -req -sha256 -days 3650 -in server.csr -CA rootCA.crt -CAkey rootCA.key -out server.crt -extfile extfile.cnf -CAcreateserial
 ```
 
 (option 2) inline
 
 ```bash
-openssl x509 -req -sha256 \
--days 365 \
--in server.csr \
--CA rootCA.crt \
--CAkey rootCA.key \
--out server.crt \
--extfile <(printf "subjectAltName=IP.1:172.19.0.11,IP.2:172.19.0.12,IP.3:172.19.0.13") -CAcreateserial
+openssl x509 -req -sha256 -days 3650 -in server.csr -CA rootCA.crt -CAkey rootCA.key -out server.crt -extfile <(printf "subjectAltName=IP.1:172.19.0.11,IP.2:172.19.0.12,IP.3:172.19.0.13") -CAcreateserial
 ```
 
 `subjectAltName` examples
