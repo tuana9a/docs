@@ -48,6 +48,10 @@ pipeline {
 }
 ```
 
+## string interpolation error bad substitution
+
+SOLVED [https://stackoverflow.com/questions/37219348/jenkins-pipeline-sh-bad-substitution-error](https://stackoverflow.com/questions/37219348/jenkins-pipeline-sh-bad-substitution-error)
+
 ## handbook
 
 [https://www.jenkins.io/doc/book/getting-started/](https://www.jenkins.io/doc/book/getting-started/)
