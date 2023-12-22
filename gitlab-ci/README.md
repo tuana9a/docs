@@ -1,3 +1,0 @@
-# Examples
-
-see [./examples/](./examples/)
