@@ -7,25 +7,25 @@ Thanks **[Bui Manh Truong](https://github.com/mtb-hust)** and **[Techpro.vn](htt
 ### create ca key
 
 ```bash
-openssl genrsa -out rootCA.key 4096
+openssl genrsa -out ca.key 2048
 ```
 
 ### create ca cert
 
 ```bash
-openssl req -new -subj "/C=VN/ST=HN/O=Techpro AI/CN=Techpro AI" -x509 -sha256 -days 3650 -key rootCA.key -out rootCA.crt
+openssl req -new -subj "/C=VN/ST=HN/O=Techpro/CN=Techpro" -x509 -sha256 -days 3650 -key ca.key -out ca.crt
 ```
 
 ### create server key
 
 ```bash
-openssl genrsa -out server.key 4096
+openssl genrsa -out server.key 2048
 ```
 
 ### create cert request
 
 ```bash
-openssl req -new -sha256 -subj "/CN=Techpro AI" -key server.key -out server.csr
+openssl req -new -sha256 -subj "/C=VN/ST=HN/O=Techpro AI/CN=Techpro AI" -key server.key -out server.csr
 ```
 
 ### create cert
@@ -34,13 +34,13 @@ openssl req -new -sha256 -subj "/CN=Techpro AI" -key server.key -out server.csr
 
 ```bash
 echo "subjectAltName=DNS.1:techpro-ai.local,DNS.2:*.techpro-ai.local" > extfile.cnf
-openssl x509 -req -sha256 -days 3650 -in server.csr -CA rootCA.crt -CAkey rootCA.key -out server.crt -extfile extfile.cnf -CAcreateserial
+openssl x509 -req -sha256 -days 3650 -in server.csr -CA ca.crt -CAkey ca.key -out server.crt -extfile extfile.cnf -CAcreateserial
 ```
 
 (option 2) inline
 
 ```bash
-openssl x509 -req -sha256 -days 3650 -in server.csr -CA rootCA.crt -CAkey rootCA.key -out server.crt -extfile <(printf "subjectAltName=IP.1:172.19.0.11,IP.2:172.19.0.12,IP.3:172.19.0.13") -CAcreateserial
+openssl x509 -req -sha256 -days 3650 -in server.csr -CA ca.crt -CAkey ca.key -out server.crt -extfile <(printf "subjectAltName=IP.1:172.19.0.11,IP.2:172.19.0.12,IP.3:172.19.0.13") -CAcreateserial
 ```
 
 `subjectAltName` examples
@@ -72,7 +72,7 @@ subjectAltName=IP.1:172.19.0.11,IP.2:172.19.0.12,IP.3:172.19.0.13
 ### (optional) create fullchain cert
 
 ```bash
-cat server.crt rootCA.crt > fullchain.crt
+cat server.crt ca.crt > fullchain.crt
 ```
 
 ### (optional) import CA to your operating system
@@ -87,43 +87,27 @@ sudo update-ca-certificates -f
 copy new ca to destination
 
 ```bash
-sudo cp rootCA.crt /usr/local/share/ca-certificates/ca.crt
+sudo cp ca.crt /usr/local/share/ca-certificates/ca.crt
 sudo update-ca-certificates
 ```
 
-## Bonus: Make self-sign certificates valid in browser
+Bonus: [Make self-sign certificates valid in browser](Make-self-sign-certificate-valid-in-browser.md)
 
-On Windows browers like: Google Chrome, Firefox, ... automaticaly accept imported CA.\
-But in Linux or other distros may be you still need to import CA to the browser manually.\
-So after import your CA to you operating system. You may also need to do that again with your browser
+## Other commands
 
-### Chrome (Jun 29, 2022)
+```bash
+openssl rsa -in ca.key -check
+openssl rsa -in server.key -check
+```
 
-open Chrome Settings, then search for `certificates` then click click `Security`
+```bash
+openssl req -text -noout -verify -in server.csr
+```
 
-![Screenshot1.png](./img/Screenshot1.png)
-
-next choose `Manage certificates`
-
-![Screenshot2.png](./img/Screenshot2.png)
-
-choose tab `Authorities` then click `Import`
-
-![Screenshot3](./img/Screenshot3.png)
-
-browse the `rootCA.crt` as generated above, then the browser will ask
-
-check as image below
-
-![Screenshot4](./img/Screenshot4.png)
-
-result
-
-![Screenshot5](./img/Screenshot5.png)
-
-## Firefox
-
-same as chrome, do your research 👽
+```bash
+openssl x509 -in ca.crt -text -noout
+openssl x509 -in server.crt -text -noout
+```
 
 ## Refs
 
