@@ -1,0 +1,173 @@
+---
+- hosts: all
+  become: yes
+  vars_files:
+    - install-kube.vars.yaml
+  tasks:
+    # (optional) enable ip forward
+    - name: enable ip forward in /etc/sysctl.conf
+      lineinfile:
+        dest: /etc/sysctl.conf
+        line: net.ipv4.ip_forward=1
+
+    # To fix ERROR FileContent--proc-sys-net-bridge-bridge-nf-call-iptables /proc/sys/net/bridge/bridge-nf-call-iptables does not exist
+    # Solution https://stackoverflow.com/questions/44125020/cant-install-kubernetes-on-vagrant
+    - name:
+      shell: |
+        echo br_netfilter > /etc/modules-load.d/br_netfilter.conf
+        systemctl restart systemd-modules-load.service
+        echo 1 > /proc/sys/net/bridge/bridge-nf-call-iptables
+        echo 1 > /proc/sys/net/bridge/bridge-nf-call-ip6tables
+
+    - name:
+      lineinfile:
+        dest: /etc/sysctl.conf
+        line: net.bridge.bridge-nf-call-iptables=1
+
+    - name: apply /etc/sysctl.conf
+      shell: "sysctl -p"
+
+    - name: install packages to allow apt to use a repository over https
+      apt:
+        name:
+          - ca-certificates
+          - gnupg
+          - apt-transport-https
+        state: present
+        update_cache: yes
+
+    - name: add docker's official gpg key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: get ubuntu release version
+      shell: lsb_release -cs
+      register: ubuntu_version
+
+    - name: get architecture
+      shell: dpkg --print-architecture
+      register: architecture
+
+    - name: add docker repository
+      apt_repository:
+        repo: "deb [arch={{ architecture.stdout }}] https://download.docker.com/linux/ubuntu {{ ubuntu_version.stdout }} stable"
+        state: present
+        filename: docker
+
+    - name: install containerd.io only
+      apt:
+        name:
+          - containerd.io={{ containerd_version }}
+        state: present
+        update_cache: yes
+
+    # Fix ERROR CRI container runtime is not running: rpc error: code = Unimplemented desc = unknown service runtime.v1.RuntimeService",
+    # Solution: https://github.com/containerd/containerd/issues/8139#issuecomment-1491536705
+    - name: config containerd.io
+      copy:
+        src: containerd-config.yaml
+        dest: /etc/containerd/config.toml
+
+    - name: restart containerd
+      systemd:
+        name: containerd
+        state: restarted
+
+    - name: add kubernetes apt-key
+      apt_key:
+        url: "https://pkgs.k8s.io/core:/stable:/{{ kubernetes_repo_version }}/deb/Release.key"
+        state: present
+
+    - name: add kubernetes's apt repository
+      apt_repository:
+        repo: "deb https://pkgs.k8s.io/core:/stable:/{{ kubernetes_repo_version }}/deb/ /"
+        state: present
+        filename: "kubernetes"
+
+    - name: install kubelet, kubectl, kubeadm
+      apt:
+        name:
+          - kubelet
+          - kubectl
+          - kubeadm
+        state: present
+        update_cache: true
+
+    # (OPTIONAL) replace default eth0 ip with eth1 ip
+    - name: add --node-ip to extra args
+      lineinfile:
+        dest: /etc/default/kubelet
+        # TODO edit eth1 with any network interface you have
+        line: KUBELET_EXTRA_ARGS="--node-ip={{ ansible_eth1.ipv4.address }}"
+        create: true
+
+    - name: restart kubelet to take effect
+      systemd:
+        name: kubelet
+        state: restarted
+---
+- hosts: masters
+  become: yes
+  vars_files:
+    - install-kube.vars.yaml
+  tasks:
+    - name: initialize the cluster
+      shell: >
+        kubeadm init --pod-network-cidr={{ pod_network_cidr }} \
+        --service-cidr={{ service_cidr }} \
+        --apiserver-advertise-address={{ apiserver_advertise_address }} \
+        --control-plane-endpoint={{ control_plane_endpoint }}
+
+    - name: copy kube-flannel.yaml
+      copy:
+        src: kube-flannel.yaml
+        dest: /tmp/kube-flannel.yaml
+
+    - name: install pod network
+      become: yes
+      shell: kubectl apply -f /tmp/kube-flannel.yaml
+---
+- hosts: masters
+  become: yes
+  tasks:
+    - name: get join command
+      shell: kubeadm token create --print-join-command
+      register: join_command_raw
+
+    - name: set join command
+      local_action:
+        module: copy
+        content: "{{ join_command_raw.stdout_lines[0] }}"
+        dest: /tmp/join_command.sh
+
+- hosts: workers
+  become: yes
+  tasks:
+    - name: upload join command
+      copy:
+        src: /tmp/join_command.sh
+        dest: /tmp/join_command.sh
+        mode: u+x
+
+    - name: join cluster
+      shell: /tmp/join_command.sh
+
+- hosts: all
+  become: yes
+  tasks:
+    - name: hold k8s version
+      shell: apt-mark hold kubelet kubeadm kubectl
+---
+- hosts: masters
+  tasks:
+    - name: store content of kube config
+      become: yes
+      slurp:
+        src: /etc/kubernetes/admin.conf
+      register: config
+    - name: copy kube config to current user's home directory
+      local_action:
+        module: copy
+        content: "{{ config.content | b64decode }}"
+        dest: ~/.kube/config
