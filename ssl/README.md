@@ -1,6 +1,4 @@
-# Info
-
-Thanks **[Bui Manh Truong](https://github.com/mtb-hust)** and **[Techpro.vn](https://techpro.vn)** for give me chance to work as a DevOps when I'm still a college student of HUST
+# ssl
 
 ## Steps to create your SSL with your own CA (Self Sign Certificate)
 
@@ -13,7 +11,7 @@ openssl genrsa -out ca.key 2048
 ### create ca cert
 
 ```bash
-openssl req -new -subj "/C=VN/ST=HN/O=Techpro/CN=Techpro" -x509 -sha256 -days 3650 -key ca.key -out ca.crt
+openssl req -new -subj "/C=VN/ST=HN/O=tuana9a/CN=tuana9a" -x509 -sha256 -days 3650 -key ca.key -out ca.crt
 ```
 
 ### create server key
@@ -25,49 +23,23 @@ openssl genrsa -out server.key 2048
 ### create cert request
 
 ```bash
-openssl req -new -sha256 -subj "/C=VN/ST=HN/O=Techpro AI/CN=Techpro AI" -key server.key -out server.csr
+openssl req -new -sha256 -subj "/C=VN/ST=HN/O=tuana9a/CN=tuana9a" -key server.key -out server.csr
 ```
 
 ### create cert
-
-(option 1) with extfile.cnf
-
-```bash
-echo "subjectAltName=DNS.1:techpro-ai.local,DNS.2:*.techpro-ai.local" > extfile.cnf
-openssl x509 -req -sha256 -days 3650 -in server.csr -CA ca.crt -CAkey ca.key -out server.crt -extfile extfile.cnf -CAcreateserial
-```
-
-(option 2) inline
 
 ```bash
 openssl x509 -req -sha256 -days 3650 -in server.csr -CA ca.crt -CAkey ca.key -out server.crt -extfile <(printf "subjectAltName=IP.1:172.19.0.11,IP.2:172.19.0.12,IP.3:172.19.0.13") -CAcreateserial
 ```
 
-`subjectAltName` examples
+A note about `subjectAltName`: it's the server address and will be verified by client. Here are some examples:
 
-one domain name
-
-```cnf
-subjectAltName=DNS:techpro-ai.local
-```
-
-one ip
-
-```cnf
-subjectAltName=IP:172.19.0.11
-```
-
-multiple domain names (include wildcard)
-
-```cnf
-subjectAltName=DNS.1:techpro-ai.local,DNS.2:*.techpro-ai.local
-```
-
-multiple ips
-
-```cnf
-subjectAltName=IP.1:172.19.0.11,IP.2:172.19.0.12,IP.3:172.19.0.13
-```
+|                                          |                                                                     |
+| ---------------------------------------- | ------------------------------------------------------------------- |
+| one domain name                          | `subjectAltName=DNS:tuana9a.com`                                    |
+| one ip                                   | `subjectAltName=IP:172.19.0.11`                                     |
+| multiple domain names (include wildcard) | `subjectAltName=DNS.1:tuana9a.com,DNS.2:*.tuana9a.com`              |
+| multiple ips                             | `subjectAltName=IP.1:172.19.0.11,IP.2:172.19.0.12,IP.3:172.19.0.13` |
 
 ### (optional) create fullchain cert
 
@@ -77,7 +49,7 @@ cat server.crt ca.crt > fullchain.crt
 
 ### (optional) import CA to your operating system
 
-remove old CA (if existed)
+Remove old CA (if existed)
 
 ```bash
 sudo rm /usr/local/share/ca-certificates/ca.crt
@@ -116,3 +88,7 @@ openssl x509 -in server.crt -text -noout
 [How to create a valid self signed SSL Certificate?](https://www.youtube.com/watch?v=VH4gXcvkmOY)
 
 [https://github.com/xcad2k/cheat-sheets/blob/main/misc/ssl-certs.md](https://github.com/xcad2k/cheat-sheets/blob/main/misc/ssl-certs.md)
+
+## Final words
+
+Thanks **[Bui Manh Truong](https://github.com/mtb-hust)** and **[Techpro.vn](https://techpro.vn)** for give me chance to work as a DevOps when I'm still a college student of HUST
