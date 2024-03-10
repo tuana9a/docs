@@ -1,7 +1,0 @@
-pod_network_cidr: 10.244.0.0/16 # (fixed) See https://github.com/flannel-io/flannel
-service_cidr: 10.233.0.0/16 # (optional) k8s service
-apiserver_advertise_address: 192.168.56.21 # (optional) Your master/control-plane ip address
-control_plane_endpoint: 192.168.56.21 # (optional) Your master/control-plane ip address
-containerd_version: 1.6.21-1 # apt list containerd.io -a
-kubernetes_version: 1.27.6-1.1
-kubernetes_repo_version: v1.27
