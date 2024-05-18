@@ -8,17 +8,9 @@ sudo apt install openvpn
 
 Thanks [https://askubuntu.com/a/1086407](https://askubuntu.com/a/1086407)
 
-lastest openvpn support multiple configs in same machine
-
-and it can be load automatically to systemd
-
-copy your .ovpn files to this directory `/etc/openvpn/client/` and replace `.ovpn` with `.conf`
-
-start each client config with
-
-```bash
-systemctl start openvpn-client@client-name
-```
+lastest openvpn support multiple configs in same machine and it can be load automatically to systemd
+- copy your .ovpn files to this directory `/etc/openvpn/client/` and replace `.ovpn` with `.conf`
+- start each client config with `sudo systemctl start openvpn-client@client-name`
 
 example
 
@@ -55,6 +47,10 @@ edit client config (if has)
 ```conf
 ifconfig-push 10.0.0.2 255.255.255.0
 ```
+
+(optional) if you use https://www.pivpn.io/
+
+then you also need to edit `/etc/pivpn/openvpn/setupVars.conf` `pivpnNET=x.x.x.0` also
 
 ## custom openvpn + systemd
 
