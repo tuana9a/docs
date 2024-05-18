@@ -9,24 +9,24 @@ sudo ln -s /snap/bin/certbot /usr/bin/certbot
 sudo snap set certbot trust-plugin-with-root=ok
 ```
 
-(optional if you use cloudflare dns)
-
-```bash
-sudo snap install certbot-dns-cloudflare
-```
-
 ## Create certs
 
 ```bash
+# one cert multiple domains
 sudo certbot certonly -d tuana9a.com -d calendar.tuana9a.com
-# or
-sudo certbot certonly -d tuana9a.com
+# one cert one domain
 sudo certbot certonly -d dkhptd.tuana9a.com
 ```
 
 ## Create wildcard certs
 
-file `cloudflare.ini`
+required dns provider plugin
+
+```bash
+sudo snap install certbot-dns-cloudflare
+```
+
+file `/opt/certbot/cloudflare.ini`
 
 using global api key
 
@@ -35,16 +35,14 @@ dns_cloudflare_email = example@example.com
 dns_cloudflare_api_key = yourglobalapikey
 ```
 
-using api token (don't need email)
+using api token
 
 ```ini
 dns_cloudflare_api_token = yourapitoken
 ```
 
 ```bash
-sudo certbot certonly --dns-cloudflare --dns-cloudflare-credentials cloudflare.ini -d tuana9a.com -d *.tuana9a.com
-# or
-sudo certbot certonly --dns-cloudflare --dns-cloudflare-credentials cloudflare.ini -d tuana9a.com,*.tuana9a.com
+sudo certbot certonly --dns-cloudflare --dns-cloudflare-credentials /opt/certbot/cloudflare.ini -d tuana9a.com -d *.tuana9a.com
 ```
 
 Certs location: `/etc/letsencrypt/live/`
