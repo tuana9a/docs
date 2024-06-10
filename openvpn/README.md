@@ -132,3 +132,19 @@ OpenVPN GUI for Windows (opensource program) require `data-ciphers` when `using 
 cipher AES-256-CBC
 data-ciphers AES-256-CBC # this line is required if `cipher` is used
 ```
+
+# OpenVPN GUI
+
+## manage tap window drivers
+
+https://community.openvpn.net/openvpn/wiki/Tapctl
+
+windows
+
+`Open as Administrator`
+
+```ps
+& 'C:\Program Files\OpenVPN\bin\tapctl.exe' list
+& 'C:\Program Files\OpenVPN\bin\tapctl.exe' delete 'Local Area Connection 3'
+& 'C:\Program Files\OpenVPN\bin\tapctl.exe' delete 'Local Area Connection'
+```
