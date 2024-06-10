@@ -69,16 +69,58 @@ sudo certbot delete
 
 place your scripts in these folder
 
-```text
+```bash
 /etc/letsencrypt/renewal-hooks/{pre,post}
 ```
 
-```text
-/etc/letsencrypt/renewal/
+examples
+
+`/etc/letsencrypt/renewal-hooks/post/reload_nginx.sh`
+
+```bash
+#!/bin/bash
+
+nginx -s reload
+```
+
+ubuntu `>=` 18.04
+
+```bash
+#!/bin/bash
+
+systemctl reload nginx
+```
+
+(optional) if using dns-plugin
+
+```bash
+vim /etc/letsencrypt/renewal/yourdomain.conf
+```
+
+```conf
+# renew_before_expiry = 30 days
+version = 2.10.0
+archive_dir = /etc/letsencrypt/archive/tuana9a.com
+cert = /etc/letsencrypt/live/tuana9a.com/cert.pem
+privkey = /etc/letsencrypt/live/tuana9a.com/privkey.pem
+chain = /etc/letsencrypt/live/tuana9a.com/chain.pem
+fullchain = /etc/letsencrypt/live/tuana9a.com/fullchain.pem
+
+# Options used in the renewal process
+[renewalparams]
+account =
+authenticator = dns-cloudflare
+dns_cloudflare_credentials = /opt/certbot/cloudflare.ini # path to the dns config
+server = https://acme-v02.api.letsencrypt.org/directory
+key_type = rsa
 ```
 
 Test Renewal
 
 ```bash
 sudo certbot renew --dry-run
+```
+
+```bash
+journalctl -xeu nginx # example with reload-nginx.sh
 ```
