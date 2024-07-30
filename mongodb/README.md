@@ -26,7 +26,19 @@ net:
   bindIp: 0.0.0.0
   tls:
     mode: requireTLS
-    certificateKeyFile: /opt/ssl/tuana9a.com/fullchain-privkey.pem
+    certificateKeyFile: /opt/fullchain-privkey.pem
+    allowConnectionsWithoutCertificates: true # mongo 7.0 ? are 5.0, 6.0 required
+```
+
+start server with those flag
+
+```bash
+# mongo 7.0 ? are 5.0, 6.0 required
+mongod --setParameter tlsUseSystemCA=true --config /etc/mongod.conf
+```
+
+```bash
+mongo "mongodb://xxx:yyy@host/?tls=true"
 ```
 
 như vậy đã thành công add ssl cho mongodb
