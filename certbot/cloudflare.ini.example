@@ -1,6 +1,0 @@
-# use global api key
-dns_cloudflare_email = example@example.com
-dns_cloudflare_api_key = GLOBAL_TOKEN_API_KEY
-
-# or just only api token
-dns_cloudflare_api_token = yourapitoken
