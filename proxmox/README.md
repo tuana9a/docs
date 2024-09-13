@@ -1,5 +1,9 @@
 # proxmox
 
+## oidc
+
+Proxmox: [Set up OpenID Connect for Google Login](https://forum.proxmox.com/threads/mobile-web-and-android-app-how-to-log-in-with-google-oauth2-openid.116234/post-563563)
+
 ## increase default root storage for storing virtual machines
 
 first remove `local-lvm` via the web-ui.
@@ -142,3 +146,13 @@ qm importdisk 121 k8s-instance-1-disk001.vmdk local -format qcow2
 ```
 
 then just enable (Add) the disk in proxmox web ui.
+
+# disk migration, re install
+
+https://forum.proxmox.com/threads/properly-remove-an-external-storage.118565/
+
+https://forum.proxmox.com/threads/mount-old-pve-data-disk.93605/
+
+https://pve.proxmox.com/pve-docs/chapter-pmxcfs.html#_recovery
+
+https://forum.proxmox.com/threads/pve7-wipe-disk-doesnt-work-in-gui.92198/
