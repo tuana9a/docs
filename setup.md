@@ -169,13 +169,21 @@ sudo make
 sudo make install
 ```
 
+# go
+
+```bash
+wget https://go.dev/dl/go1.22.4.linux-amd64.tar.gz -O /tmp/go.tar.gz
+sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf /tmp/go.tar.gz
+```
+
 # .zshrc
 
 Then add the following lines to `~/.zshrc` file
 
 ```bash
-# ~/.local/bin
+# bin
 export PATH=$PATH:~/.local/bin
+export PATH=$PATH:/usr/local/go/bin
 
 # lang
 export LANG=en_US.UTF-8
