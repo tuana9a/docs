@@ -176,6 +176,14 @@ wget https://go.dev/dl/go1.22.4.linux-amd64.tar.gz -O /tmp/go.tar.gz
 sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf /tmp/go.tar.gz
 ```
 
+# vault
+
+```bash
+wget https://releases.hashicorp.com/vault/1.18.1/vault_1.18.1_linux_amd64.zip -O /tmp/vault.zip
+unzip /tmp/vault.zip -d /tmp/
+sudo install -o root -g root -m 0755 /tmp/vault /usr/local/bin/vault
+```
+
 # .zshrc
 
 Then add the following lines to `~/.zshrc` file
