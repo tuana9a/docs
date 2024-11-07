@@ -1,4 +1,4 @@
-# cloudflared
+# cloudflare-tunnel or (cloudflared)
 
 how to use cloudflare tunnel as a vpn to your infrastructure
 
