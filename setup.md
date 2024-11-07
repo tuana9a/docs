@@ -192,6 +192,15 @@ unzip /tmp/vault.zip -d /tmp/
 sudo install -o root -g root -m 0755 /tmp/vault /usr/local/bin/vault
 ```
 
+# docker
+
+https://docs.docker.com/engine/install/ubuntu/
+
+```bash
+curl -fsSL https://get.docker.com -o /tmp/get-docker.sh
+sudo sh /tmp/get-docker.sh
+```
+
 # .zshrc
 
 Then add the following lines to `~/.zshrc` file
