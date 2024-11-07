@@ -83,6 +83,14 @@ tar xzf /opt/corretto-8.tar.gz -C /opt
 ln -sf /opt/amazon-corretto-8*/bin/* /usr/local/bin
 ```
 
+# awscli
+
+```bash
+wget https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -O /tmp/awscli.zip
+unzip /tmp/awscli.zip -d /tmp/
+sudo /tmp/aws/install -u > /tmp/awscli-install.log
+```
+
 # gcloud
 
 ```bash
