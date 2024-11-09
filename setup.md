@@ -16,7 +16,8 @@ sudo apt install -y direnv
 # zxodie
 
 ```bash
-curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+sudo apt remove zoxide # zoxide in apt repository is old and buggy
+curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
 ```
 
 # fzf
