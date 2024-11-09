@@ -22,7 +22,7 @@ list_zones() {
 
 # Main script logic based on command arguments
 case "$1" in
-    list|ls)
+    list|ls|l)
         list_zones
         ;;
     *)

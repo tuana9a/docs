@@ -103,7 +103,7 @@ delete_dns() {
 
 # Main script logic based on command arguments
 case "$1" in
-    list|l)
+    list|ls|l)
         shift
         list_dns "$@"
         ;;
@@ -115,7 +115,7 @@ case "$1" in
         shift
         update_dns "$@"
         ;;
-    delete|d|rm)
+    delete|rm|d)
         shift
         delete_dns "$@"
         ;;
