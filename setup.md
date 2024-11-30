@@ -145,6 +145,14 @@ tar xzf /tmp/k9s.tar.gz -C /tmp/
 sudo install -o root -g root -m 0755 /tmp/k9s /usr/local/bin/k9s
 ```
 
+# helm
+
+```bash
+wget https://get.helm.sh/helm-v3.16.3-linux-amd64.tar.gz -O /tmp/helm-v3.16.3-linux-amd64.tar.gz
+tar -zxvf /tmp/helm-v3.16.3-linux-amd64.tar.gz -C /tmp
+sudo cp /tmp/linux-amd64/helm /usr/local/bin/helm
+```
+
 # mvn
 
 ```bash
@@ -200,6 +208,30 @@ https://docs.docker.com/engine/install/ubuntu/
 ```bash
 curl -fsSL https://get.docker.com -o /tmp/get-docker.sh
 sudo sh /tmp/get-docker.sh
+```
+
+# coder cli
+
+```bash
+curl -L https://coder.com/install.sh | sh
+```
+
+# ansible
+
+NOTE: using python of the os, change the 3.10 if necessary
+
+```bash
+sudo apt install -y python3.10-venv
+mkdir -p ~/ansible && cd ~/ansible
+python3 -m venv .venv
+.venv/bin/pip install ansible ansible-core ansible-lint
+ln -sf $PWD/.venv/bin/ansible* ~/.local/bin
+```
+
+verify ansible installation
+
+```bash
+ansible --version
 ```
 
 # .zshrc
