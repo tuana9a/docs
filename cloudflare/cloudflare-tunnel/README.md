@@ -10,8 +10,6 @@ make warp client handle the ip range of you network
 
 ![select-profile-then-configure](./imgs/select-profile-then-configure.png)
 
-![select-profile-then-configure](./imgs/select-profile-then-configure.png)
-
 ![configure-split-tunnels](./imgs/configure-split-tunnels.png)
 
 **TODO** confiure
