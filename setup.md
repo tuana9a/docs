@@ -1,10 +1,55 @@
-# setup
+# Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [zsh](#zsh)
+- [oh my zsh](#oh-my-zsh)
+- [direnv](#direnv)
+- [zxodie](#zxodie)
+- [fzf](#fzf)
+- [kubectx kubens](#kubectx-kubens)
+- [nvm](#nvm)
+- [tfenv](#tfenv)
+- [argocd](#argocd)
+- [corretto 8](#corretto-8)
+- [awscli](#awscli)
+- [gcloud](#gcloud)
+  - [gke auth plugin](#gke-auth-plugin)
+- [gh](#gh)
+- [glab](#glab)
+- [kubectl](#kubectl)
+- [k9s](#k9s)
+- [helm](#helm)
+- [mvn](#mvn)
+- [coder](#coder)
+- [python](#python)
+- [go](#go)
+- [vault](#vault)
+- [docker](#docker)
+- [coder](#coder-1)
+- [ansible](#ansible)
+
 
 # zsh
 
 ```bash
 sudo apt install -y zsh
 sudo chsh -s $(which zsh) $USER
+```
+
+See [dotfiles.md#zshrc](./dotfiles.md#zshrc)
+
+# oh my zsh
+
+install oh my zsh
+
+```bash
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended
+```
+
+install plugins
+
+```bash
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 ```
 
 # direnv
@@ -27,26 +72,12 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 ```
 
-# kubectx, kubens
+# kubectx kubens
 
 ```bash
 sudo git clone https://github.com/ahmetb/kubectx /opt/kubectx
 sudo ln -s /opt/kubectx/kubectx /usr/local/bin/kubectx
 sudo ln -s /opt/kubectx/kubens /usr/local/bin/kubens
-```
-
-# oh my zsh
-
-install oh my zsh
-
-```bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended
-```
-
-install plugins
-
-```bash
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 ```
 
 # nvm
@@ -102,7 +133,7 @@ echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.clou
 sudo apt-get update -y && sudo apt-get install -y google-cloud-cli
 ```
 
-gke auth login
+## gke auth plugin
 
 ```bash
 sudo apt-get install -y google-cloud-cli-gke-gcloud-auth-plugin
@@ -211,7 +242,7 @@ curl -fsSL https://get.docker.com -o /tmp/get-docker.sh
 sudo sh /tmp/get-docker.sh
 ```
 
-# coder cli
+# coder
 
 ```bash
 curl -L https://coder.com/install.sh | sh
@@ -233,80 +264,4 @@ verify ansible installation
 
 ```bash
 ansible --version
-```
-
-# .zshrc
-
-Then add the following lines to `~/.zshrc` file
-
-```bash
-# bin
-export PATH=$PATH:~/.local/bin
-export PATH=$PATH:/usr/local/go/bin
-
-# lang
-export LANG=en_US.UTF-8
-
-# history
-HISTSIZE=9999
-
-# zsh
-export ZSH="$HOME/.oh-my-zsh"
-
-# theme
-ZSH_THEME="random"
-ZSH_THEME_RANDOM_CANDIDATES=("gentoo")
-
-# plugins
-plugins=(git zsh-autosuggestions kubectl kubectx aws gcloud)
-source $ZSH/oh-my-zsh.sh
-
-# direnv
-eval "$(direnv hook zsh)"
-
-# zoxide
-eval "$(zoxide init zsh)"
-
-alias cd=z
-
-# k8s
-alias k='kubectl'
-alias ktx='kubectx'
-alias kns='kubens'
-
-# r2
-alias r2='aws s3api --endpoint-url "$S3_ENDPOINT_URL"'
-
-# nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# prompt
-PROMPT='%(!.%B%F{red}.%B%F{green}%n@)%m %F{blue}%(!.%1~.%~) ${vcs_info_msg_0_}%F{white}($(kubectx_prompt_info)) %F{blue}%(!.#.$)%k%b%f '
-```
-
-# .vimrc
-
-```bash
-set hlsearch
-```
-
-# .tmux.conf
-
-```conf
-set -g default-terminal 'screen-256color'
-
-# change default prefix (hotkey) to Ctrl + t
-set-option -g prefix C-t
-
-# hotkey + a to sync typing between panes
-bind a setw synchronize-panes
-
-# vim mode
-setw -g mode-keys vi
-bind-key h select-pane -L
-bind-key j select-pane -D
-bind-key k select-pane -U
-bind-key l select-pane -R
 ```
