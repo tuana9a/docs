@@ -2,7 +2,7 @@
 
 [https://en.wikipedia.org/wiki/R-tree](https://en.wikipedia.org/wiki/R-tree)
 
-![1200px-R-tree.svg.jpg](./1200px-R-tree.svg.jpg)
+![](./imgs/1200px-R-tree.svg.jpg)
 
 phù hợp cho những dữ liệu phân tán theo nhiều chiều, ví dụ như tọa độ địa lý, những bài toán liên quan tới tìm hàng xóm gần nhất.
 

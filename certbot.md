@@ -28,17 +28,17 @@ sudo snap install certbot-dns-cloudflare
 
 file `/opt/certbot/cloudflare.ini`
 
-using global api key
-
-```ini
-dns_cloudflare_email = example@example.com
-dns_cloudflare_api_key = yourglobalapikey
-```
-
 using api token
 
 ```ini
 dns_cloudflare_api_token = yourapitoken
+```
+
+or using global api key
+
+```ini
+dns_cloudflare_email = example@example.com
+dns_cloudflare_api_key = yourglobalapikey
 ```
 
 ```bash
