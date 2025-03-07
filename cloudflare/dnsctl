@@ -1,17 +1,11 @@
 #!/bin/bash
 
-# Cloudflare API credentials
-# CF_EMAIL="<your-email>"
-# CF_API_TOKEN="<your-api-token>"
-# CF_ZONE_ID="<your-zone-id>"
-
 CF_API_BASE_URL="https://api.cloudflare.com/client/v4"
 
 # Function to list DNS records
 list_dns() {
     local name="$1"
     local content="$2"
-    local cols="$3"
     
     local url="${CF_API_BASE_URL}/zones/${CF_ZONE_ID}/dns_records"
     
@@ -25,13 +19,7 @@ list_dns() {
         -H "X-Auth-Email: $CF_EMAIL" \
         -H "Authorization: Bearer $CF_API_TOKEN" \
         -H "Content-Type: application/json")
-
-    # Parse the response with jq
-    if [ -n "$cols" ]; then
-        echo "$response" | jq -r ".result[] | [$cols] | @tsv"
-    else
-        echo "$response" | jq -r '.result[] | [.id, .type, .name, .content, .proxied, .ttl] | @tsv'
-    fi
+    echo "$response"
 }
 
 # Function to insert a new DNS record
@@ -56,7 +44,7 @@ insert_dns() {
         }')
 
     # Output the response
-    echo "$response" | jq .  # Pretty-print the JSON response
+    echo "$response"
 }
 
 # Function to update an existing DNS record
@@ -82,7 +70,7 @@ update_dns() {
         }')
 
     # Output the response
-    echo "$response" | jq .  # Pretty-print the JSON response
+    echo "$response"
 }
 
 # Function to delete a DNS record
@@ -98,7 +86,7 @@ delete_dns() {
         -H "Content-Type: application/json")
 
     # Output the response
-    echo "$response" | jq .  # Pretty-print the JSON response
+    echo "$response"
 }
 
 # Main script logic based on command arguments
@@ -120,7 +108,19 @@ case "$1" in
         delete_dns "$@"
         ;;
     *)
-        echo "Usage: $0 {list|insert|create|update|delete} [arguments]"
+        cat <<EOF
+Usage: $0 {list|insert|create|update|delete} [arguments]
+Example:
+
+CF_EMAIL="<your-email>"
+CF_API_TOKEN="<your-api-token>"
+CF_ZONE_ID="<your-zone-id>"
+
+$0 list | jq -r '.result'
+$0 list dkhptd.tuana9a.com | jq -r '.result'
+$0 list | jq -r '.result[] | [.id, .type, .name, .content, .proxied, .ttl]'
+$0 list | jq -r '.result[] | [.id, .type, .name, .content, .proxied, .ttl] | @tsv'
+EOF
         exit 1
         ;;
 esac

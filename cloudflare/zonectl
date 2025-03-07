@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# Cloudflare API credentials
-# CF_EMAIL="<your-email>"
-# CF_API_TOKEN="<your-api-token>"
-
 CF_API_BASE_URL="https://api.cloudflare.com/client/v4"
 
 # Function to list all zones
@@ -17,7 +13,7 @@ list_zones() {
         -H "Content-Type: application/json")
 
     # Parse and display the response using jq
-    echo "$response" | jq -r '.result[] | [.id, .name, "name_servers=" + (.name_servers | join(",")), .status] | @tsv'
+    echo "$response"
 }
 
 # Main script logic based on command arguments
@@ -26,7 +22,14 @@ case "$1" in
         list_zones
         ;;
     *)
-        echo "Usage: $0 {list|ls}"
+        cat <<EOF
+Usage: $0 {list|ls|l}
+Example:
+
+CF_EMAIL=<your-email>
+CF_API_TOKEN=<your-api-token>
+$0 ls | jq -r '.result[] | [.id, .name, "name_servers=" + (.name_servers | join(",")), .status] | @tsv'
+EOF
         exit 1
         ;;
 esac
