@@ -37,9 +37,9 @@ stream {
 
 custom http conf location:
 
-`/etc/nginx/conf.d/*.conf`
+`/etc/nginx/conf.d/` with file pattern `*.conf`
 
-`/etc/nginx/sites-available/*`
+`/etc/nginx/sites-available/`
 
 ## serve static files
 
@@ -142,7 +142,9 @@ server {
 }
 ```
 
-## http reverse proxy with ssl
+## https reverse proxy
+
+http with ssl certificate
 
 just like with http but with ssl.
 
@@ -192,9 +194,7 @@ test
 curl http://localhost:8080/stub_status
 ```
 
-## more examples
-
-### regex path matching
+## regex path matching
 
 ```conf
 server {
@@ -206,7 +206,7 @@ server {
 }
 ```
 
-### redirect
+## redirect
 
 ```conf
 server {
@@ -237,7 +237,7 @@ server {
 }
 ```
 
-### rewrite
+## rewrite
 
 ```conf
 rewrite ^/number/(\w+) /count/$1
