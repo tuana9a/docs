@@ -17,6 +17,12 @@ one cert one domain (recommended)
 sudo certbot certonly -d dkhptd.tuana9a.com
 ```
 
+if you installed nginx then use nginx plugin
+
+```bash
+sudo certbot certonly --nginx -d dkhptd.tuana9a.com
+```
+
 one cert multiple domains
 
 ```bash
