@@ -1,4 +1,4 @@
-# Multi Version Concurrency Control
+# MVCC - Multi Version Concurrency Control
 
 [https://en.wikipedia.org/wiki/Multiversion_concurrency_control](https://en.wikipedia.org/wiki/Multiversion_concurrency_control)
 
