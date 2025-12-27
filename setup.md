@@ -3,29 +3,31 @@
 - [Table of Contents](#table-of-contents)
 - [zsh](#zsh)
 - [oh my zsh](#oh-my-zsh)
+- [zsh-autosuggestions](#zsh-autosuggestions)
 - [direnv](#direnv)
 - [zxodie](#zxodie)
 - [fzf](#fzf)
-- [kubectx kubens](#kubectx-kubens)
+- [kubectx](#kubectx)
+- [kubectl](#kubectl)
+- [k9s](#k9s)
+- [helm](#helm)
 - [nvm](#nvm)
 - [tfenv](#tfenv)
+- [terraform](#terraform)
 - [argocd](#argocd)
 - [corretto 8](#corretto-8)
+- [doctl](#doctl)
 - [awscli](#awscli)
 - [gcloud](#gcloud)
   - [gke auth plugin](#gke-auth-plugin)
 - [gh](#gh)
 - [glab](#glab)
-- [kubectl](#kubectl)
-- [k9s](#k9s)
-- [helm](#helm)
 - [mvn](#mvn)
 - [coder](#coder)
 - [python](#python)
 - [go](#go)
 - [vault](#vault)
 - [docker](#docker)
-- [coder](#coder-1)
 - [ansible](#ansible)
 
 
@@ -40,19 +42,19 @@ See [dotfiles.md#zshrc](./dotfiles.md#zshrc)
 
 # oh my zsh
 
-install oh my zsh
-
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended
 ```
 
-install plugins
+# zsh-autosuggestions
 
 ```bash
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 ```
 
 # direnv
+
+TODO: install in `$HOME/.local`
 
 ```bash
 sudo apt install -y direnv
@@ -61,8 +63,13 @@ sudo apt install -y direnv
 # zxodie
 
 ```bash
-sudo apt remove zoxide # zoxide in apt repository is old and buggy
-curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
+curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+```
+
+remove old and buggy zoxide in apt repository
+
+```bash
+sudo apt remove zoxide
 ```
 
 # fzf
@@ -72,12 +79,41 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 ```
 
-# kubectx kubens
+# kubectx
 
 ```bash
-sudo git clone https://github.com/ahmetb/kubectx /opt/kubectx
-sudo ln -s /opt/kubectx/kubectx /usr/local/bin/kubectx
-sudo ln -s /opt/kubectx/kubens /usr/local/bin/kubens
+# Ensure ~/.local/bin exists
+mkdir -p ~/.local/bin
+
+git clone https://github.com/ahmetb/kubectx ~/.local/kubectx
+ln -s ~/.local/kubectx/kubectx ~/.local/bin/kubectx
+ln -s ~/.local/kubectx/kubens ~/.local/bin/kubens
+```
+
+# kubectl
+
+```bash
+curl -sL "https://dl.k8s.io/release/v1.33.4/bin/linux/amd64/kubectl" -o ~/.local/bin/kubectl
+chmod 0755 ~/.local/bin/kubectl
+```
+
+# k9s
+
+```bash
+curl -sSL https://github.com/derailed/k9s/releases/download/v0.50.9/k9s_Linux_amd64.tar.gz -o /tmp/k9s.tar.gz
+tar xzf /tmp/k9s.tar.gz -C /tmp/
+cp /tmp/k9s ~/.local/bin/
+rm /tmp/k9s*
+```
+
+# helm
+
+TODO: install to `$HOME/.local`
+
+```bash
+wget https://get.helm.sh/helm-v3.16.3-linux-amd64.tar.gz -O /tmp/helm-v3.16.3-linux-amd64.tar.gz
+tar -zxvf /tmp/helm-v3.16.3-linux-amd64.tar.gz -C /tmp
+sudo cp /tmp/linux-amd64/helm /usr/local/bin/helm
 ```
 
 # nvm
@@ -89,6 +125,9 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/$NVM_VERSION/install.sh | 
 
 ```bash
 nvm install 20
+```
+
+```bash
 node -v # should print `v20.12.2`
 npm -v # should print `10.5.0`
 ```
@@ -97,18 +136,28 @@ npm -v # should print `10.5.0`
 
 ```bash
 git clone --depth=1 https://github.com/tfutils/tfenv.git ~/.tfenv
-sudo ln -sf ~/.tfenv/bin/* /usr/local/bin
+ln -sf ~/.tfenv/bin/* ~/.local/bin
+```
+
+# terraform
+
+terraform module cache plugin
+
+```bash
+mkdir -p ~/.terraform.d/plugin-cache
+echo 'plugin_cache_dir = "$HOME/.terraform.d/plugin-cache"' >> ~/.terraformrc
 ```
 
 # argocd
 
 ```bash
-ARGOCD_VERSION=v2.7.10
-sudo curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/download/$ARGOCD_VERSION/argocd-linux-amd64
-sudo chmod 755 /usr/local/bin/argocd
+curl -sL "https://github.com/argoproj/argo-cd/releases/download/v2.7.10/argocd-linux-amd64" -o ~/.local/bin/argocd
+chmod 0755 ~/.local/bin/argocd
 ```
 
 # corretto 8
+
+TODO: install to `$HOME/.local`
 
 ```bash
 wget https://corretto.aws/downloads/latest/amazon-corretto-8-x64-linux-jdk.tar.gz -O /opt/corretto-8.tar.gz
@@ -116,7 +165,17 @@ tar xzf /opt/corretto-8.tar.gz -C /opt
 ln -sf /opt/amazon-corretto-8*/bin/* /usr/local/bin
 ```
 
+# doctl
+
+```bash
+curl -sSL https://github.com/digitalocean/doctl/releases/download/v1.124.0/doctl-1.124.0-linux-amd64.tar.gz -o /tmp/doctl.tar.gz
+tar xzf /tmp/doctl.tar.gz -C /tmp
+mv mv /tmp/doctl ~/.local/bin/
+```
+
 # awscli
+
+TODO: install to `$HOME/.local`
 
 ```bash
 wget https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -O /tmp/awscli.zip
@@ -127,19 +186,28 @@ sudo /tmp/aws/install -u > /tmp/awscli-install.log
 # gcloud
 
 ```bash
-sudo apt-get install apt-transport-https ca-certificates gnupg curl
-curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --batch --yes --dearmor -o /usr/share/keyrings/cloud.google.gpg
-echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-sudo apt-get update -y && sudo apt-get install -y google-cloud-cli
+curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz
+tar -xf google-cloud-cli-linux-x86_64.tar.gz -C $HOME/.local
+$HOME/.local/google-cloud-sdk/install.sh
+```
+
+Add gcloud CLI to PATH
+
+```bash
+export PATH="$PATH:$HOME/.local/google-cloud-sdk/bin"
 ```
 
 ## gke auth plugin
+
+TODO: install to `$HOME/.local`
 
 ```bash
 sudo apt-get install -y google-cloud-cli-gke-gcloud-auth-plugin
 ```
 
 # gh
+
+TODO: install to `$HOME/.local`
 
 ```bash
 (type -p wget >/dev/null || (sudo apt update && sudo apt-get install wget -y)) \
@@ -153,36 +221,12 @@ sudo apt-get install -y google-cloud-cli-gke-gcloud-auth-plugin
 
 # glab
 
+TODO: install to `$HOME/.local`
+
 ```bash
 wget https://gitlab.com/gitlab-org/cli/-/releases/v1.39.0/downloads/glab_1.39.0_Linux_x86_64.tar.gz -O /tmp/glab.tar.gz
 mkdir -p /tmp/glab/ && tar xzf /tmp/glab.tar.gz -C /tmp/glab
 sudo install -o root -g root -m 0755 /tmp/glab/bin/glab /usr/local/bin/glab
-```
-
-# kubectl
-
-```bash
-KUBECTL_VERSION=v1.28.11
-curl -L "https://dl.k8s.io/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl" -o /tmp/kubectl
-curl -L "https://dl.k8s.io/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl.sha256" -o /tmp/kubectl.sha256
-echo "$(cat /tmp/kubectl.sha256) /tmp/kubectl" | sha256sum --check
-sudo install -o root -g root -m 0755 /tmp/kubectl /usr/local/bin/kubectl
-```
-
-# k9s
-
-```bash
-wget https://github.com/derailed/k9s/releases/download/v0.32.4/k9s_Linux_amd64.tar.gz -O /tmp/k9s.tar.gz
-tar xzf /tmp/k9s.tar.gz -C /tmp/
-sudo install -o root -g root -m 0755 /tmp/k9s /usr/local/bin/k9s
-```
-
-# helm
-
-```bash
-wget https://get.helm.sh/helm-v3.16.3-linux-amd64.tar.gz -O /tmp/helm-v3.16.3-linux-amd64.tar.gz
-tar -zxvf /tmp/helm-v3.16.3-linux-amd64.tar.gz -C /tmp
-sudo cp /tmp/linux-amd64/helm /usr/local/bin/helm
 ```
 
 # mvn
@@ -240,12 +284,6 @@ https://docs.docker.com/engine/install/ubuntu/
 ```bash
 curl -fsSL https://get.docker.com -o /tmp/get-docker.sh
 sudo sh /tmp/get-docker.sh
-```
-
-# coder
-
-```bash
-curl -L https://coder.com/install.sh | sh
 ```
 
 # ansible
