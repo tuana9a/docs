@@ -249,18 +249,38 @@ curl -L https://coder.com/install.sh | sh
 
 # python
 
-```bash
-# Install neccessary dev tools to build
-sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+Install neccessary dev tools to build
 
-# Choose the version of python you want, here is the list I tested
+```bash
+sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+```
+
+Choose the version of python you want, here is the list I tested
+
+```bash
 PYTHON_VERSION=3.6.13
 PYTHON_VERSION=3.8.16
 PYTHON_VERSION=3.12.3
+```
 
+```bash
 wget https://www.python.org/ftp/python/$PYTHON_VERSION/Python-$PYTHON_VERSION.tgz
 tar xzf Python-$PYTHON_VERSION.tgz
 cd Python-$PYTHON_VERSION/
+```
+
+local installation
+
+```bash
+./configure --prefix=$HOME/.local/python-$PYTHON_VERSION --enable-shared LDFLAGS=-Wl,-rpath=$HOME/.local/python-$PYTHON_VERSION/lib
+make
+make install
+ln -sf ~/.local/python-3.8.16/bin/python3* ~/.local/bin
+```
+
+system-wide installation
+
+```bash
 ./configure --prefix=/opt/python-$PYTHON_VERSION --enable-shared LDFLAGS=-Wl,-rpath=/opt/python-$PYTHON_VERSION/lib
 sudo make
 sudo make install
