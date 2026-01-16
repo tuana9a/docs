@@ -179,12 +179,20 @@ mv mv /tmp/doctl ~/.local/bin/
 
 # awscli
 
-TODO: install to `$HOME/.local`
+install localy `$HOME/.local`
+
+```bash
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+./aws/install -i ~/.local/aws-cli -b ~/.local/bin
+```
+
+install system wide
 
 ```bash
 wget https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -O /tmp/awscli.zip
 unzip /tmp/awscli.zip -d /tmp/
-sudo /tmp/aws/install -u > /tmp/awscli-install.log
+sudo /tmp/aws/install -u
 ```
 
 # gcloud
